@@ -1,0 +1,25 @@
+@startuml makeRollCall
+actor Teacher
+boundary UpdateRollCallForm
+control DashboardController
+entity ClassroomEntity
+entity ClassroomMember
+
+Teacher -> UpdateRollCallForm: 1.1 // Request Roll Call For Student Have ID
+UpdateRollCallForm -> DashboardController: 1.2 // Request Roll Call For Student
+DashboardController -> ClassroomEntity: 1.3 // Request Roll Call For Student
+ClassroomEntity -> ClassroomMember: 1.4 // Checking condition for roll call
+
+alt student is valid for roll call
+    ClassroomMember -> ClassroomEntity: 1.4.1 // Condition is ok
+    ClassroomEntity -> DashboardController: 1.5 // Roll call Successfully
+    DashboardController -> UpdateRollCallForm: 1.6 // Roll call Successfully
+    UpdateRollCallForm -> Teacher: 1.7 // Roll call successfully
+else student is not valid for roll call
+    ClassroomMember -> ClassroomEntity: 1.4.1 // Condition is not ok
+    ClassroomEntity -> DashboardController: 1.5.1 // Student is not valid for roll call
+    DashboardController -> UpdateRollCallForm: 1.6.1 // Roll call failed
+    UpdateRollCallForm -> Teacher: 1.7.1 // Roll call failed, check information again
+end
+
+@enduml

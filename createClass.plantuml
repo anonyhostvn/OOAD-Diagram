@@ -1,0 +1,24 @@
+@startuml createClass
+
+actor Teacher
+boundary createClassroomForm
+control dashboardController
+entity classroomEntity
+
+Teacher -> createClassroomForm: 1 // fill & request create classroom
+createClassroomForm -> dashboardController: 2 // request create classroom
+dashboardController -> classroomEntity: 3 // request checking classroom valid
+classroomEntity -> classroomEntity: 4// checking classroom is valid and unique
+alt classroom is valid
+    classroomEntity -> dashboardController: 5 // classroom is valid
+    dashboardController ->> classroomEntity: 6 // create classroom
+    classroomEntity -> classroomEntity: 7 // create classroom
+    dashboardController -> createClassroomForm: 8 // create classroom successfully
+    createClassroomForm -> Teacher: 9 // Classroom created
+else classroom is not valid
+    classroomEntity -> dashboardController: 5.1 // classroom is not valid
+    dashboardController -> createClassroomForm: 6.1 // create classroom failed
+    createClassroomForm -> Teacher: 7.1 // classroom is not created
+end
+
+@enduml

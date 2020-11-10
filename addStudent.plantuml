@@ -1,0 +1,26 @@
+@startuml addStudent
+
+actor Teacher
+boundary ":AddStudentForm"
+control DashboardController
+entity ClassroomEntity
+entity ClassroomMember
+
+Teacher -> ":AddStudentForm": 1 // Add student to classroom
+AddStudentForm -> DashboardController: 2 // Request add student to classroom
+DashboardController -> ClassroomMember: 3 // Checking student valid to enroll classroom
+ClassroomMember -> ClassroomMember: 4 // Checking student is valid to enroll classroom
+alt student is valid for enroll classroom
+    ClassroomMember -> DashboardController: 5 // student is valid to enroll class
+    DashboardController ->> ClassroomEntity: 6 // add student to classroom
+    ClassroomEntity -> ClassroomEntity: 7 // add student to classroom
+    DashboardController -> AddStudentForm: 8 // add student to classroom successfully
+    AddStudentForm -> Teacher: 9 // student is added to classroom
+
+else student is not valid for enroll classroom
+    ClassroomMember -> DashboardController: 5.1 // student is not valid for add to classroom
+    DashboardController -> AddStudentForm: 6.1 // add student to classroom failed
+    AddStudentForm -> Teacher: 7.1 // student is not added to classroom
+end
+
+@enduml

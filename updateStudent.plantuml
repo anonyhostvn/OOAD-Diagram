@@ -1,0 +1,23 @@
+@startuml updateStudent
+
+actor Teacher
+boundary UpdateStudentForm
+control DashboardController
+entity Classroom
+entity ClassroomMember
+entity Score
+
+Teacher -> UpdateStudentForm: 1 // fill & update student 
+UpdateStudentForm -> DashboardController: 2 // request update student
+DashboardController -> ClassroomMember: 3 // Request checking student and classroom is valid
+ClassroomMember -> ClassroomMember: 4 // Checking student and classroomm is valid
+alt Student and classroom is valid
+    ClassroomMember -> DashboardController: 5 // Student and classroom is valid
+
+else Student and classroom is not valid
+    ClassroomMember -> DashboardController: 5.1 // Infomation is not valid
+    DashboardController -> UpdateStudentForm: 6.1 // Provided information is not valid
+    UpdateStudentForm -> Teacher: 7.1 // Update student failed
+end
+
+@enduml
