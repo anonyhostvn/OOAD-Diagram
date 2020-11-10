@@ -1,0 +1,33 @@
+@startuml createClass
+
+actor ":Teacher"
+boundary ":CreateClassroomForm"
+control ":ClassroomController"
+entity ":ClassroomEntity"
+
+activate ":Teacher"
+":Teacher" -> ":CreateClassroomForm": 1 // fill & request create classroom
+activate ":CreateClassroomForm"
+":CreateClassroomForm" -> ":ClassroomController": 2 // request create classroom
+activate ":ClassroomController"
+":ClassroomController" -> ":ClassroomEntity": 3 // request checking classroom valid
+activate ":ClassroomEntity"
+":ClassroomEntity" -> ":ClassroomEntity": 4// checking classroom is valid and unique
+alt classroom is valid
+    ":ClassroomEntity" -> ":ClassroomController": 5 // classroom is valid
+    ":ClassroomController" ->> ":ClassroomEntity": 6 // create classroom
+    ":ClassroomEntity" -> ":ClassroomEntity": 7 // create classroom
+    ":ClassroomController" -> ":CreateClassroomForm": 8 // create classroom successfully
+    ":CreateClassroomForm" -> ":Teacher": 9 // Classroom created
+else classroom is not valid
+    ":ClassroomEntity" -> ":ClassroomController": 5.1 // classroom is not valid
+    deactivate ":ClassroomEntity"
+    ":ClassroomController" -> ":CreateClassroomForm": 6.1 // create classroom failed
+    deactivate ":ClassroomController"
+    ":CreateClassroomForm" -> ":Teacher": 7.1 // classroom is not created
+end
+
+deactivate ":CreateClassroomForm"
+deactivate ":Teacher"
+
+@enduml
