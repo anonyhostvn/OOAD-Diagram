@@ -1,0 +1,33 @@
+@startuml updateClass
+
+class ClassroomMember <<entity>> {
+    id: bigint
+    user_id: bigint
+    classroom_id: bigint
+    created_at: datetime
+
+    // create ()
+    // read ()
+    // delete ()
+    // update ()
+    // get all student in classroom ()
+}
+
+class ViewClassroomForm <<boundary>> {
+    // request get all student in classroom oke ()
+}
+
+class StudentController <<controller>> {
+    // get all student ()
+}
+
+hide ViewClassroomForm <<boundary>> circle
+hide StudentController <<controller>> circle
+hide ClassroomMember <<entity>> circle
+
+StudentController "1" -right- "1" ClassroomMember
+StudentController "1" -down- "1" ViewClassroomForm
+
+
+
+@enduml
