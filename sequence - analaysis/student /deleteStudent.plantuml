@@ -1,15 +1,15 @@
 @startuml deleteStudent
 
 actor ": Teacher"
-boundary ": IStudentForm"
+boundary ": DeleteStudentForm"
 control ": StudentController"
 entity ": ClassroomEntity"
 entity ": ClassroomMember"
 
 activate ": Teacher"
-": Teacher" -> ": IStudentForm": 1 // Delete student from classroom
-activate ": IStudentForm"
-": IStudentForm" -> ": StudentController": 2 // Request delete student to classroom
+": Teacher" -> ": DeleteStudentForm": 1 // Delete student from classroom
+activate ": DeleteStudentForm"
+": DeleteStudentForm" -> ": StudentController": 2 // Request delete student to classroom
 activate ": StudentController"
 ": StudentController" -> ": ClassroomMember": 3 // Checking student and class information is valid
 activate ": ClassroomMember"
@@ -17,19 +17,19 @@ alt student is exist in classroom
     ": ClassroomMember" -> ": StudentController": 4 // student and classroom is valid
     ": StudentController" ->> ": ClassroomEntity": 5 // delete student i from classroom j
     activate ": ClassroomEntity" 
-    ": StudentController" -> ": IStudentForm": 6 // delete student to classroom successfully
+    ": StudentController" -> ": DeleteStudentForm": 6 // delete student to classroom successfully
     deactivate ": ClassroomEntity"
-    ": IStudentForm" -> ": Teacher": 7 // student is deleted to classroom
+    ": DeleteStudentForm" -> ": Teacher": 7 // student is deleted to classroom
 
 else student is not exist in classroom
     ": ClassroomMember" -> ": StudentController": 4.1 // provided student or classroom is not valid
     deactivate ": ClassroomMember"
-    ": StudentController" -> ": IStudentForm": 5.1 // delete student from classroom failed
+    ": StudentController" -> ": DeleteStudentForm": 5.1 // delete student from classroom failed
     deactivate ": StudentController"
-    ": IStudentForm" -> ": Teacher": 6.1 // student is not deleted from classroom
+    ": DeleteStudentForm" -> ": Teacher": 6.1 // student is not deleted from classroom
 end
 
-deactivate ": IStudentForm"
+deactivate ": DeleteStudentForm"
 deactivate ": Teacher"
 
 @enduml

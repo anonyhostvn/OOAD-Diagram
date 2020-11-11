@@ -1,17 +1,17 @@
 @startuml addStudent
 
 actor ": Teacher"
-boundary ": IStudentForm"
+boundary ": AddStudentForm"
 control ": StudentController"
 entity ": ClassroomEntity"
 entity ": ClassroomMember"
 
 activate ": Teacher"
-": Teacher" -> ": IStudentForm": 1 // Add student to classroom
-activate ": IStudentForm"
-": IStudentForm" -> ": IStudentForm": 2 // validate 
+": Teacher" -> ": AddStudentForm": 1 // Add student to classroom
+activate ": AddStudentForm"
+": AddStudentForm" -> ": AddStudentForm": 2 // validate 
 alt all information is filled and valid
-    ": IStudentForm" -> ": StudentController": 3 // Request add student to classroom
+    ": AddStudentForm" -> ": StudentController": 3 // Request add student to classroom
     activate ": StudentController"
     ": StudentController" -> ": ClassroomMember": 4 // Checking student valid to enroll classroom
     activate ": ClassroomMember"
@@ -19,22 +19,22 @@ alt all information is filled and valid
         ": ClassroomMember" -> ": StudentController": 5 // student is valid to enroll class
         ": StudentController" ->> ": ClassroomEntity": 6 // add student to classroom
         activate ": ClassroomEntity" 
-        ": StudentController" -> ": IStudentForm": 7 // add student to classroom successfully
+        ": StudentController" -> ": AddStudentForm": 7 // add student to classroom successfully
         deactivate ": ClassroomEntity"
-        ": IStudentForm" -> ": Teacher": 8 // student is added to classroom
+        ": AddStudentForm" -> ": Teacher": 8 // student is added to classroom
 
     else student is not valid for enroll classroom
         ": ClassroomMember" -> ": StudentController": 5.1 // student is not valid for add to classroom
         deactivate ": ClassroomMember"
-        ": StudentController" -> ": IStudentForm": 6.1 // add student to classroom failed
+        ": StudentController" -> ": AddStudentForm": 6.1 // add student to classroom failed
         deactivate ": StudentController"
-        ": IStudentForm" -> ": Teacher": 7.1 // student is not added to classroom
+        ": AddStudentForm" -> ": Teacher": 7.1 // student is not added to classroom
     end
 else some information is missing or invalid
-   ": IStudentForm" -> ": Teacher": 3.1 // Check information again 
+   ": AddStudentForm" -> ": Teacher": 3.1 // Check information again 
 end
 
-deactivate ": IStudentForm"
+deactivate ": AddStudentForm"
 deactivate ": Teacher"
 
 @enduml

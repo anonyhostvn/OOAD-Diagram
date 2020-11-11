@@ -1,36 +1,36 @@
 @startuml updateClass
 
 actor ": Teacher"
-boundary ": IClassroomForm"
+boundary ": UpdateClassroomForm"
 control ": ClassroomController"
 entity ": ClassroomEntity"
 
 activate ": Teacher"
-": Teacher" -> ": IClassroomForm": 1 // fill & request update classroom
-activate ": IClassroomForm"
-": IClassroomForm" -> ": IClassroomForm": 2 // validate
+": Teacher" -> ": UpdateClassroomForm": 1 // fill & request update classroom
+activate ": UpdateClassroomForm"
+": UpdateClassroomForm" -> ": UpdateClassroomForm": 2 // validate
 alt all information is valid
-    ": IClassroomForm" -> ": ClassroomController": 3 // request update classroom
+    ": UpdateClassroomForm" -> ": ClassroomController": 3 // request update classroom
     activate ": ClassroomController"
     ": ClassroomController" -> ": ClassroomEntity": 4 // request checking \n classroom is exist and classroom information
     activate ": ClassroomEntity"
     alt classroom is valid
         ": ClassroomEntity" -> ": ClassroomController": 5 // classroom is exist and information is valid
         ": ClassroomController" ->> ": ClassroomEntity": 6 // update classroom
-        ": ClassroomController" -> ": IClassroomForm": 7 // update classroom successfully
-        ": IClassroomForm" -> ": Teacher": 8 // Classroom updated
+        ": ClassroomController" -> ": UpdateClassroomForm": 7 // update classroom successfully
+        ": UpdateClassroomForm" -> ": Teacher": 8 // Classroom updated
     else classroom is not valid
         ": ClassroomEntity" -> ": ClassroomController": 5.1 // classroom is not valid
         deactivate ": ClassroomEntity"
-        ": ClassroomController" -> ": IClassroomForm": 6.1 // update  classroom failed
+        ": ClassroomController" -> ": UpdateClassroomForm": 6.1 // update  classroom failed
         deactivate ": ClassroomController"
-        ": IClassroomForm" -> ": Teacher": 7.1 // classroom is not updated
+        ": UpdateClassroomForm" -> ": Teacher": 7.1 // classroom is not updated
     end
 else some information is missing or invalid
-    ": IClassroomForm" -> ": Teacher": 3.1 // check information again
+    ": UpdateClassroomForm" -> ": Teacher": 3.1 // check information again
 end
 
-deactivate ": IClassroomForm"
+deactivate ": UpdateClassroomForm"
 deactivate ": Teacher"
 
 @enduml
