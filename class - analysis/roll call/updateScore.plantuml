@@ -1,0 +1,50 @@
+@startuml updateClass
+
+class RollCall <<entity>> {
+    id: bigint
+    classroom_member_id: bigint
+    date: date
+    test_title: string
+    score: double
+    created_at: datetime
+    updated_at: datetime
+
+    // create ()
+    // read ()
+    // delete ()
+    // update ()
+    // request update score ()
+}
+
+class ClassroomMember <<entity>> {
+    id: bigint
+    user_id: bigint
+    classroom_id: bigint
+    created_at: datetime
+
+    // create ()
+    // read ()
+    // delete ()
+    // update ()
+    // checking information is valid()
+}
+
+class ViewClassroomForm <<boundary>> {
+    // request update score()
+}
+
+class StudentController <<controller>> {
+    // request update score ()
+}
+
+hide RollCall <<entity>> circle
+hide ViewClassroomForm <<boundary>> circle
+hide StudentController <<controller>> circle
+
+StudentController "1" -left- "1" RollCall
+StudentController "1" -right- "1" ClassroomMember
+StudentController "1" -down- "1" ViewClassroomForm
+
+
+
+@enduml
