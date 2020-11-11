@@ -1,0 +1,15 @@
+@startuml viewClass
+
+activate ": User"
+": User" -->> ": IClassroomForm": // request get class info
+activate ": IClassroomForm"
+": IClassroomForm" -> ": ClassroomController": view_classroom(token)
+activate ": ClassroomController"
+": ClassroomController" -> ": IClassroomMemberDB": get_classroom(classroom_member)
+activate ": IClassroomMemberDB"
+": IClassroomForm" -->> ": User": view all class
+
+deactivate ": IClassroomForm"
+deactivate ": User"
+
+@enduml

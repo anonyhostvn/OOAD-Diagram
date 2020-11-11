@@ -1,0 +1,32 @@
+@startuml updateClass
+
+activate ": Teacher"
+": Teacher" -->> ": IClassroomForm": // fill & request update classroom
+activate ": IClassroomForm"
+": IClassroomForm" -> ": IClassroomForm": validate(token, classroom_id, classroom_name, description)
+alt all information is valid
+    ": IClassroomForm" -> ": ClassroomController": update_classroom(token, classroom_id, classroom_name, description)
+    activate ": ClassroomController"
+    ": ClassroomController" -> ": ClassroomController": validate_update_classroom(token, classroom_id, classroom_name, description)
+    activate ": IClassroomDB"
+    alt classroom is valid
+        ": ClassroomController" -> ": IClassroomDB": get(classroom_id)
+        alt classroom is exist
+            ": ClassroomController" ->> ": IClassroomDB": update(classroom_id, class_name, description)
+            ": IClassroomForm" -->> ": Teacher": // Classroom updated
+        else classroom is not exist
+            ": IClassroomForm" -->> ": Teacher": classroom is not updated
+        end
+    else classroom is not valid
+        deactivate ": IClassroomDB"
+        deactivate ": ClassroomController"
+        ": IClassroomForm" -->> ": Teacher": classroom is not updated
+    end
+else some information is missing or invalid
+    ": IClassroomForm" -->> ": Teacher": 3.1 // check information again
+end
+
+deactivate ": IClassroomForm"
+deactivate ": Teacher"
+
+@enduml

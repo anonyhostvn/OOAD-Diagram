@@ -1,37 +1,37 @@
 @startuml updateScore
 
-actor ":Teacher"
+actor ": Teacher"
 boundary ":UpdateScoreForm"
-control ":StudentController"
+control ": StudentController"
 entity ":Score"
-entity ":ClassroomMember"
+entity ": ClassroomMember"
 
-activate ":Teacher"
+activate ": Teacher"
 
-":Teacher" -> ":UpdateScoreForm": 1 // request update score
+": Teacher" -> ":UpdateScoreForm": 1 // request update score
 activate ":UpdateScoreForm"
-":UpdateScoreForm" -> ":StudentController": 2 // request update score
-activate ":StudentController"
-":StudentController" -> ":ClassroomMember": 3 // checking information is valid
-activate ":ClassroomMember"
-":ClassroomMember" -> ":ClassroomMember": 4 // check teacher, classroom, \n student is valid
+":UpdateScoreForm" -> ": StudentController": 2 // request update score
+activate ": StudentController"
+": StudentController" -> ": ClassroomMember": 3 // checking information is valid
+activate ": ClassroomMember"
+": ClassroomMember" -> ": ClassroomMember": 4 // check teacher, classroom, \n student is valid
 alt information is valid
-    ":ClassroomMember" -> ":StudentController": 5 // Information is valid
-    ":StudentController" ->> ":Score": 6 // Request update score
+    ": ClassroomMember" -> ": StudentController": 5 // Information is valid
+    ": StudentController" ->> ":Score": 6 // Request update score
     activate ":Score"
     ":Score" -> ":Score": 7 // update score
-    ":StudentController" -> ":UpdateScoreForm": 8 // Update score done
+    ": StudentController" -> ":UpdateScoreForm": 8 // Update score done
     deactivate ":Score"
-    ":UpdateScoreForm" -> ":Teacher": 9 // Update score done
+    ":UpdateScoreForm" -> ": Teacher": 9 // Update score done
 else information is not valid
-    ":ClassroomMember" -> ":StudentController": 5.1 // Information is not valid
-    deactivate ":ClassroomMember"
-    ":StudentController" -> ":UpdateScoreForm": 6.1 // Score update failed
-    deactivate ":StudentController"
-    ":UpdateScoreForm" -> ":Teacher": 7.1 // Score update failed,\n check information again
+    ": ClassroomMember" -> ": StudentController": 5.1 // Information is not valid
+    deactivate ": ClassroomMember"
+    ": StudentController" -> ":UpdateScoreForm": 6.1 // Score update failed
+    deactivate ": StudentController"
+    ":UpdateScoreForm" -> ": Teacher": 7.1 // Score update failed,\n check information again
 end
 
-deactivate ":Teacher"
+deactivate ": Teacher"
 deactivate ":UpdateScoreForm"
 
 

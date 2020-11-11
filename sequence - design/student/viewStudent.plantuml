@@ -1,0 +1,14 @@
+@startuml viewStudent
+activate ": Student"
+": Student" -->> ": IStudentForm": // request view student information
+activate ": IStudentForm"
+": IStudentForm" -> ": StudentController": view_profile(token, classroom_member_id)
+activate ": StudentController"
+": StudentController" -> ": IClassroomMemberDB": get_user(classroom_id)
+activate ": IClassroomMemberDB"
+deactivate ": IClassroomMemberDB"
+deactivate ": StudentController"
+": IStudentForm" -->> ": Student": // list all classroom
+deactivate ": Student"
+
+@enduml

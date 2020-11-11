@@ -1,33 +1,32 @@
 @startuml viewClass
 
-actor ":Teacher"
-boundary ":CreateClassroomForm"
-control ":ClassroomController"
-entity ":ClassroomEntity"
+actor ":User"
+boundary ": IClassroomForm"
+control ": ClassroomController"
+entity ": ClassroomMember"
 
-activate ":Teacher"
-":Teacher" -> ":CreateClassroomForm": 1 // request get class info
-activate ":CreateClassroomForm"
-":CreateClassroomForm" -> ":ClassroomController": 2 // request get classroom information
-activate ":ClassroomController"
-":ClassroomController" -> ":ClassroomEntity": 3 // request checking \n classroom is exist
-activate ":ClassroomEntity"
-":ClassroomEntity" -> ":ClassroomEntity": 4// checking classroom is exist \n
+activate ":User"
+":User" -> ": IClassroomForm": 1 // request get class info
+activate ": IClassroomForm"
+": IClassroomForm" -> ": ClassroomController": 2 // request get classroom information
+activate ": ClassroomController"
+": ClassroomController" -> ": ClassroomMember": 3 // request checking \n classroom is exist
+activate ": ClassroomMember"
 alt classroom is valid
-    ":ClassroomEntity" -> ":ClassroomController": 5 // classroom is exist
-    ":ClassroomController" -> ":ClassroomEntity": 6 // get classroom information
-    ":ClassroomEntity" -> ":ClassroomController": 7 // classroom information
-    ":ClassroomController" -> ":CreateClassroomForm": 8 // get classroom info successfully
-    ":CreateClassroomForm" -> ":Teacher": 9 // Classroom information
+    ": ClassroomMember" -> ": ClassroomController": 4 // classroom is exist
+    ": ClassroomController" -> ": ClassroomMember": 5 // get classroom information
+    ": ClassroomMember" -> ": ClassroomController": 6 // classroom information
+    ": ClassroomController" -> ": IClassroomForm": 7 // get classroom info successfully
+    ": IClassroomForm" -> ":User": 8 // Classroom information
 else classroom is not valid
-    ":ClassroomEntity" -> ":ClassroomController": 5.1 // classroom is not exist
-    deactivate ":ClassroomEntity"
-    ":ClassroomController" -> ":CreateClassroomForm": 6.1 // cannot get classroom information
-    deactivate ":ClassroomController"
-    ":CreateClassroomForm" -> ":Teacher": 7.1 // classroom invalid
+    ": ClassroomMember" -> ": ClassroomController": 4.1 // classroom is not exist
+    deactivate ": ClassroomMember"
+    ": ClassroomController" -> ": IClassroomForm": 5.1 // cannot get classroom information
+    deactivate ": ClassroomController"
+    ": IClassroomForm" -> ":User": 6.1 // classroom invalid
 end
 
-deactivate ":CreateClassroomForm"
-deactivate ":Teacher"
+deactivate ": IClassroomForm"
+deactivate ":User"
 
 @enduml

@@ -1,0 +1,23 @@
+@startuml deleteStudent
+
+activate ": Teacher"
+": Teacher" -->> ": IStudentForm": // Delete student from classroom
+activate ": IStudentForm"
+": IStudentForm" -> ": StudentController": delete_student(token, classroom_member_id)
+activate ": StudentController"
+": StudentController" -> ": IClassroomMemberDB": read(classroom_id, user_id)
+activate ": IClassroomMemberDB"
+alt student is exist in classroom
+    ": StudentController" ->> ": IClassroomMemberDB": delete(classroom_id, user_id)
+    ": IStudentForm" -->> ": Teacher": 7 // student is deleted to classroom
+
+else student is not exist in classroom
+    deactivate ": IClassroomMemberDB"
+    deactivate ": StudentController"
+    ": IStudentForm" -->> ": Teacher": 6.1 // student is not deleted from classroom
+end
+
+deactivate ": IStudentForm"
+deactivate ": Teacher"
+
+@enduml

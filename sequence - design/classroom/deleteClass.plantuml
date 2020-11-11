@@ -1,32 +1,27 @@
 @startuml deleteClass
 
-actor ":Teacher"
-boundary ":CreateClassroomForm"
-control ":ClassroomController"
-entity ":ClassroomEntity"
-
-activate ":Teacher"
-":Teacher" -->> ":CreateClassroomForm": // request delete classroom
-activate ":CreateClassroomForm"
-":CreateClassroomForm" -> ":CreateClassroomForm": validate(token, classroom_id)
+activate ": Teacher"
+": Teacher" -->> ": IClassroomForm": // request delete classroom
+activate ": IClassroomForm"
+": IClassroomForm" -> ": IClassroomForm": validate(token, classroom_id)
 alt all information is filled
-    ":CreateClassroomForm" -> ":ClassroomController": delete_classroom(token, classroom_id)
-    activate ":ClassroomController"
-    ":ClassroomController" -> ":ClassroomEntity": get(classroom_id)
-    activate ":ClassroomEntity"
+    ": IClassroomForm" -> ": ClassroomController": delete_classroom(token, classroom_id)
+    activate ": ClassroomController"
+    ": ClassroomController" -> ": IClassroomDB": get(classroom_id)
+    activate ": IClassroomDB"
     alt classroom is exist
-        ":ClassroomController" ->> ":ClassroomEntity": delete(classroom_id)
-        ":CreateClassroomForm" -->> ":Teacher": Classroom deleted
+        ": ClassroomController" ->> ": IClassroomDB": delete(classroom_id)
+        ": IClassroomForm" -->> ": Teacher": Classroom deleted
     else classroom is not exist
-        deactivate ":ClassroomEntity"
-        deactivate ":ClassroomController"
-        ":CreateClassroomForm" -->> ":Teacher": 6.1 // classroom is not deleted
+        deactivate ": IClassroomDB"
+        deactivate ": ClassroomController"
+        ": IClassroomForm" -->> ": Teacher": classroom is not deleted
     end
 else some information is missing
-    ":CreateClassroomForm" -->> ":Teacher": 3.1 // check information again
+    ": IClassroomForm" -->> ": Teacher": check information again
 end
 
-deactivate ":CreateClassroomForm"
-deactivate ":Teacher"
+deactivate ": IClassroomForm"
+deactivate ": Teacher"
 
 @enduml
