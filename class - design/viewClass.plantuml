@@ -1,0 +1,52 @@
+@startuml updateClass
+
+class ClassroomMember {
+    - id: bigint
+    - user_id: bigint
+    - classroom_id: bigint
+    - created_at: datetime
+
+    + create(classroom_id, user_id): void
+    + read(classroom_id)
+    + read(user_id)
+    + read(classroom_member_id)
+    + read(classroom_id, user_id)
+    + update_rollcall(classroom_member_id, created_at, is_presented)
+    + update_bonus_point(classroom_member_id, created_at, point)
+    + update_score(classroom_member_id, created_at, test_title, score)
+    + delete(classroom_id, user_id)
+    + get_user(classroom_member)
+    + get_classroom(classroom_member)
+}
+
+class IClassroomMemberDB <<interface>> {
+    + get_classroom(class_room_member)
+}
+
+class ViewClassroomForm {
+    - token
+
+    + view_classroom(token)
+}
+
+class IClassroomForm <<interface>> {
+    + view_classroom(token)
+}
+
+class ClassroomController {
+    + view_classroom(token)
+}
+
+hide ClassroomMember circle
+hide IClassroomMemberDB <<interface>> circle
+hide CreateClassroomForm circle
+hide IClassroomForm <<interface>> circle
+hide ClassroomController circle
+
+IClassroomMemberDB -down.> ClassroomMember
+IClassroomForm .down.> CreateClassroomForm
+ClassroomController "1"-left-"1" IClassroomMemberDB
+IClassroomForm "1"-left-"1" ClassroomController
+
+
+@enduml

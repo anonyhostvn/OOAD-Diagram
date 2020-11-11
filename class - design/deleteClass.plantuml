@@ -1,0 +1,57 @@
+@startuml deleteClass
+
+class Classroom {
+    - id: bigint
+    - classroom_name: string
+    - description: string
+    - teacher_id: bigint
+    - created_at: datetime
+    - updated_at: datetime
+
+    + get_id(): bigint
+    + get_classroom_name(): string
+    + set_classroom_name(): string
+    + get_description(): string
+    + set_description(): string
+    + get_teacher_id(): bigint
+    + set_teacher_id(): bigint
+}
+
+class IClassroomDB <<interface>> {
+    + create(classroom_name, description, teacher_id)
+    + read()
+    + read(classroom_id)
+    + update(classroom_id, class_name, description)
+    + delete(classroom_id)
+    + get_users(classroom)
+}
+
+class CreateClassroomForm {
+    - classroom_id: string
+
+    + validate(token, classroom_id)
+    + delete_classroom(token, classroom_id)
+}
+
+class IClassroomForm <<interface>> {
+    + validate(token, classroom_name, description)
+    + delete_classroom(token, classroom_id)
+}
+
+class ClassroomController {
+    + delete_classroom(token, classroom_id)
+}
+
+hide Classroom circle
+hide IClassroomDB <<interface>> circle
+hide CreateClassroomForm circle
+hide IClassroomForm <<interface>> circle
+hide ClassroomController circle
+
+IClassroomDB -down.> Classroom
+IClassroomForm .down.> CreateClassroomForm
+ClassroomController "1"-left-"1" IClassroomDB
+IClassroomForm "1"-left-"1" ClassroomController
+
+
+@enduml
