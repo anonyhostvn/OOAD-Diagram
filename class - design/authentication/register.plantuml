@@ -75,6 +75,7 @@ class ConfirmRegisterForm {
 class IAuthenticationForm <<interface>> {
     + validate(email, password1, password2)
     + register(email, password1)
+    + confirm_register(register_token)
 }
 
 class AuthenticationController {
