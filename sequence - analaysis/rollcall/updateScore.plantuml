@@ -14,21 +14,19 @@ activate ":UpdateScoreForm"
 activate ": StudentController"
 ": StudentController" -> ": ClassroomMember": 3 // checking information is valid
 activate ": ClassroomMember"
-": ClassroomMember" -> ": ClassroomMember": 4 // check teacher, classroom, \n student is valid
 alt information is valid
-    ": ClassroomMember" -> ": StudentController": 5 // Information is valid
-    ": StudentController" ->> ":Score": 6 // Request update score
+    ": ClassroomMember" -> ": StudentController": 4 // Information is valid
+    ": StudentController" ->> ":Score": 5 // Request update score
     activate ":Score"
-    ":Score" -> ":Score": 7 // update score
-    ": StudentController" -> ":UpdateScoreForm": 8 // Update score done
+    ": StudentController" -> ":UpdateScoreForm": 6 // Update score done
     deactivate ":Score"
-    ":UpdateScoreForm" -> ": Teacher": 9 // Update score done
+    ":UpdateScoreForm" -> ": Teacher": 7 // Update score done
 else information is not valid
-    ": ClassroomMember" -> ": StudentController": 5.1 // Information is not valid
+    ": ClassroomMember" -> ": StudentController": 4.1 // Information is not valid
     deactivate ": ClassroomMember"
-    ": StudentController" -> ":UpdateScoreForm": 6.1 // Score update failed
+    ": StudentController" -> ":UpdateScoreForm": 5.1 // Score update failed
     deactivate ": StudentController"
-    ":UpdateScoreForm" -> ": Teacher": 7.1 // Score update failed,\n check information again
+    ":UpdateScoreForm" -> ": Teacher": 6.1 // Score update failed,\n check information again
 end
 
 deactivate ": Teacher"

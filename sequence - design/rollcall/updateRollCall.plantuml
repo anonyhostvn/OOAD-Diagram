@@ -1,0 +1,27 @@
+@startuml updateRollCall
+
+activate ": Teacher"
+
+": Teacher" -->> ": IStudentForm": // request update roll call
+activate ": IStudentForm"
+": IStudentForm" -> ": StudentController": update_roll_call(token, classroom_member_id, created_at, is_presented)
+activate ": StudentController"
+": StudentController" -> ": IClassroomMemberDB": read(classroom_id, user_id)
+activate ": IClassroomMemberDB"
+alt student is exist in classroom
+    ": StudentController" ->> ": IRollCallDB": create(classroom_member_id, date, is_presented)
+    activate ": IRollCallDB"
+    deactivate ": IRollCallDB"
+    ": IStudentForm" -->> ": Teacher": // Roll call done
+else student is not exist in classroom
+    deactivate ": IClassroomMemberDB"
+    deactivate ": StudentController"
+    ": IStudentForm" -->> ": Teacher": 7.1 // Roll call failed,\n check information again
+end
+
+deactivate ": IStudentForm"
+deactivate ": Teacher"
+
+
+
+@enduml

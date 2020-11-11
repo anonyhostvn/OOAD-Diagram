@@ -1,14 +1,14 @@
 @startuml viewClass
 
 actor ":User"
-boundary ": IClassroomForm"
+boundary ": ViewClassroomForm"
 control ": ClassroomController"
 entity ": ClassroomMember"
 
 activate ":User"
-":User" -> ": IClassroomForm": 1 // request get class info
-activate ": IClassroomForm"
-": IClassroomForm" -> ": ClassroomController": 2 // request get classroom information
+":User" -> ": ViewClassroomForm": 1 // request get class info
+activate ": ViewClassroomForm"
+": ViewClassroomForm" -> ": ClassroomController": 2 // request get classroom information
 activate ": ClassroomController"
 ": ClassroomController" -> ": ClassroomMember": 3 // request checking \n classroom is exist
 activate ": ClassroomMember"
@@ -16,17 +16,17 @@ alt classroom is valid
     ": ClassroomMember" -> ": ClassroomController": 4 // classroom is exist
     ": ClassroomController" -> ": ClassroomMember": 5 // get classroom information
     ": ClassroomMember" -> ": ClassroomController": 6 // classroom information
-    ": ClassroomController" -> ": IClassroomForm": 7 // get classroom info successfully
-    ": IClassroomForm" -> ":User": 8 // Classroom information
+    ": ClassroomController" -> ": ViewClassroomForm": 7 // get classroom info successfully
+    ": ViewClassroomForm" -> ":User": 8 // Classroom information
 else classroom is not valid
     ": ClassroomMember" -> ": ClassroomController": 4.1 // classroom is not exist
     deactivate ": ClassroomMember"
-    ": ClassroomController" -> ": IClassroomForm": 5.1 // cannot get classroom information
+    ": ClassroomController" -> ": ViewClassroomForm": 5.1 // cannot get classroom information
     deactivate ": ClassroomController"
-    ": IClassroomForm" -> ":User": 6.1 // classroom invalid
+    ": ViewClassroomForm" -> ":User": 6.1 // classroom invalid
 end
 
-deactivate ": IClassroomForm"
+deactivate ": ViewClassroomForm"
 deactivate ":User"
 
 @enduml

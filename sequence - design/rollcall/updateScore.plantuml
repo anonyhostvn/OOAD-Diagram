@@ -1,0 +1,32 @@
+@startuml updateScore
+
+actor ": Teacher"
+boundary ": IStudentForm"
+control ": StudentController"
+entity ": IScoreDB"
+entity ": IClassroomMemberDB"
+
+activate ": Teacher"
+
+": Teacher" -> ": IStudentForm": // request update score
+activate ": IStudentForm"
+": IStudentForm" -> ": StudentController": update_score(token, classroom_member_id, created_at, test_title, score)
+activate ": StudentController"
+": StudentController" -> ": IClassroomMemberDB": read(classroom_id, user_id)
+activate ": IClassroomMemberDB"
+deactivate ": IClassroomMemberDB"
+alt student is exist in classroom
+    ": StudentController" ->> ": IScoreDB": create(classroom_member_id, date, test_title, score)
+    activate ": IScoreDB"
+    deactivate ": IScoreDB"
+    ": IStudentForm" -->> ": Teacher": 7 // Update score done
+else student is exist in classroom
+    deactivate ": StudentController"
+    ": IStudentForm" -->> ": Teacher": 6.1 // Score update failed,\n check information again
+end
+
+deactivate ": Teacher"
+deactivate ": IStudentForm"
+
+
+@enduml

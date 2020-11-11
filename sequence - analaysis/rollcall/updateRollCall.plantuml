@@ -14,12 +14,10 @@ activate ":UpdateRollCallForm"
 activate ": StudentController"
 ": StudentController" -> ": ClassroomMember": 3 // checking information is valid
 activate ": ClassroomMember"
-": ClassroomMember" -> ": ClassroomMember": 4 // check teacher, classroom, \n student is valid
 alt information is valid
     ": ClassroomMember" -> ": StudentController": 5 // Information is valid
     ": StudentController" ->> ":RollCall": 6 // Request make roll call
     activate ":RollCall"
-    ":RollCall" -> ":RollCall": 7 // make roll call
     ": StudentController" -> ":UpdateRollCallForm": 8 // Roll call update done
     deactivate ":RollCall"
     ":UpdateRollCallForm" -> ": Teacher": 9 // Roll call done
