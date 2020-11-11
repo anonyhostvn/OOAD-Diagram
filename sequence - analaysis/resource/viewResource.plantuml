@@ -1,36 +1,36 @@
 @startuml updateBonusPoint
 
-actor ":Teacher"
-boundary ":ViewResourceForm"
-control ":StudentController"
-entity ":Resource"
-entity ":ClassroomMember"
+actor ": Teacher"
+boundary ": ViewResourceForm"
+control ": StudentController"
+entity ": Resource"
+entity ": ClassroomMember"
 
-activate ":Teacher"
+activate ": Teacher"
 
-":Teacher" -> ":ViewResourceForm":1 // request view resource 
-activate ":ViewResourceForm"
-":ViewResourceForm" -> ":StudentController":2 // request update bonus point
-activate ":StudentController"
-":StudentController" -> ":ClassroomMember":3 // checking information is valid
-activate ":ClassroomMember"
+": Teacher" -> ": ViewResourceForm": 1 // request view resource 
+activate ": ViewResourceForm"
+": ViewResourceForm" -> ": StudentController": 2 // request update bonus point
+activate ": StudentController"
+": StudentController" -> ": ClassroomMember": 3 // checking information is valid
+activate ": ClassroomMember"
 alt information is valid
-    ":ClassroomMember" -> ":StudentController":4 // Information is valid
-    ":StudentController" ->> ":Resource":5 // Request update bonus point
-    activate ":Resource"
-    ":StudentController" -> ":ViewResourceForm":6 // Update bonus point done
-    deactivate ":Resource"
-    ":ViewResourceForm" -> ":Teacher":7 // Update bonus point done
+    ": ClassroomMember" -> ": StudentController": 4 // Information is valid
+    ": StudentController" ->> ": Resource": 5 // Request update bonus point
+    activate ": Resource"
+    ": StudentController" -> ": ViewResourceForm": 6 // Update bonus point done
+    deactivate ": Resource"
+    ": ViewResourceForm" -> ": Teacher": 7 // Update bonus point done
 else information is not valid
-    ":ClassroomMember" -> ":StudentController":4.1 // Information is not valid
-    deactivate ":ClassroomMember"
-    ":StudentController" -> ":ViewResourceForm":5.1 // Bonus point update failed
-    deactivate ":StudentController"
-    ":ViewResourceForm" -> ":Teacher":6.1 // Bonus point update failed,\n check information again
+    ": ClassroomMember" -> ": StudentController": 4.1 // Information is not valid
+    deactivate ": ClassroomMember"
+    ": StudentController" -> ": ViewResourceForm": 5.1 // Bonus point update failed
+    deactivate ": StudentController"
+    ": ViewResourceForm" -> ": Teacher": 6.1 // Bonus point update failed,\n check information again
 end
 
-deactivate ":Teacher"
-deactivate ":ViewResourceForm"
+deactivate ": Teacher"
+deactivate ": ViewResourceForm"
 
 
 @enduml
