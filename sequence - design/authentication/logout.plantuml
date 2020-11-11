@@ -2,12 +2,12 @@
 actor ":User"
 
 activate ":User"
-":User" -> ":LogoutForm" : 1 // enter information
-activate ":LogoutForm"
-":LogoutForm" -> ":LogoutForm" : validate(token)
+":User" -> ":IAuthenticationForm" : 1 // enter information
+activate ":IAuthenticationForm"
+":IAuthenticationForm" -> ":IAuthenticationForm" : validate(token)
 alt all info is provided
 
-":LogoutForm" -> ":AuthenticationController" : logout(token)
+":IAuthenticationForm" -> ":AuthenticationController" : logout(token)
 activate ":AuthenticationController"
 ":AuthenticationController" -> ":AuthenticationController" : validate_logout(token)
 
@@ -16,22 +16,22 @@ alt correct info
 ":AuthenticationController" -> ":IUserDB" : logout(token)
 activate ":IUserDB"
 ":IUserDB" -> ":IUserDB" : delete_token(token)
-":IUserDB" -> ":AuthenticationController" :  // logout accept msg
+":IUserDB" --> ":AuthenticationController" :  // logout accept msg
 deactivate ":IUserDB"
-":AuthenticationController" -> ":User" :  // logout accept msg
+":AuthenticationController" --> ":User" :  // logout accept msg
 
 else invalid info
 
-":AuthenticationController" -> ":LogoutForm" : // invalid inf msg
+":AuthenticationController" --> ":IAuthenticationForm" : // invalid inf msg
 deactivate ":AuthenticationController"
-":LogoutForm" -> ":User" : // invalid inf msg
+":IAuthenticationForm" --> ":User" : // invalid inf msg
 
 end
 
 else missing info
 
-":LogoutForm" -> ":User" : // missing inf msg
-deactivate ":LogoutForm"
+":IAuthenticationForm" --> ":User" : // missing inf msg
+deactivate ":IAuthenticationForm"
 deactivate ":User"
 end
 @enduml

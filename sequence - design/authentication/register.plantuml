@@ -2,38 +2,38 @@
 actor ":User"
 
 activate ":User"
-":User" -> ":RegisterForm" : 1 // enter information
-activate ":RegisterForm"
-":RegisterForm" -> ":RegisterForm" : validate(email, password1, password2)
+":User" -> ":IAuthenticationForm" : 1 // enter information
+activate ":IAuthenticationForm"
+":IAuthenticationForm" -> ":IAuthenticationForm" : validate(email, password1, password2)
 
 alt all info is provided
 
-":RegisterForm" -> ":AuthenticationController" : register(email, password1)
+":IAuthenticationForm" -> ":AuthenticationController" : register(email, password1)
 activate ":AuthenticationController"
 ":AuthenticationController" -> ":IUserDB" : validate_register(email, password1, password2)
 activate ":IUserDB"
 
 alt id is unique
 
-":IUserDB" -> ":AuthenticationController" : // User does not exsit
+":IUserDB" --> ":AuthenticationController" : // User does not exsit
 ":AuthenticationController" -> ":IUserDB" : register(email, password1, password2)
 ":IUserDB" -> ":IUserDB" : 1.7 // create
 
 else id exits
 
-":IUserDB" -> ":AuthenticationController" : // User exist msg
+":IUserDB" --> ":AuthenticationController" : // User exist msg
 deactivate ":IUserDB"
-":AuthenticationController" -> ":RegisterForm" : // User exist msg
+":AuthenticationController" --> ":IAuthenticationForm" : // User exist msg
 deactivate ":AuthenticationController"
-":RegisterForm" -> ":User" : // User exist msg
+":IAuthenticationForm" --> ":User" : // User exist msg
 end
 
 else missing info
 
-":RegisterForm" -> ":User" : // missing inf msg
+":IAuthenticationForm" --> ":User" : // missing inf msg
 
 end
-deactivate ":RegisterForm"
+deactivate ":IAuthenticationForm"
 ":User" -> ":ConfirmRegisterForm" : 2 // send mail
 activate ":ConfirmRegisterForm"
 ":ConfirmRegisterForm" -> ":ConfirmRegisterForm" : validate(register_token)
@@ -52,15 +52,15 @@ activate ":IUserDB"
 deactivate ":IUserDB"
 else missing info
 
-":AuthenticationController" -> ":ConfirmRegisterForm" : // missing inf msg
-":ConfirmRegisterForm" -> ":User" : // missing inf msg
+":AuthenticationController" --> ":ConfirmRegisterForm" : // missing inf msg
+":ConfirmRegisterForm" --> ":User" : // missing inf msg
 
 end
 deactivate ":ConfirmRegisterForm"
 
 else missing info
 
-":AuthenticationController" -> ":User" : // missing info msg
+":AuthenticationController" --> ":User" : // missing info msg
 deactivate ":AuthenticationController"
 end
 deactivate ":User"
