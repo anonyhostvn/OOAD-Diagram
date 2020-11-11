@@ -1,0 +1,36 @@
+@startuml updateClass
+
+class Classroom <<entity>> {
+    id: bigint
+    classroom_name: string
+    description: string
+    teacher_id: bigint
+    created_at: datetime
+    updated_at: datetime
+
+    // create ()
+    // read ()
+    // delete ()
+    // update ()
+    // request checking classroom is exist and classroom information()
+}
+
+class UpdateClassroomForm <<boundary>> {
+    // validate ()
+    // update class room ()
+}
+
+class ClassroomController <<controller>> {
+    // request update classroom()
+}
+
+hide Classroom <<entity>> circle
+hide UpdateClassroomForm <<boundary>> circle
+hide ClassroomController <<controller>> circle
+
+ClassroomController "1" -left- "1" Classroom
+ClassroomController "1" -down- "1" UpdateClassroomForm
+
+
+
+@enduml

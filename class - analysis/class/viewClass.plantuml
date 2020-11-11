@@ -1,4 +1,4 @@
-@startuml
+@startuml updateClass
 
 class Classroom <<entity>> {
     id: bigint
@@ -12,24 +12,24 @@ class Classroom <<entity>> {
     // read ()
     // delete ()
     // update ()
+    // request checking classroom is exist()
 }
 
-class CreateClassroomForm <<boundary>> {
+class ViewClassroomForm <<boundary>> {
     // validate ()
-    // create class room ()
+    // view class room ()
 }
 
 class ClassroomController <<controller>> {
-    // validate create classroom ()
-    // create class room ()
+    // request get classroom information()
 }
 
 hide Classroom <<entity>> circle
-hide CreateClassroomForm <<boundary>> circle
+hide ViewClassroomForm <<boundary>> circle
 hide ClassroomController <<controller>> circle
 
 ClassroomController "1" -left- "1" Classroom
-ClassroomController "1" -down- "1" CreateClassroomForm
+ClassroomController "1" -down- "1" ViewClassroomForm
 
 
 
