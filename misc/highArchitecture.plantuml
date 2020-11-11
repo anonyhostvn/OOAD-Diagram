@@ -1,0 +1,22 @@
+@startuml
+
+skinparam DefaultTextAlignment center
+skinparam minClassWidth 120
+
+folder Application <<layer>> {
+}
+
+folder "Business Service" <<layer>> {
+}
+
+folder "Data Access" <<layer>> {
+}
+
+folder Middleware <<layer>> {
+}
+
+Application .down.> "Business Service"
+"Business Service" .down.> "Data Access"
+"Data Access" .down.> Middleware
+
+@enduml
