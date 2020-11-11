@@ -1,28 +1,23 @@
 @startuml deleteStudent
 
-actor ": Teacher"
-boundary ": AddStudentForm"
-control ": StudentController"
-entity ": ClassroomMember"
-
 activate ": Teacher"
-": Teacher" -->> ": AddStudentForm": // Delete student from classroom
-activate ": AddStudentForm"
-": AddStudentForm" -> ": StudentController": delete_student(token, classroom_member_id)
+": Teacher" -->> ": IStudentForm": // Delete student from classroom
+activate ": IStudentForm"
+": IStudentForm" -> ": StudentController": delete_student(token, classroom_member_id)
 activate ": StudentController"
-": StudentController" -> ": ClassroomMember": read(classroom_id, user_id)
-activate ": ClassroomMember"
+": StudentController" -> ": IClassroomMemberDB": read(classroom_id, user_id)
+activate ": IClassroomMemberDB"
 alt student is exist in classroom
-    ": StudentController" ->> ": ClassroomMember": delete(classroom_id, user_id)
-    ": AddStudentForm" -->> ": Teacher": 7 // student is deleted to classroom
+    ": StudentController" ->> ": IClassroomMemberDB": delete(classroom_id, user_id)
+    ": IStudentForm" -->> ": Teacher": 7 // student is deleted to classroom
 
 else student is not exist in classroom
-    deactivate ": ClassroomMember"
+    deactivate ": IClassroomMemberDB"
     deactivate ": StudentController"
-    ": AddStudentForm" -->> ": Teacher": 6.1 // student is not deleted from classroom
+    ": IStudentForm" -->> ": Teacher": 6.1 // student is not deleted from classroom
 end
 
-deactivate ": AddStudentForm"
+deactivate ": IStudentForm"
 deactivate ": Teacher"
 
 @enduml
