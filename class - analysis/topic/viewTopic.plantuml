@@ -1,0 +1,52 @@
+@startuml viewTopic
+
+class Topic <<entity>> {
+    id: bigint
+    classroom_id: bigint
+    posted_by: bigint
+    title: string
+    content: text
+    has_resource: bool
+    resource_id: bigint
+    created_at: datetime
+    updated_at: datetime
+
+    // create ()
+    // read ()
+    // delete ()
+    // update ()
+    // Request view topic ()
+}
+
+class ClassroomMember <<entity>> {
+    id: bigint
+    user_id: bigint
+    classroom_id: bigint
+    created_at: datetime
+
+    // create ()
+    // read ()
+    // delete ()
+    // update ()
+    // checking permission to view topic()
+}
+
+class ViewTopicForm <<boundary>> {
+    // request view  topic()
+}
+
+class TopicController <<controller>> {
+    // request view topic ()
+}
+
+hide Topic <<entity>> circle
+hide ViewTopicForm <<boundary>> circle
+hide TopicController <<controller>> circle
+
+TopicController "1" -left- "1" Topic
+TopicController "1" -right- "1" ClassroomMember
+TopicController "1" -down- "1" ViewTopicForm
+
+
+
+@enduml

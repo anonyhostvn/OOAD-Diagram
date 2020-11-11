@@ -1,0 +1,87 @@
+@startuml createTopic
+
+class CreateTopicForm {
+    - classroom_id: bigint
+    - token: string
+    - resource: bigint
+    - posted_by: bigint
+    - title: string
+    - content: string
+
+    + create_topic(token, classroom_id, posted_by, title, content, resource)
+    + validate(token, classroom_id, posted_by, title, content, resource)
+}
+
+class ITopicForm <<interface>> {
+    + create_topic(token, classroom_id, posted_by, title, content, resource)
+    + validate(token, classroom_id, posted_by, title, content, resource)
+}
+
+class TopicController {
+    + create_topic(token, classroom_id, posted_by, title, content, resource) 
+}
+
+class ClassroomMember {
+    - id: bigint
+    - user_id: bigint
+    - classroom_id: bigint
+    - created_at: datetime
+
+    + create(classroom_id, user_id): void
+    + read(classroom_id)
+    + read(user_id)
+    + read(classroom_member_id)
+    + read(classroom_id, user_id)
+    + update_rollcall(classroom_member_id, created_at, is_presented)
+    + update_bonus_point(classroom_member_id, created_at, point)
+    + update_score(classroom_member_id, created_at, test_title, score)
+    + delete(classroom_id, user_id)
+    + get_user(classroom_member)
+    + get_classroom(classroom_member)
+}
+
+class IClassroomMemberDB <<interface>> {
+    + read(classroom_id, user_id)
+}
+
+
+class Topic {
+    - id: bigint
+    - classroom_id: bigint
+    - posted_by: bigint
+    - title: string
+    - content: text
+    - has_resource: bool
+    - resource_id: bigint
+    - created_at: datetime
+    - updated_at: datetime
+
+    + create(classroom_id, posted_by, title, content, resource)
+    + read(classroom_id)
+    + read(posted_by)
+    + read(topic_id)
+    + delete(topic_id)
+}
+
+class ITopicDB <<interface>> {
+    + create(classroom_id, posted_by, title, content, resource)
+}
+
+hide CreateTopicForm circle
+hide ITopicForm <<interface>> circle
+hide TopicController circle
+hide IClassroomMemberDB <<interface>> circle
+hide ClassroomMember circle
+hide ITopicDB <<interface>> circle
+hide Topic circle 
+
+
+ITopicForm .down.> CreateTopicForm
+IClassroomMemberDB .down.> ClassroomMember
+ITopicDB .down.> Topic
+ITopicForm "1"-left-"1" TopicController
+TopicController "1"-left-"1" IClassroomMemberDB
+TopicController "1"-left-"1" ITopicDB
+
+
+@enduml

@@ -1,4 +1,4 @@
-@startuml createResource
+@startuml deleteResource
 
 class Resource <<entity>> {
     id: bigint

@@ -1,11 +1,4 @@
 @startuml createTopic
-
-actor ": User"
-boundary ": ITopicForm"
-control ": TopicController"
-entity ": ITopicDB"
-entity ": IClassroomMemberDB"
-
 activate ": User"
 
 ": User" -->> ": ITopicForm": // request view topic 

@@ -1,0 +1,52 @@
+@startuml deleteTopic
+
+class Topic <<entity>> {
+    id: bigint
+    classroom_id: bigint
+    posted_by: bigint
+    title: string
+    content: text
+    has_resource: bool
+    resource_id: bigint
+    created_at: datetime
+    updated_at: datetime
+
+    // create ()
+    // read ()
+    // delete ()
+    // update ()
+    // Request delete topic ()
+}
+
+class ClassroomMember <<entity>> {
+    id: bigint
+    user_id: bigint
+    classroom_id: bigint
+    created_at: datetime
+
+    // create ()
+    // read ()
+    // delete ()
+    // update ()
+    // checking permission to delete topic()
+}
+
+class DeleteTopicForm <<boundary>> {
+    // request delete  topic()
+}
+
+class TopicController <<controller>> {
+    // request delete topic ()
+}
+
+hide Topic <<entity>> circle
+hide DeleteTopicForm <<boundary>> circle
+hide TopicController <<controller>> circle
+
+TopicController "1" -left- "1" Topic
+TopicController "1" -right- "1" ClassroomMember
+TopicController "1" -down- "1" DeleteTopicForm
+
+
+
+@enduml
