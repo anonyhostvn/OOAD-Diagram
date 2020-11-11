@@ -8,23 +8,26 @@ entity ":ClassroomEntity"
 activate ":Teacher"
 ":Teacher" -> ":CreateClassroomForm": 1 // request delete classroom
 activate ":CreateClassroomForm"
-":CreateClassroomForm" -> ":ClassroomController": 2 // request delete classroom
-activate ":ClassroomController"
-":ClassroomController" -> ":ClassroomEntity": 3 // request checking \n classroom is exist
-activate ":ClassroomEntity"
-":ClassroomEntity" -> ":ClassroomEntity": 4// checking classroom is exist
-alt classroom is valid
-    ":ClassroomEntity" -> ":ClassroomController": 5 // classroom is exist 
-    ":ClassroomController" ->> ":ClassroomEntity": 6 // request delete classroom
-    ":ClassroomEntity" -> ":ClassroomEntity": 7 // delete classroom 
-    ":ClassroomController" -> ":CreateClassroomForm": 8 // delete classroom successfully
-    ":CreateClassroomForm" -> ":Teacher": 9 // Classroom deleted
-else classroom is not valid
-    ":ClassroomEntity" -> ":ClassroomController": 5.1 // classroom is not exist
-    deactivate ":ClassroomEntity"
-    ":ClassroomController" -> ":CreateClassroomForm": 6.1 // delete  classroom failed
-    deactivate ":ClassroomController"
-    ":CreateClassroomForm" -> ":Teacher": 7.1 // classroom is not deleted
+":CreateClassroomForm" -> ":CreateClassroomForm": 2 // validate
+alt all information is filled
+    ":CreateClassroomForm" -> ":ClassroomController": 3 // request delete classroom
+    activate ":ClassroomController"
+    ":ClassroomController" -> ":ClassroomEntity": 4 // request checking \n classroom is exist
+    activate ":ClassroomEntity"
+    alt classroom is valid
+        ":ClassroomEntity" -> ":ClassroomController": 5 // classroom is exist 
+        ":ClassroomController" ->> ":ClassroomEntity": 6 // request delete classroom
+        ":ClassroomController" -> ":CreateClassroomForm": 7 // delete classroom successfully
+        ":CreateClassroomForm" -> ":Teacher": 8 // Classroom deleted
+    else classroom is not valid
+        ":ClassroomEntity" -> ":ClassroomController": 4.1 // classroom is not exist
+        deactivate ":ClassroomEntity"
+        ":ClassroomController" -> ":CreateClassroomForm": 5.1 // delete  classroom failed
+        deactivate ":ClassroomController"
+        ":CreateClassroomForm" -> ":Teacher": 6.1 // classroom is not deleted
+    end
+else some information is missing
+    ":CreateClassroomForm" -> ":Teacher": 3.1 // check information again
 end
 
 deactivate ":CreateClassroomForm"
