@@ -1,0 +1,92 @@
+@startuml createClass
+
+class User {
+    - id: bigint
+    - email: string
+    - password: string
+    - first_name: string
+    - last_name: string
+    - dob: date
+    - school_id: string
+    - phone_number: string
+    - avatar_url: string
+    - token: string
+    - last_logged_in: datetime
+    - is_banned: bool
+    - is_admin: bool
+    - is_verify: bool
+    - created_at: datetime
+    - updated_at: datetime
+
+    + get_id(): bigint
+    + get_email(): string
+    + set_email(): string
+    + get_password(): string
+    + set_password(): string
+    + get_first_name(): string
+    + set_first_name(): string
+    + get_last_name(): string
+    + set_last_name(): string
+    + get_dob(): date
+    + set_dob(): date
+    + get_school_id(): string
+    + set_school_id(): string
+    + get_phone_number(): string
+    + set_phone_number(): string
+    + get_avatar_url(): string
+    + set_avatar_url(): string
+    + set_token(): string
+    + get_token(): string
+    + get_last_logged_in(): datetime
+    + set_last_logged_in(): datetime
+    + set_is_banned(): bool
+    + set_is_admin(): bool
+    + set_is_verify(): bool
+}
+
+class IUserDB <<interface>> {
+    + create(email, password)
+    + read()
+    + read(user_id)
+    + update(user_id, first_name, last_name, dob, school_id, phone_number, avatar)
+    + delete(user_id)
+    + get_user(token)
+    + get_classrooms(user)
+    + get_token(user_id)
+    + delete_token(token)
+}
+
+class RegisterForm {
+    - email: string
+    - password1: string
+    - password2: string
+
+    + validate(email, password1, password2)
+    + register(email, password1)
+}
+
+class IAuthenticationForm <<interface>> {
+    + validate(email, password1, password2)
+    + register(email, password1)
+}
+
+class AuthenticationController {
+    + validate_register(email, password1, password2)
+    + register(email, password1, password2)
+    + send_register_email(email, register_token)
+    + validate_confirm_register(register_token)
+    + confirm_register(register_token)
+}
+
+hide User circle
+hide IUserDB <<interface>> circle
+hide RegisterForm circle
+hide IAuthenticationForm <<interface>> circle
+hide AuthenticationController circle
+
+IUserDB -down.> User
+IAuthenticationForm .down.> RegisterForm
+AuthenticationController "1"-left-"1" IUserDB
+IAuthenticationForm "1"-left-"1" AuthenticationController
+
+@enduml
