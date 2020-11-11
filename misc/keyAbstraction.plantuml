@@ -1,0 +1,11 @@
+@startuml
+rectangle User
+rectangle Classroom
+rectangle ClassroomMember
+rectangle Rollcall
+rectangle BonusPoint
+rectangle Score
+rectangle Resource
+rectangle Topic
+rectangle Comment
+@enduml

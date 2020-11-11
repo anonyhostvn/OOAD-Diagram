@@ -1,0 +1,42 @@
+'@startuml
+skinparam linetype ortho
+
+node ": Database Server" <<database>> {
+    artifact ": CoursePlus Schema" {
+    }
+}
+
+node ": Resources Storage" <<storage>> {
+}
+
+node ": Remote Backend Server" <<device>> {
+    node ": Backend Container" <<execution environment>> {
+        artifact ": Django Application" {
+        }
+    }
+    node ": Web Server Container" <<execution environment>> {
+        artifact ": Nginx" {
+        }
+        artifact ": WSGI" {
+        }
+    }
+}
+
+node ": Remote Frontend Server" <<device>> {
+    node ": Frontend Container" <<execution environment>> {
+        artifact ": React Application" {
+        }
+    }
+}
+
+node ": PCs or mobile phones" <<client>> {
+    artifact ": Web Application" {
+    }
+}
+
+": Backend Container" -down- ": Database Server"
+": Backend Container" -down- ": Resources Storage"
+": Web Server Container" -down- ": Frontend Container"
+": Web Server Container" -left- ": PCs or mobile phones"
+": Backend Container" -left- ": Web Server Container"
+@enduml
