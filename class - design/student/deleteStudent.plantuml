@@ -1,0 +1,57 @@
+@startuml addStudent
+
+class DeleteStudentForm {
+    - classroom_id: bigint
+    - student_id: string
+
+    + delete_student_from_classroom(token, classroom_id)
+}
+
+class IStudentForm <<interface>> {
+
+    + delete_student_from_classroom(token, classroom_id)
+}
+
+class StudentController {
+    + delete_student(token, classroom_member_id)
+}
+
+class ClassroomMember {
+    - id: bigint
+    - user_id: bigint
+    - classroom_id: bigint
+    - created_at: datetime
+
+    + create(classroom_id, user_id): void
+    + read(classroom_id)
+    + read(user_id)
+    + read(classroom_member_id)
+    + read(classroom_id, user_id)
+    + update_rollcall(classroom_member_id, created_at, is_presented)
+    + update_bonus_point(classroom_member_id, created_at, point)
+    + update_score(classroom_member_id, created_at, test_title, score)
+    + delete(classroom_id, user_id)
+    + get_user(classroom_member)
+    + get_classroom(classroom_member)
+}
+
+class IClassroomMemberDB <<interface>> {
+    + read(class_room_id, user_id)
+    + delete(class_room_id, user_id)
+}
+
+hide DeleteStudentForm circle
+hide IStudentForm <<interface>> circle
+hide StudentController circle
+hide IClassroomMemberDB <<interface>> circle
+hide ClassroomMember circle
+
+
+IStudentForm .down.> DeleteStudentForm
+IClassroomMemberDB .down.> ClassroomMember
+IStudentForm "1"-left-"1" StudentController
+StudentController "1"-left-"1" IClassroomMemberDB
+
+
+
+@enduml

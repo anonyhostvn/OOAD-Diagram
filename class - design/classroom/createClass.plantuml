@@ -1,4 +1,4 @@
-@startuml
+@startuml createClass
 
 class Classroom {
     - id: bigint

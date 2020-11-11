@@ -1,0 +1,83 @@
+@startuml addStudent
+
+class Classroom {
+    - id: bigint
+    - classroom_name: string
+    - description: string
+    - teacher_id: bigint
+    - created_at: datetime
+    - updated_at: datetime
+
+    + create(classroom_name, description, teacher_id)
+    + read()
+    + read(classroom_id)
+    + update(classroom_id, class_name, description)
+    + delete(classroom_id)
+    + get_users(classroom)
+
+}
+
+class IClassroomDB <<interface>> {
+    + create(classroom_id, user_id)
+}
+
+class AddStudentForm {
+    - classroom_name: string
+    - description: string
+
+    + validate(token, classroom_name, description)
+    + create_classroom(token, classroom_name, description)
+}
+
+class IStudentForm <<interface>> {
+    + validate(token, class_room_id, user_id)
+}
+
+class StudentController {
+    + validate_add_student(token, classroom_name, description)
+    + add_student(token, class_room_id, user_id)
+}
+
+
+class ClassroomMember {
+    - id: bigint
+    - user_id: bigint
+    - classroom_id: bigint
+    - created_at: datetime
+
+    + create(classroom_id, user_id): void
+    + read(classroom_id)
+    + read(user_id)
+    + read(classroom_member_id)
+    + read(classroom_id, user_id)
+    + update_rollcall(classroom_member_id, created_at, is_presented)
+    + update_bonus_point(classroom_member_id, created_at, point)
+    + update_score(classroom_member_id, created_at, test_title, score)
+    + delete(classroom_id, user_id)
+    + get_user(classroom_member)
+    + get_classroom(classroom_member)
+}
+
+class IClassroomMemberDB <<interface>> {
+    + read(class_room_id, user_id)
+}
+
+hide Classroom circle
+hide IClassroomDB <<interface>> circle
+hide AddStudentForm circle
+hide IStudentForm <<interface>> circle
+hide StudentController circle
+hide IClassroomMemberDB <<interface>> circle
+hide ClassroomMember circle
+
+
+IClassroomDB -down.> Classroom
+IStudentForm .down.> AddStudentForm
+IClassroomMemberDB .down.> ClassroomMember
+StudentController "1"-left-"1" IClassroomDB
+IStudentForm "1"-left-"1" StudentController
+StudentController "1"-left-"1" IClassroomMemberDB
+
+
+
+@enduml
