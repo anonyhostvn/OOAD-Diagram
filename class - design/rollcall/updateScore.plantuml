@@ -1,0 +1,78 @@
+@startuml viewStudent
+
+class UpdateScoreForm {
+    - classroom_member_id: bigint
+    - token: string
+    - test_title: string
+
+    + update_score(token, classroom_member_id, test_title, score)
+}
+
+class IStudentForm <<interface>> {
+    + update_score(token, classroom_member_id, test_title, score)
+}
+
+class StudentController {
+    + update_score(token, classroom_member_id, test_title, score)
+}
+
+class ClassroomMember {
+    - id: bigint
+    - user_id: bigint
+    - classroom_id: bigint
+    - created_at: datetime
+
+    + create(classroom_id, user_id): void
+    + read(classroom_id)
+    + read(user_id)
+    + read(classroom_member_id)
+    + read(classroom_id, user_id)
+    + update_rollcall(classroom_member_id, created_at, is_presented)
+    + update_bonus_point(classroom_member_id, created_at, point)
+    + update_score(classroom_member_id, created_at, test_title, score)
+    + delete(classroom_id, user_id)
+    + get_user(classroom_member)
+    + get_classroom(classroom_member)
+}
+
+class IClassroomMemberDB <<interface>> {
+    + read(classroom_id, user_id)
+}
+
+class ScoreDB {
+    - id: bigint
+    - classroom_member_id: bigint
+    - date: date
+    - test_title: string
+    - score: double
+    - created_at: datetime
+    - updated_at: datetime
+
+    + create(classroom_member_id, date, test_title, score)
+    + read(classroom_member_id)
+    + read(classroom_member_id, score_id)
+    + delete(classroom_member_id, score_id)
+}
+
+class IScoreDB <<interface>> {
+    + create(classroom_member_id, date, test_title, score)
+}
+
+hide UpdateScoreForm circle
+hide IStudentForm <<interface>> circle
+hide StudentController circle
+hide IClassroomMemberDB <<interface>> circle
+hide ClassroomMember circle
+hide IScoreDB <<interface>> circle
+hide ScoreDB circle
+
+
+IStudentForm .down.> UpdateScoreForm
+IClassroomMemberDB .down.> ClassroomMember
+IScoreDB .down.> ScoreDB
+IStudentForm "1"-left-"1" StudentController
+StudentController "1"-left-"1" IClassroomMemberDB
+StudentController "1"-left-"1" IScoreDB
+
+
+@enduml
