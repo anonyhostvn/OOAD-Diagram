@@ -1,0 +1,80 @@
+@startuml deleteResource
+
+class DeleteResousrceForm {
+    - token: string
+    - resource_id: bigint
+
+    + delete_resource(token, resource_id)
+}
+
+class IResourceForm <<interface>> {
+    + delete_resource(token, resource_id)
+}
+
+class ResourceController {
+    + delete_resource(token, resource_id)
+}
+
+class ClassroomMember {
+    - id: bigint
+    - user_id: bigint
+    - classroom_id: bigint
+    - created_at: datetime
+
+    + create(classroom_id, user_id): void
+    + read(classroom_id)
+    + read(user_id)
+    + read(classroom_member_id)
+    + read(classroom_id, user_id)
+    + update_rollcall(classroom_member_id, created_at, is_presented)
+    + update_bonus_point(classroom_member_id, created_at, point)
+    + update_score(classroom_member_id, created_at, test_title, score)
+    + delete(classroom_id, user_id)
+    + get_user(classroom_member)
+    + get_classroom(classroom_member)
+}
+
+class IClassroomMemberDB <<interface>> {
+    + read(classroom_id, user_id)
+}
+
+
+class Resource {
+    -id: bigint
+    -classroom_id: bigint
+    -uploaded_by: bigint
+    -resource: string
+    -created_at: datetime
+
+    + save_resource()
+    + get_resource_url()
+    + create(classroom_id, uploaded_by, resource_url)
+    + read(classroom_id)
+    + read(uploaded_by)
+    + read(resource_id)
+    + delete(resource_id)
+}
+
+class IResourceDB <<interface>> {
+    + delete(resource_id)
+    + read(resource_id)
+}
+
+hide DeleteResousrceForm circle
+hide IResourceForm <<interface>> circle
+hide ResourceController circle
+hide IClassroomMemberDB <<interface>> circle
+hide ClassroomMember circle
+hide IResourceDB <<interface>> circle
+hide Resource circle 
+
+
+IResourceForm .down.> DeleteResousrceForm
+IClassroomMemberDB .down.> ClassroomMember
+IResourceDB .down.> Resource
+IResourceForm "1"-left-"1" ResourceController
+ResourceController "1"-left-"1" IClassroomMemberDB
+ResourceController "1"-left-"1" IResourceDB
+
+
+@enduml
