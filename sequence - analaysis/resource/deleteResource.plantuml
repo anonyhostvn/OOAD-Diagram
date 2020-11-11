@@ -1,0 +1,36 @@
+@startuml deleteResource
+
+actor ": Teacher"
+boundary ": DeleteResourceForm"
+control ": ResourceController"
+entity ": ResourceEntity"
+entity ": ClassroomMember"
+
+activate ": Teacher"
+
+": Teacher" -> ": DeleteResourceForm": 1 // request delete resource 
+activate ": DeleteResourceForm"
+": DeleteResourceForm" -> ": ResourceController": 2 // request delete resource
+activate ": ResourceController"
+": ResourceController" -> ": ClassroomMember": 3 // checking permission to delete resource
+activate ": ClassroomMember"
+alt resource is accessible
+    ": ClassroomMember" -> ": ResourceController": 4 // can delete resource
+    ": ResourceController" ->> ": ResourceEntity": 5 // request delete resource
+    activate ": ResourceEntity"
+    ": ResourceController" -> ": DeleteResourceForm": 6 // delete resource successfully
+    deactivate ": ResourceEntity"
+    ": DeleteResourceForm" -> ": Teacher": 7 // delete resource successfully
+else resource is not accessible
+    ": ClassroomMember" -> ": ResourceController": 4.1 // can not delete resource
+    deactivate ": ClassroomMember"
+    ": ResourceController" -> ": DeleteResourceForm": 5.1 // delete resource failed
+    deactivate ": ResourceController"
+    ": DeleteResourceForm" -> ": Teacher": 6.1 // delete resource failed
+end
+
+deactivate ": Teacher"
+deactivate ": DeleteResourceForm"
+
+
+@enduml
