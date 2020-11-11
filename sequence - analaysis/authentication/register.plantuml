@@ -19,22 +19,22 @@ activate ":UserEntity"
 
 alt id is unique
 
-":UserEntity" -> ":AuthenticationController" : 1.5 // User does not exsit
+":UserEntity" --> ":AuthenticationController" : 1.5 // User does not exsit
 ":AuthenticationController" -> ":UserEntity" : 1.6 // register
 ":UserEntity" -> ":UserEntity" : 1.7 // create
 
 else id exits
 
-":UserEntity" -> ":AuthenticationController" : 1.5.1 // User exist msg
+":UserEntity" --> ":AuthenticationController" : 1.5.1 // User exist msg
 deactivate ":UserEntity"
-":AuthenticationController" -> ":RegisterForm" : 1.6.1 // User exist msg
+":AuthenticationController" --> ":RegisterForm" : 1.6.1 // User exist msg
 deactivate ":AuthenticationController"
-":RegisterForm" -> ":User" : 1.7.1 // User exist msg
+":RegisterForm" --> ":User" : 1.7.1 // User exist msg
 end
 
 else missing info
 
-":RegisterForm" -> ":User" : 1.3.1 // missing inf msg
+":RegisterForm" --> ":User" : 1.3.1 // missing inf msg
 
 end
 deactivate ":RegisterForm"
@@ -46,7 +46,7 @@ alt all info is provided
 
 ":ConfirmRegisterForm" -> ":AuthenticationController" : 2.3 // confirm register
 activate ":AuthenticationController"
-":AuthenticationController" -> ":User" : 2.4 // send registerEmail
+":AuthenticationController" --> ":User" : 2.4 // send registerEmail
 ":AuthenticationController" -> ":AuthenticationController" : 2.5 // validate confirmRegister
 
 alt all info is provided
@@ -56,15 +56,15 @@ activate ":UserEntity"
 deactivate ":UserEntity"
 else missing info
 
-":AuthenticationController" -> ":ConfirmRegisterForm" : 2.6.1 // missing inf msg
-":ConfirmRegisterForm" -> ":User" : 2.7.1 // missing inf msg
+":AuthenticationController" --> ":ConfirmRegisterForm" : 2.6.1 // missing inf msg
+":ConfirmRegisterForm" --> ":User" : 2.7.1 // missing inf msg
 
 end
 deactivate ":ConfirmRegisterForm"
 
 else missing info
 
-":AuthenticationController" -> ":User" : 2.5.1 // missing info msg
+":AuthenticationController" --> ":User" : 2.5.1 // missing info msg
 deactivate ":AuthenticationController"
 end
 deactivate ":User"

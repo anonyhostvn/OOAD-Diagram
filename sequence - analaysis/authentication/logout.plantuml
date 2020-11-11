@@ -17,22 +17,22 @@ alt correct info
 
 ":AuthenticationController" -> ":UserEntity" : 5 // logout
 activate ":UserEntity"
-":UserEntity" -> ":UserEntity" : 6 // get user
-":UserEntity" -> ":AuthenticationController" : 7 // logout accept msg
+":UserEntity" -> ":UserEntity" : 6 // delete token
+":UserEntity" --> ":AuthenticationController" : 7 // logout accept msg
 deactivate ":UserEntity"
-":AuthenticationController" -> ":User" : 8 // logout accept msg
+":AuthenticationController" --> ":User" : 8 // logout accept msg
 
 else invalid info
 
-":AuthenticationController" -> ":LogoutForm" : 5.1 // invalid inf msg
+":AuthenticationController" --> ":LogoutForm" : 5.1 // invalid inf msg
 deactivate ":AuthenticationController"
-":LogoutForm" -> ":User" : 5.2 // invalid inf msg
+":LogoutForm" --> ":User" : 5.2 // invalid inf msg
 
 end
 
 else missing info
 
-":LogoutForm" -> ":User" : 4.1 // missing inf msg
+":LogoutForm" --> ":User" : 4.1 // missing inf msg
 deactivate ":LogoutForm"
 deactivate ":User"
 end

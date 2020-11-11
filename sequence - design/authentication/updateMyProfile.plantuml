@@ -1,0 +1,26 @@
+@startuml
+actor ":User"
+
+activate ":User"
+":User" -> ":IAuthenticationForm" : 1 // enter information
+activate ":IAuthenticationForm"
+":IAuthenticationForm" -> ":IAuthenticationForm" : validate(token, first_name, last_name, dob, school_id, phone_number, avatar)
+
+alt all info is provided
+
+":IAuthenticationForm" -> ":AuthenticationController" : update_profile(token, first_name, last_name, dob, school_id, phone_number, avatar)
+activate ":AuthenticationController"
+":AuthenticationController" -> ":IUserDB" : view_profile(token)
+":IUserDB" -> ":IUserDB" : update_profile(token, first_name, last_name, dob, school_id, phone_number, avatar)
+
+
+":IUserDB" --> ":AuthenticationController" : // info view msg
+":AuthenticationController" --> ":IAuthenticationForm" : // info view msg
+":IAuthenticationForm"  --> ":User" : // info view msg
+else missing info
+
+":IAuthenticationForm" --> ":User" : // missing inf msg
+deactivate ":IAuthenticationForm"
+deactivate ":User"
+end
+@enduml

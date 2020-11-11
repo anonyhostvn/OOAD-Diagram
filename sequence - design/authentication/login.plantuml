@@ -2,37 +2,37 @@
 actor ":User"
 
 activate ":User"
-":User" -> ":LoginForm" : 1 // enter information
-activate ":LoginForm"
-":LoginForm" -> ":LoginForm" : validate(email, password)
+":User" -> ":IAuthenticationForm" : 1 // enter information
+activate ":IAuthenticationForm"
+":IAuthenticationForm" -> ":IAuthenticationForm" : validate(email, password)
 
 alt all info is provided
 
-":LoginForm" -> ":AuthenticationController" : login(email, password)
+":IAuthenticationForm" -> ":AuthenticationController" : login(email, password)
 activate ":AuthenticationController"
 ":AuthenticationController" -> ":IUserDB" : validate_login(email, password)
 
 alt user exist
 activate ":IUserDB"
-":IUserDB" -> ":AuthenticationController" : // user exist msg
+":IUserDB" --> ":AuthenticationController" : // user exist msg
 ":AuthenticationController" -> ":IUserDB" : login(emal, password)
 
 ":IUserDB" -> ":IUserDB" : get_token(user_id)
-":IUserDB" -> ":AuthenticationController" : // login accept msg
+":IUserDB" --> ":AuthenticationController" : // token
 deactivate ":IUserDB"
-":AuthenticationController" -> ":User" : // login accept msg
+":AuthenticationController" --> ":User" : // token
 
 else user not exist
-":AuthenticationController" -> ":LoginForm" : // invalid inf msg
+":AuthenticationController" --> ":IAuthenticationForm" : // invalid inf msg
 deactivate ":AuthenticationController"
-":LoginForm" -> ":User" : // invalid inf msg
+":IAuthenticationForm" --> ":User" : // invalid inf msg
 
 end
 
 else missing info
 
-":LoginForm" -> ":User" : // missing inf msg
-deactivate ":LoginForm"
+":IAuthenticationForm" --> ":User" : // missing inf msg
+deactivate ":IAuthenticationForm"
 deactivate ":User"
 end
 @enduml

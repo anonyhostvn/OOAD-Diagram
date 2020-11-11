@@ -13,11 +13,13 @@ alt all info is provided
 activate ":AuthenticationController"
 ":AuthenticationController" -> ":UserEntity" : 4 // view profile
 ":UserEntity" -> ":UserEntity" : 5 // get user
-":UserEntity" -> ":AuthenticationController" : 6 // info view msg
-":AuthenticationController"  -> ":User" : 6 // info view msg
+":UserEntity" --> ":AuthenticationController" : 6 // info view msg
+":AuthenticationController"  --> ":ViewMyProfileForm" : 7 // info view msg
+":ViewMyProfileForm"  --> ":User" : 7 // info view msg
+
 else missing info
 
-":ViewMyProfileForm" -> ":User" : 4.1 // missing inf msg
+":ViewMyProfileForm" --> ":User" : 3.1 // missing inf msg
 deactivate ":ViewMyProfileForm"
 deactivate ":User"
 end

@@ -1,0 +1,60 @@
+@startuml login
+
+class User <<entity>> {
+    id: bigint
+    email: string
+    password: string
+    first_name: string
+    last_name: string
+    dob: date
+    school_id: string
+    phone_number: string
+    avatar_url: string
+    token: string
+    last_logged_in: datetime
+    is_banned: bool
+    is_admin: bool
+    is_verify: bool
+    created_at: datetime
+    updated_at: datetime
+
+    // create()
+    // read()
+    // update()
+    // delete()
+    // get_user()
+    // get_classrooms()
+    // get_token()
+    // delete_token()
+}
+
+class RegisterForm <<boundary>> {
+    // validate()
+    // register()
+}
+
+class ConfirmRegisterForm <<boundary>> {
+    // validate()
+    // confirm_register()
+}
+
+class AuthenticationController <<controller>> {
+    // validate_register()
+    // register()
+    // send_register_email()
+    // validate_confirm_register()
+    // confirm_register()
+}
+
+hide User <<entity>> circle
+hide RegisterForm <<boundary>> circle
+hide ConfirmRegisterForm <<boundary>> circle
+hide AuthenticationController <<controller>> circle
+
+AuthenticationController "1" -left- "1" User
+AuthenticationController "1" -down- "1" ConfirmRegisterForm
+AuthenticationController "1" -down- "1" RegisterForm
+
+
+
+@enduml
