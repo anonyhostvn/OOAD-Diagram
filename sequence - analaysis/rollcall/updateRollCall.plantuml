@@ -1,0 +1,26 @@
+@startuml updateRollCall
+
+actor ":Teacher"
+boundary ":UpdateRollCallForm"
+control ":StudentController"
+entity ":RollCall"
+entity ":ClassroomMember"
+
+":Teacher" -> ":UpdateRollCallForm": 1 // request update roll call
+":UpdateRollCallForm" -> ":StudentController": 2 // request update roll call
+":StudentController" -> ":ClassroomMember": 3 // checking information is valid
+":ClassroomMember" -> ":ClassroomMember": 4 // check teacher, classroom, \n student is valid
+alt information is valid
+    ":ClassroomMember" -> ":StudentController": 5 // Information is valid
+    ":StudentController" ->> ":RollCall": 6 // Request make roll call
+    ":RollCall" -> ":RollCall": 7 // make roll call
+    ":StudentController" -> ":UpdateRollCallForm": 8 // Roll call update done
+    ":UpdateRollCallForm" -> ":Teacher": 9 // Roll call done
+else information is not valid
+    ":ClassroomMember" -> ":StudentController": 5.1 // Information is not valid
+    ":StudentController" -> ":UpdateRollCallForm": 6.1 // Roll call update failed
+    ":UpdateRollCallForm" -> ":Teacher": 7.1 // Roll call failed,\n check information again
+end
+
+
+@enduml
