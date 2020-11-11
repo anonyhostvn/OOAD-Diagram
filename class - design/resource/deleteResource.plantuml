@@ -1,6 +1,6 @@
 @startuml deleteResource
 
-class DeleteResousrceForm {
+class DeleteResourceForm {
     - token: string
     - resource_id: bigint
 
@@ -60,7 +60,7 @@ class IResourceDB <<interface>> {
     + read(resource_id)
 }
 
-hide DeleteResousrceForm circle
+hide DeleteResourceForm circle
 hide IResourceForm <<interface>> circle
 hide ResourceController circle
 hide IClassroomMemberDB <<interface>> circle
@@ -69,7 +69,7 @@ hide IResourceDB <<interface>> circle
 hide Resource circle 
 
 
-IResourceForm .down.> DeleteResousrceForm
+IResourceForm .down.> DeleteResourceForm
 IClassroomMemberDB .down.> ClassroomMember
 IResourceDB .down.> Resource
 IResourceForm "1"-left-"1" ResourceController

@@ -1,6 +1,6 @@
 @startuml viewResource
 
-class ViewResousrceForm {
+class ViewResourceForm {
     - token: string
     - resource_id: bigint
 
@@ -59,7 +59,7 @@ class IResourceDB <<interface>> {
     + read(resource_id)
 }
 
-hide ViewResousrceForm circle
+hide ViewResourceForm circle
 hide IResourceForm <<interface>> circle
 hide ResourceController circle
 hide IClassroomMemberDB <<interface>> circle
@@ -68,7 +68,7 @@ hide IResourceDB <<interface>> circle
 hide Resource circle 
 
 
-IResourceForm .down.> ViewResousrceForm
+IResourceForm .down.> ViewResourceForm
 IClassroomMemberDB .down.> ClassroomMember
 IResourceDB .down.> Resource
 IResourceForm "1"-left-"1" ResourceController

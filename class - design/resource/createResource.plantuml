@@ -1,6 +1,6 @@
 @startuml addResource
 
-class AddResousrceForm {
+class AddResourceForm {
     - classroom_id: bigint
     - token: string
     - resource: file
@@ -60,7 +60,7 @@ class IResourceDB <<interface>> {
     + create(classroom_id, uploaded_by, resource_url)
 }
 
-hide AddResousrceForm circle
+hide AddResourceForm circle
 hide IResourceForm <<interface>> circle
 hide ResourceController circle
 hide IClassroomMemberDB <<interface>> circle
@@ -69,7 +69,7 @@ hide IResourceDB <<interface>> circle
 hide Resource circle 
 
 
-IResourceForm .down.> AddResousrceForm
+IResourceForm .down.> AddResourceForm
 IClassroomMemberDB .down.> ClassroomMember
 IResourceDB .down.> Resource
 IResourceForm "1"-left-"1" ResourceController
