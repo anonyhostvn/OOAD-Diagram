@@ -1,0 +1,38 @@
+@startuml
+actor ":User"
+
+activate ":User"
+":User" -> ":LoginForm" : 1 // enter information
+activate ":LoginForm"
+":LoginForm" -> ":LoginForm" : validate(email, password)
+
+alt all info is provided
+
+":LoginForm" -> ":AuthenticationController" : login(email, password)
+activate ":AuthenticationController"
+":AuthenticationController" -> ":IUserDB" : validate_login(email, password)
+
+alt user exist
+activate ":IUserDB"
+":IUserDB" -> ":AuthenticationController" : // user exist msg
+":AuthenticationController" -> ":IUserDB" : login(emal, password)
+
+":IUserDB" -> ":IUserDB" : get_token(user_id)
+":IUserDB" -> ":AuthenticationController" : // login accept msg
+deactivate ":IUserDB"
+":AuthenticationController" -> ":User" : // login accept msg
+
+else user not exist
+":AuthenticationController" -> ":LoginForm" : // invalid inf msg
+deactivate ":AuthenticationController"
+":LoginForm" -> ":User" : // invalid inf msg
+
+end
+
+else missing info
+
+":LoginForm" -> ":User" : // missing inf msg
+deactivate ":LoginForm"
+deactivate ":User"
+end
+@enduml

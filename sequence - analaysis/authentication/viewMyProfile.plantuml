@@ -1,0 +1,24 @@
+@startuml
+actor ":User"
+boundary ":ViewMyProfileForm"
+control ":AuthenticationController"
+entity ":UserEntity"
+activate ":User"
+":User" -> ":ViewMyProfileForm" : 1 // enter information
+activate ":ViewMyProfileForm"
+":ViewMyProfileForm" -> ":ViewMyProfileForm" : 2 // validate
+alt all info is provided
+
+":ViewMyProfileForm" -> ":AuthenticationController" : 3 // view profile
+activate ":AuthenticationController"
+":AuthenticationController" -> ":UserEntity" : 4 // view profile
+":UserEntity" -> ":UserEntity" : 5 // get user
+":UserEntity" -> ":AuthenticationController" : 6 // info view msg
+":AuthenticationController"  -> ":User" : 6 // info view msg
+else missing info
+
+":ViewMyProfileForm" -> ":User" : 4.1 // missing inf msg
+deactivate ":ViewMyProfileForm"
+deactivate ":User"
+end
+@enduml

@@ -1,0 +1,23 @@
+@startuml
+actor ":User"
+
+activate ":User"
+":User" -> ":ViewMyProfileForm" : 1 // enter information
+activate ":ViewMyProfileForm"
+":ViewMyProfileForm" -> ":ViewMyProfileForm" : 2 // validate
+alt all info is provided
+
+":ViewMyProfileForm" -> ":AuthenticationController" : 3 // view profile
+activate ":AuthenticationController"
+":AuthenticationController" -> ":IUserDB" : 4 // view profile
+":IUserDB" -> ":IUserDB" : 5 // get user
+":IUserDB" -> ":AuthenticationController" : // info view msg
+":AuthenticationController"  -> ":User" : // info view msg
+
+else missing info
+
+":ViewMyProfileForm" -> ":User" : // missing inf msg
+deactivate ":ViewMyProfileForm"
+deactivate ":User"
+end
+@enduml
