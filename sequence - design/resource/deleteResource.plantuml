@@ -1,0 +1,31 @@
+@startuml deleteResource
+
+activate ": Teacher"
+
+": Teacher" -->> ": IResourceForm": // request delete resource 
+activate ": IResourceForm"
+": IResourceForm" -> ": ResourceController": delete_resource(token, resource_id)
+activate ": ResourceController"
+": ResourceController" -> ": IClassroomMemberDB": read(classroom_id, user_id)
+activate ": IClassroomMemberDB"
+alt teacher is in classroom
+    ": ResourceController" -> ": IResourceDB": read(resource_id)
+    activate ": IResourceDB"
+    alt resource is exist
+        ": ResourceController" ->> ": IResourceDB": delete(resource_id)
+        deactivate ": ResourceController" 
+        deactivate ": IResourceDB"
+        ": IResourceForm" -->> ": Teacher": // delete resource successfully
+    else resource is not exist
+        ": IResourceForm" -->> ": Teacher": // resource is not exist
+    end
+else teacher is not in classroom
+    deactivate ": IClassroomMemberDB"
+    ": IResourceForm" -->> ": Teacher": // not have permission to delete resource
+end
+
+deactivate ": Teacher"
+deactivate ": IResourceForm"
+
+
+@enduml

@@ -1,0 +1,27 @@
+@startuml createResource
+
+activate ": Teacher"
+
+": Teacher" -->> ": IResourceForm": // request create resource 
+activate ": IResourceForm"
+": IResourceForm" -> ": ResourceController": create_resource(token, classroom_id, uploaded_by, resource)
+
+activate ": ResourceController"
+": ResourceController" -> ": IClassroomMemberDB": read(classroom_id, user_id)
+activate ": IClassroomMemberDB"
+deactivate ": IClassroomMemberDB"
+alt teacher is in classroom
+    ": ResourceController" ->> ": IResourceDB": create(classroom_id, uploaded_by, resource_url)
+    activate ": IResourceDB"
+    deactivate ": IResourceDB"
+    ": IResourceForm" -->> ": Teacher": // create resource successfully
+else teacher is not in classroom
+    deactivate ": ResourceController"
+    ": IResourceForm" -> ": Teacher": // create resource failed
+end
+
+deactivate ": Teacher"
+deactivate ": IResourceForm"
+
+
+@enduml

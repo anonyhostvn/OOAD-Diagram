@@ -1,0 +1,31 @@
+@startuml viewResource
+
+activate ": User"
+
+": User" -> ": IResourceForm": // request view resource 
+activate ": IResourceForm"
+": IResourceForm" -> ": ResourceController": view_resource(token, resource_id)
+activate ": ResourceController"
+": ResourceController" -> ": IClassroomMemberDB": read(classroom_id, user_id)
+activate ": IClassroomMemberDB"
+deactivate ": IClassroomMemberDB"
+alt user is in classroom
+    ": ResourceController" -> ": IResourceDB": read(resource_id)
+    activate ": IResourceDB"
+    deactivate ": IResourceDB"
+    deactivate ": ResourceController"
+    alt resource is exist
+        ": IResourceForm" -->> ": User": // Show resource
+    else resource is not exist
+        ": IResourceForm" -->> ": User": // Resource is not exist
+    end
+    
+else user is not in classroom
+    ": IResourceForm" -> ": User": // not have permission to access resource
+end
+
+deactivate ": User"
+deactivate ": IResourceForm"
+
+
+@enduml

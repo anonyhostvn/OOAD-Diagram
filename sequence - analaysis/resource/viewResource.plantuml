@@ -1,14 +1,14 @@
 @startuml viewResource
 
-actor ": Teacher"
+actor ": User"
 boundary ": ViewResourceForm"
 control ": ResourceController"
 entity ": Resource"
 entity ": ClassroomMember"
 
-activate ": Teacher"
+activate ": User"
 
-": Teacher" -> ": ViewResourceForm": 1 // request view resource 
+": User" -> ": ViewResourceForm": 1 // request view resource 
 activate ": ViewResourceForm"
 ": ViewResourceForm" -> ": ResourceController": 2 // request view resource
 activate ": ResourceController"
@@ -21,16 +21,16 @@ alt resource is accessible
     ": Resource" -> ": ResourceController": 6 // Return resource
     ": ResourceController" -> ": ViewResourceForm": 7 // Return resource
     deactivate ": Resource"
-    ": ViewResourceForm" -> ": Teacher": 8 // Show resource
+    ": ViewResourceForm" -> ": User": 8 // Show resource
 else resource is not accessible
     ": ClassroomMember" -> ": ResourceController": 4.1 // can not access resource
     deactivate ": ClassroomMember"
     ": ResourceController" -> ": ViewResourceForm": 5.1 // get resource failed
     deactivate ": ResourceController"
-    ": ViewResourceForm" -> ": Teacher": 6.1 // get resource failed
+    ": ViewResourceForm" -> ": User": 6.1 // get resource failed
 end
 
-deactivate ": Teacher"
+deactivate ": User"
 deactivate ": ViewResourceForm"
 
 
