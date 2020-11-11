@@ -1,37 +1,37 @@
 @startuml addStudent
 
-actor ":Teacher"
-boundary ":AddStudentForm"
-control ":StudentController"
+actor ": Teacher"
+boundary ": AddStudentForm"
+control ": StudentController"
 entity ":ClassroomEntity"
-entity ":ClassroomMember"
+entity ": ClassroomMember"
 
-activate ":Teacher"
-":Teacher" -> ":AddStudentForm": 1 // Add student to classroom
-activate ":AddStudentForm"
-":AddStudentForm" -> ":StudentController": 2 // Request add student to classroom
-activate ":StudentController"
-":StudentController" -> ":ClassroomMember": 3 // Checking student valid to enroll classroom
-activate ":ClassroomMember"
-":ClassroomMember" -> ":ClassroomMember": 4 // Checking student is valid to enroll classroom
+activate ": Teacher"
+": Teacher" -> ": AddStudentForm": 1 // Add student to classroom
+activate ": AddStudentForm"
+": AddStudentForm" -> ": StudentController": 2 // Request add student to classroom
+activate ": StudentController"
+": StudentController" -> ": ClassroomMember": 3 // Checking student valid to enroll classroom
+activate ": ClassroomMember"
+": ClassroomMember" -> ": ClassroomMember": 4 // Checking student is valid to enroll classroom
 alt student is valid for enroll classroom
-    ":ClassroomMember" -> ":StudentController": 5 // student is valid to enroll class
-    ":StudentController" ->> ":ClassroomEntity": 6 // add student to classroom
+    ": ClassroomMember" -> ": StudentController": 5 // student is valid to enroll class
+    ": StudentController" ->> ":ClassroomEntity": 6 // add student to classroom
     activate ":ClassroomEntity" 
     ":ClassroomEntity" -> ":ClassroomEntity": 7 // add student to classroom
-    ":StudentController" -> ":AddStudentForm": 8 // add student to classroom successfully
+    ": StudentController" -> ": AddStudentForm": 8 // add student to classroom successfully
     deactivate ":ClassroomEntity"
-    ":AddStudentForm" -> ":Teacher": 9 // student is added to classroom
+    ": AddStudentForm" -> ": Teacher": 9 // student is added to classroom
 
 else student is not valid for enroll classroom
-    ":ClassroomMember" -> ":StudentController": 5.1 // student is not valid for add to classroom
-    deactivate ":ClassroomMember"
-    ":StudentController" -> ":AddStudentForm": 6.1 // add student to classroom failed
-    deactivate ":StudentController"
-    ":AddStudentForm" -> ":Teacher": 7.1 // student is not added to classroom
+    ": ClassroomMember" -> ": StudentController": 5.1 // student is not valid for add to classroom
+    deactivate ": ClassroomMember"
+    ": StudentController" -> ": AddStudentForm": 6.1 // add student to classroom failed
+    deactivate ": StudentController"
+    ": AddStudentForm" -> ": Teacher": 7.1 // student is not added to classroom
 end
 
-deactivate ":AddStudentForm"
-deactivate ":Teacher"
+deactivate ": AddStudentForm"
+deactivate ": Teacher"
 
 @enduml

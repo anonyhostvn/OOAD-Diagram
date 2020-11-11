@@ -1,38 +1,38 @@
 @startuml updateRollCall
 
-actor ":Teacher"
+actor ": Teacher"
 boundary ":UpdateRollCallForm"
-control ":StudentController"
+control ": StudentController"
 entity ":RollCall"
-entity ":ClassroomMember"
+entity ": ClassroomMember"
 
-activate ":Teacher"
+activate ": Teacher"
 
-":Teacher" -> ":UpdateRollCallForm": 1 // request update roll call
+": Teacher" -> ":UpdateRollCallForm": 1 // request update roll call
 activate ":UpdateRollCallForm"
-":UpdateRollCallForm" -> ":StudentController": 2 // request update roll call
-activate ":StudentController"
-":StudentController" -> ":ClassroomMember": 3 // checking information is valid
-activate ":ClassroomMember"
-":ClassroomMember" -> ":ClassroomMember": 4 // check teacher, classroom, \n student is valid
+":UpdateRollCallForm" -> ": StudentController": 2 // request update roll call
+activate ": StudentController"
+": StudentController" -> ": ClassroomMember": 3 // checking information is valid
+activate ": ClassroomMember"
+": ClassroomMember" -> ": ClassroomMember": 4 // check teacher, classroom, \n student is valid
 alt information is valid
-    ":ClassroomMember" -> ":StudentController": 5 // Information is valid
-    ":StudentController" ->> ":RollCall": 6 // Request make roll call
+    ": ClassroomMember" -> ": StudentController": 5 // Information is valid
+    ": StudentController" ->> ":RollCall": 6 // Request make roll call
     activate ":RollCall"
     ":RollCall" -> ":RollCall": 7 // make roll call
-    ":StudentController" -> ":UpdateRollCallForm": 8 // Roll call update done
+    ": StudentController" -> ":UpdateRollCallForm": 8 // Roll call update done
     deactivate ":RollCall"
-    ":UpdateRollCallForm" -> ":Teacher": 9 // Roll call done
+    ":UpdateRollCallForm" -> ": Teacher": 9 // Roll call done
 else information is not valid
-    ":ClassroomMember" -> ":StudentController": 5.1 // Information is not valid
-    deactivate ":ClassroomMember"
-    ":StudentController" -> ":UpdateRollCallForm": 6.1 // Roll call update failed
-    deactivate ":StudentController"
-    ":UpdateRollCallForm" -> ":Teacher": 7.1 // Roll call failed,\n check information again
+    ": ClassroomMember" -> ": StudentController": 5.1 // Information is not valid
+    deactivate ": ClassroomMember"
+    ": StudentController" -> ":UpdateRollCallForm": 6.1 // Roll call update failed
+    deactivate ": StudentController"
+    ":UpdateRollCallForm" -> ": Teacher": 7.1 // Roll call failed,\n check information again
 end
 
 deactivate ":UpdateRollCallForm"
-deactivate ":Teacher"
+deactivate ": Teacher"
 
 
 

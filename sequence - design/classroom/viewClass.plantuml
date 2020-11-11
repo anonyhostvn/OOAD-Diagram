@@ -1,27 +1,22 @@
 @startuml viewClass
 
-actor ":User"
-boundary ":CreateClassroomForm"
-control ":ClassroomController"
-entity ":ClassroomEntity"
-
 activate ":User"
-":User" -->> ":CreateClassroomForm": // request get class info
-activate ":CreateClassroomForm"
-":CreateClassroomForm" -> ":ClassroomController": view_classroom(token, classroom_id)
-activate ":ClassroomController"
-":ClassroomController" -> ":ClassroomEntity": get(classroom_id)
+":User" -->> ": CreateClassroomForm": // request get class info
+activate ": CreateClassroomForm"
+": CreateClassroomForm" -> ": ClassroomController": view_classroom(token, classroom_id)
+activate ": ClassroomController"
+": ClassroomController" -> ":ClassroomEntity": get(classroom_id)
 activate ":ClassroomEntity"
 alt classroom is exist
-    ":ClassroomController" -> ":CreateClassroomForm": view_profilie(token, classroom_id)
-    deactivate ":ClassroomController"
-    ":CreateClassroomForm" -->> ":User": // Classroom information
+    ": ClassroomController" -> ": CreateClassroomForm": view_profilie(token, classroom_id)
+    deactivate ": ClassroomController"
+    ": CreateClassroomForm" -->> ":User": // Classroom information
 else classroom is not exist
     deactivate ":ClassroomEntity"
-    ":CreateClassroomForm" -> ":User": // classroom_id invalid
+    ": CreateClassroomForm" -> ":User": // classroom_id invalid
 end
 
-deactivate ":CreateClassroomForm"
+deactivate ": CreateClassroomForm"
 deactivate ":User"
 
 @enduml

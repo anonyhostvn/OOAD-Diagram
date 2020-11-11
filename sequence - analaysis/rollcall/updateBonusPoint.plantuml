@@ -1,37 +1,37 @@
 @startuml updateBonusPoint
 
-actor ":Teacher"
+actor ": Teacher"
 boundary ":UpdateBonusPointForm"
-control ":StudentController"
+control ": StudentController"
 entity ":BonusPoint"
-entity ":ClassroomMember"
+entity ": ClassroomMember"
 
-activate ":Teacher"
+activate ": Teacher"
 
-":Teacher" -> ":UpdateBonusPointForm": 1 // request update bonus point
+": Teacher" -> ":UpdateBonusPointForm": 1 // request update bonus point
 activate ":UpdateBonusPointForm"
-":UpdateBonusPointForm" -> ":StudentController": 2 // request update bonus point
-activate ":StudentController"
-":StudentController" -> ":ClassroomMember": 3 // checking information is valid
-activate ":ClassroomMember"
-":ClassroomMember" -> ":ClassroomMember": 4 // check teacher, classroom, \n student is valid
+":UpdateBonusPointForm" -> ": StudentController": 2 // request update bonus point
+activate ": StudentController"
+": StudentController" -> ": ClassroomMember": 3 // checking information is valid
+activate ": ClassroomMember"
+": ClassroomMember" -> ": ClassroomMember": 4 // check teacher, classroom, \n student is valid
 alt information is valid
-    ":ClassroomMember" -> ":StudentController": 5 // Information is valid
-    ":StudentController" ->> ":BonusPoint": 6 // Request update bonus point
+    ": ClassroomMember" -> ": StudentController": 5 // Information is valid
+    ": StudentController" ->> ":BonusPoint": 6 // Request update bonus point
     activate ":BonusPoint"
     ":BonusPoint" -> ":BonusPoint": 7 // update bonus point
-    ":StudentController" -> ":UpdateBonusPointForm": 8 // Update bonus point done
+    ": StudentController" -> ":UpdateBonusPointForm": 8 // Update bonus point done
     deactivate ":BonusPoint"
-    ":UpdateBonusPointForm" -> ":Teacher": 9 // Update bonus point done
+    ":UpdateBonusPointForm" -> ": Teacher": 9 // Update bonus point done
 else information is not valid
-    ":ClassroomMember" -> ":StudentController": 5.1 // Information is not valid
-    deactivate ":ClassroomMember"
-    ":StudentController" -> ":UpdateBonusPointForm": 6.1 // Bonus point update failed
-    deactivate ":StudentController"
-    ":UpdateBonusPointForm" -> ":Teacher": 7.1 // Bonus point update failed,\n check information again
+    ": ClassroomMember" -> ": StudentController": 5.1 // Information is not valid
+    deactivate ": ClassroomMember"
+    ": StudentController" -> ":UpdateBonusPointForm": 6.1 // Bonus point update failed
+    deactivate ": StudentController"
+    ":UpdateBonusPointForm" -> ": Teacher": 7.1 // Bonus point update failed,\n check information again
 end
 
-deactivate ":Teacher"
+deactivate ": Teacher"
 deactivate ":UpdateBonusPointForm"
 
 

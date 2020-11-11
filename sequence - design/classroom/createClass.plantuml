@@ -1,30 +1,30 @@
 @startuml createClass
 
-actor ":Teacher"
+actor ": Teacher"
 
-activate ":Teacher"
-":Teacher" ->> ":CreateClassroomForm": 1 // fill information
-activate ":CreateClassroomForm"
-":CreateClassroomForm" -> ":CreateClassroomForm": validate(classroom_name, description)
+activate ": Teacher"
+": Teacher" ->> ": CreateClassroomForm": 1 // fill information
+activate ": CreateClassroomForm"
+": CreateClassroomForm" -> ": CreateClassroomForm": validate(classroom_name, description)
 alt all information is filled
-    ":CreateClassroomForm" -> ":ClassroomController": create_classroom(token, classroom_name, description)
-    activate ":ClassroomController"
-    ":ClassroomController" -> ":ClassroomController": validate_create_classroom(token, classroom_name, description)
-    ":ClassroomController" -> ":IClassroomDB": get_classroom_by_name(classroom_name)
-    activate ":IClassroomDB"
+    ": CreateClassroomForm" -> ": ClassroomController": create_classroom(token, classroom_name, description)
+    activate ": ClassroomController"
+    ": ClassroomController" -> ": ClassroomController": validate_create_classroom(token, classroom_name, description)
+    ": ClassroomController" -> ": IClassroomDB": get_classroom_by_name(classroom_name)
+    activate ": IClassroomDB"
     alt classroom is valid and unique
-        ":ClassroomController" ->> ":IClassroomDB": create(classroom_name, description, teacher_id)
-        ":CreateClassroomForm" -->> ":Teacher": // Classroom created
+        ": ClassroomController" ->> ": IClassroomDB": create(classroom_name, description, teacher_id)
+        ": CreateClassroomForm" -->> ": Teacher": // Classroom created
     else classroom is not valid or exist
-        deactivate ":IClassroomDB"
-        deactivate ":ClassroomController"
-        ":CreateClassroomForm" -->> ":Teacher": // classroom is not created
+        deactivate ": IClassroomDB"
+        deactivate ": ClassroomController"
+        ": CreateClassroomForm" -->> ": Teacher": // classroom is not created
     end
 else some information is missing
-    ":CreateClassroomForm" -->> ":Teacher": // check information again
+    ": CreateClassroomForm" -->> ": Teacher": // check information again
 end
 
-deactivate ":CreateClassroomForm"
-deactivate ":Teacher"
+deactivate ": CreateClassroomForm"
+deactivate ": Teacher"
 
 @enduml
