@@ -65,6 +65,13 @@ class RegisterForm {
     + register(email, password1)
 }
 
+class ConfirmRegisterForm {
+    - register_token: string
+
+    + validate(register_token)
+    + confirm_register(register_token)
+}
+
 class IAuthenticationForm <<interface>> {
     + validate(email, password1, password2)
     + register(email, password1)
@@ -81,11 +88,13 @@ class AuthenticationController {
 hide User circle
 hide IUserDB <<interface>> circle
 hide RegisterForm circle
+hide ConfirmRegisterForm circle
 hide IAuthenticationForm <<interface>> circle
 hide AuthenticationController circle
 
 IUserDB -down.> User
 IAuthenticationForm .down.> RegisterForm
+IAuthenticationForm .down.> ConfirmRegisterForm
 AuthenticationController "1"-left-"1" IUserDB
 IAuthenticationForm "1"-left-"1" AuthenticationController
 

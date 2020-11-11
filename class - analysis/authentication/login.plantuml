@@ -19,24 +19,24 @@ class User <<entity>> {
     updated_at: datetime
 
     // create()
-    //read()
-    //read()
-    //update()
-    //delete()
-    //get_user()
-    //get_classrooms()
-    //get_token()
-    //delete_token()
+    // read()
+    // read()
+    // update()
+    // delete()
+    // get_user()
+    // get_classrooms()
+    // get_token()
+    // delete_token()
 }
 
 class LoginForm <<boundary>> {
-    //validate()
-    //login()
+    // validate()
+    // login()
 }
 
 class AuthenticationController <<controller>> {
-    //validate_login()
-    //login()
+    // validate_login()
+    // login()
 }
 
 hide User <<entity>> circle
