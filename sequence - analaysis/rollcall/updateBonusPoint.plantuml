@@ -3,7 +3,7 @@
 actor ": Teacher"
 boundary ":UpdateBonusPointForm"
 control ": StudentController"
-entity ":BonusPoint"
+entity ": BonusPoint"
 entity ": ClassroomMember"
 
 activate ": Teacher"
@@ -16,10 +16,10 @@ activate ": StudentController"
 activate ": ClassroomMember"
 alt information is valid
     ": ClassroomMember" -> ": StudentController": 4 // Information is valid
-    ": StudentController" ->> ":BonusPoint": 5 // Request update bonus point
-    activate ":BonusPoint"
+    ": StudentController" ->> ": BonusPoint": 5 // Request update bonus point
+    activate ": BonusPoint"
     ": StudentController" -> ":UpdateBonusPointForm": 6 // Update bonus point done
-    deactivate ":BonusPoint"
+    deactivate ": BonusPoint"
     ":UpdateBonusPointForm" -> ": Teacher": 7 // Update bonus point done
 else information is not valid
     ": ClassroomMember" -> ": StudentController": 4.1 // Information is not valid
