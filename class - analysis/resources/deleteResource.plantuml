@@ -1,0 +1,48 @@
+@startuml createResource
+
+class Resource <<entity>> {
+    id: bigint
+    classroom_id: bigint
+    uploaded_by: bigint
+    resource: string
+    created_at: datetime
+
+    // create ()
+    // read ()
+    // delete ()
+    // update ()
+    // Request delete resource ()
+}
+
+class ClassroomMember <<entity>> {
+    id: bigint
+    user_id: bigint
+    classroom_id: bigint
+    created_at: datetime
+
+    // create ()
+    // read ()
+    // delete ()
+    // update ()
+    // checking permission to delete resource()
+}
+
+class DeleteResourceForm <<boundary>> {
+    // request delete  resource()
+}
+
+class ResourceController <<controller>> {
+    // request delete resource ()
+}
+
+hide Resource <<entity>> circle
+hide DeleteResourceForm <<boundary>> circle
+hide ResourceController <<controller>> circle
+
+ResourceController "1" -left- "1" Resource
+ResourceController "1" -right- "1" ClassroomMember
+ResourceController "1" -down- "1" DeleteResourceForm
+
+
+
+@enduml

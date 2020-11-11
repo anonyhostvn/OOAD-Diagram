@@ -1,0 +1,37 @@
+@startuml viewResource
+
+actor ": User"
+boundary ": ViewResourceForm"
+control ": ResourceController"
+entity ": Resource"
+entity ": ClassroomMember"
+
+activate ": User"
+
+": User" -> ": ViewResourceForm": 1 // request view resource 
+activate ": ViewResourceForm"
+": ViewResourceForm" -> ": ResourceController": 2 // request view resource
+activate ": ResourceController"
+": ResourceController" -> ": ClassroomMember": 3 // checking permission on resource
+activate ": ClassroomMember"
+alt resource is accessible
+    ": ClassroomMember" -> ": ResourceController": 4 // can access resource
+    ": ResourceController" -> ": Resource": 5 // Request get resource
+    activate ": Resource"
+    ": Resource" -> ": ResourceController": 6 // Return resource
+    ": ResourceController" -> ": ViewResourceForm": 7 // Return resource
+    deactivate ": Resource"
+    ": ViewResourceForm" -> ": User": 8 // Show resource
+else resource is not accessible
+    ": ClassroomMember" -> ": ResourceController": 4.1 // can not access resource
+    deactivate ": ClassroomMember"
+    ": ResourceController" -> ": ViewResourceForm": 5.1 // get resource failed
+    deactivate ": ResourceController"
+    ": ViewResourceForm" -> ": User": 6.1 // get resource failed
+end
+
+deactivate ": User"
+deactivate ": ViewResourceForm"
+
+
+@enduml
