@@ -1,0 +1,37 @@
+@startuml createTopic
+
+actor ": User"
+boundary ": ViewTopicForm"
+control ": TopicController"
+entity ": TopicEntity"
+entity ": ClassroomMember"
+
+activate ": User"
+
+": User" -> ": ViewTopicForm": 1 // request view topic 
+activate ": ViewTopicForm"
+": ViewTopicForm" -> ": TopicController": 2 // request view topic
+activate ": TopicController"
+": TopicController" -> ": ClassroomMember": 3 // checking permission to view topic
+activate ": ClassroomMember"
+alt can view topic
+    ": ClassroomMember" -> ": TopicController": 4 // can view topic
+    ": TopicController" -> ": TopicEntity": 5 // request view topic
+    activate ": TopicEntity"
+    ": TopicEntity" -> ": TopicController": 6 // return topic
+    ": TopicController" -> ": ViewTopicForm": 7 // return topic
+    deactivate ": TopicEntity"
+    ": ViewTopicForm" -> ": User": 8 // return topic
+else can not view topic
+    ": ClassroomMember" -> ": TopicController": 4.1 // can not view topic
+    deactivate ": ClassroomMember"
+    ": TopicController" -> ": ViewTopicForm": 5.1 // can not view topic 
+    deactivate ": TopicController"
+    ": ViewTopicForm" -> ": User": 6.1 // can not view topic
+end
+
+deactivate ": User"
+deactivate ": ViewTopicForm"
+
+
+@enduml

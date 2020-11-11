@@ -1,0 +1,36 @@
+@startuml createTopic
+
+actor ": User"
+boundary ": CreateTopicForm"
+control ": TopicController"
+entity ": TopicEntity"
+entity ": ClassroomMember"
+
+activate ": User"
+
+": User" -> ": CreateTopicForm": 1 // request create topic 
+activate ": CreateTopicForm"
+": CreateTopicForm" -> ": TopicController": 2 // request create topic
+activate ": TopicController"
+": TopicController" -> ": ClassroomMember": 3 // checking permission to create topic
+activate ": ClassroomMember"
+alt can create topic
+    ": ClassroomMember" -> ": TopicController": 4 // can create topic
+    ": TopicController" ->> ": TopicEntity": 5 // request create topic
+    activate ": TopicEntity"
+    ": TopicController" -> ": CreateTopicForm": 7 // create topic successfully
+    deactivate ": TopicEntity"
+    ": CreateTopicForm" -> ": User": 8 // create topic successfully
+else can not create topic
+    ": ClassroomMember" -> ": TopicController": 4.1 // can not create topic
+    deactivate ": ClassroomMember"
+    ": TopicController" -> ": CreateTopicForm": 5.1 // create topic failed
+    deactivate ": TopicController"
+    ": CreateTopicForm" -> ": User": 6.1 // create topic failed
+end
+
+deactivate ": User"
+deactivate ": CreateTopicForm"
+
+
+@enduml

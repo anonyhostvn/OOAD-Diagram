@@ -1,0 +1,36 @@
+@startuml createTopic
+
+actor ": User"
+boundary ": ITopicForm"
+control ": TopicController"
+entity ": ITopicDB"
+entity ": IClassroomMemberDB"
+
+activate ": User"
+
+": User" -->> ": ITopicForm": // request view topic 
+activate ": ITopicForm"
+": ITopicForm" -> ": TopicController": view_topic(token, classroom_id)
+activate ": TopicController"
+": TopicController" -> ": IClassroomMemberDB": read(classroom_id, user_id)
+activate ": IClassroomMemberDB"
+deactivate ": IClassroomMemberDB"
+alt can view topic
+    ": TopicController" -> ": ITopicDB": read(topic_id)
+    activate ": ITopicDB"
+    deactivate ": ITopicDB"
+    deactivate ": TopicController"
+    alt topic is exist
+        ": ITopicForm" -->> ": User": // show topic
+    else toipic is not exist
+        ": ITopicForm" -->> ": User": // topic is not exist
+    end
+else can not view topic
+    ": ITopicForm" -->> ": User": // not have permission for view topic 
+end
+
+deactivate ": User"
+deactivate ": ITopicForm"
+
+
+@enduml

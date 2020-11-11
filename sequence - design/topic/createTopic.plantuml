@@ -1,0 +1,38 @@
+@startuml createTopic
+
+actor ": User"
+boundary ": ITopicForm"
+control ": TopicController"
+entity ": ITopicDB"
+entity ": IClassroomMemberDB"
+
+activate ": User"
+
+": User" -> ": ITopicForm": 1 // request create topic 
+activate ": ITopicForm"
+": ITopicForm" -> ": ITopicForm": validate(token, classroom_id, posted_by, title, content, resource)
+alt file is valid
+    ": ITopicForm" -> ": TopicController": create_topic(token, classroom_id, posted_by, title, content, resource)
+    activate ": TopicController"
+    ": TopicController" -> ": IClassroomMemberDB": read(classroom_id, user_id)
+    activate ": IClassroomMemberDB"
+    alt can create topic
+        ": TopicController" ->> ": ITopicDB": create(classroom_id, posted_by, title, content, resource)
+        activate ": ITopicDB"
+        deactivate ": ITopicDB"
+        ": ITopicForm" -> ": User": 8 // create topic successfully
+    else can not create topic
+        deactivate ": IClassroomMemberDB"
+        deactivate ": TopicController"
+        ": ITopicForm" -> ": User": 6.1 // not have permission to create topic
+    end
+else file is not valid
+    ": ITopicForm" -> ": User": 6.1 // check upload file
+end
+
+
+deactivate ": User"
+deactivate ": ITopicForm"
+
+
+@enduml
