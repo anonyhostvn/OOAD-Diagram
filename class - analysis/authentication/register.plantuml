@@ -29,22 +29,32 @@ class User <<entity>> {
     //delete_token()
 }
 
-class LoginForm <<boundary>> {
+class RegisterForm <<boundary>> {
     //validate()
-    //login()
+    //register()
+}
+
+class ConfirmRegisterForm <<boundary>> {
+    //validate()
+    //confirm_register()
 }
 
 class AuthenticationController <<controller>> {
-    //validate_login()
-    //login()
+    //validate_register()
+    //register()
+    //send_register_email()
+    //validate_confirm_register()
+    //confirm_register()
 }
 
 hide User <<entity>> circle
-hide LoginForm <<boundary>> circle
+hide RegisterForm <<boundary>> circle
+hide ConfirmRegisterForm <<boundary>> circle
 hide AuthenticationController <<controller>> circle
 
 AuthenticationController "1" -left- "1" User
-AuthenticationController "1" -down- "1" LoginForm
+AuthenticationController "1" -down- "1" ConfirmRegisterForm
+AuthenticationController "1" -down- "1" RegisterForm
 
 
 
