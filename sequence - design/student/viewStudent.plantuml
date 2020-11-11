@@ -1,0 +1,20 @@
+@startuml viewStudent
+
+actor ": Student"
+boundary ": ViewStudentForm"
+control ": StudentController"
+entity ": IClassroomMemberDB"
+
+activate ": Student"
+": Student" -->> ": ViewStudentForm": // request view student information
+activate ": ViewStudentForm"
+": ViewStudentForm" -> ": StudentController": view_profile(token, classroom_member_id)
+activate ": StudentController"
+": StudentController" -> ": IClassroomMemberDB": get_user(classroom_id)
+activate ": IClassroomMemberDB"
+deactivate ": IClassroomMemberDB"
+deactivate ": StudentController"
+": ViewStudentForm" -->> ": Student": // list all classroom
+deactivate ": Student"
+
+@enduml

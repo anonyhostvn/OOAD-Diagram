@@ -1,0 +1,35 @@
+@startuml addStudent
+
+activate ": Teacher"
+": Teacher" -->> ": AddStudentForm": // Add student to classroom
+activate ": AddStudentForm"
+": AddStudentForm" -> ": AddStudentForm": validate(token, classroom_id, user_id) 
+alt all information is filled and valid
+    ": AddStudentForm" -> ": StudentController": add_student(token, classroom_id, user_id)
+    activate ": StudentController"
+    ": StudentController" -> ": StudentController": validate_add_student(token, classroom_id, user_id)
+    alt student is valid for enroll classroom
+        ": StudentController" -> ": ClassroomMember": read(classroom_id, user_id)
+        activate ": ClassroomMember"
+        alt student is not exist in classroom
+            ": StudentController" ->> ": ClassroomEntity": create(classroom_id, user_id)
+            deactivate ": StudentController"
+            deactivate ": ClassroomMember"
+            activate ": ClassroomEntity"
+            ": AddStudentForm" -->> ": Teacher": // student is added to classroom
+            deactivate ": ClassroomEntity"
+        else student is exist in classroom
+            ": AddStudentForm" -->> ": Teacher": // student is exist in classroom
+        end
+
+    else student is not valid for enroll classroom
+        ": AddStudentForm" -->> ": Teacher":// student is not valid to  added to classroom
+    end
+else some information is missing or invalid
+   ": AddStudentForm" -->> ": Teacher": // Check information again 
+end
+
+deactivate ": AddStudentForm"
+deactivate ": Teacher"
+
+@enduml

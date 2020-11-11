@@ -3,7 +3,7 @@
 actor ": Teacher"
 boundary ": AddStudentForm"
 control ": StudentController"
-entity ":ClassroomEntity"
+entity ": ClassroomEntity"
 entity ": ClassroomMember"
 
 activate ": Teacher"
@@ -13,22 +13,20 @@ activate ": AddStudentForm"
 activate ": StudentController"
 ": StudentController" -> ": ClassroomMember": 3 // Checking student and class information is valid
 activate ": ClassroomMember"
-": ClassroomMember" -> ": ClassroomMember": 4 // Checking student and class information is valid
-alt student is valid for enroll classroom
-    ": ClassroomMember" -> ": StudentController": 5 // student and classroom is valid
-    ": StudentController" ->> ":ClassroomEntity": 6 // delete student i from classroom j
-    activate ":ClassroomEntity" 
-    ":ClassroomEntity" -> ":ClassroomEntity": 7 // delete student to classroom
-    ": StudentController" -> ": AddStudentForm": 8 // delete student to classroom successfully
-    deactivate ":ClassroomEntity"
-    ": AddStudentForm" -> ": Teacher": 9 // student is deleted to classroom
+alt student is exist in classroom
+    ": ClassroomMember" -> ": StudentController": 4 // student and classroom is valid
+    ": StudentController" ->> ": ClassroomEntity": 5 // delete student i from classroom j
+    activate ": ClassroomEntity" 
+    ": StudentController" -> ": AddStudentForm": 6 // delete student to classroom successfully
+    deactivate ": ClassroomEntity"
+    ": AddStudentForm" -> ": Teacher": 7 // student is deleted to classroom
 
-else student is not valid for enroll classroom
-    ": ClassroomMember" -> ": StudentController": 5.1 // provided student or classroom is not valid
+else student is not exist in classroom
+    ": ClassroomMember" -> ": StudentController": 4.1 // provided student or classroom is not valid
     deactivate ": ClassroomMember"
-    ": StudentController" -> ": AddStudentForm": 6.1 // delete student from classroom failed
+    ": StudentController" -> ": AddStudentForm": 5.1 // delete student from classroom failed
     deactivate ": StudentController"
-    ": AddStudentForm" -> ": Teacher": 7.1 // student is not deleted from classroom
+    ": AddStudentForm" -> ": Teacher": 6.1 // student is not deleted from classroom
 end
 
 deactivate ": AddStudentForm"
