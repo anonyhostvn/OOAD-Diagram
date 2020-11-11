@@ -1,4 +1,4 @@
-@startuml updateRollCall
+@startuml updateBonusPoint
 
 actor ":Teacher"
 boundary ":UpdateBonusPointForm"
@@ -19,7 +19,7 @@ alt information is valid
     ":ClassroomMember" -> ":StudentController": 5 // Information is valid
     ":StudentController" ->> ":BonusPoint": 6 // Request update bonus point
     activate ":BonusPoint"
-    ":BonusPoint" -> ":BonusPoint": 7 // make roll call
+    ":BonusPoint" -> ":BonusPoint": 7 // update bonus point
     ":StudentController" -> ":UpdateBonusPointForm": 8 // Update bonus point done
     deactivate ":BonusPoint"
     ":UpdateBonusPointForm" -> ":Teacher": 9 // Update bonus point done
