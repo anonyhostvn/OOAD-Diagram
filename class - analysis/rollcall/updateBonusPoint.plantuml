@@ -1,4 +1,4 @@
-@startuml updateClass
+@startuml updateBonusPoint
 
 class BonusPoint <<entity>> {
     id: bigint
@@ -28,7 +28,7 @@ class ClassroomMember <<entity>> {
     // checking information is valid()
 }
 
-class ViewClassroomForm <<boundary>> {
+class UpdateBonusPointForm <<boundary>> {
     // request update bonus point()
 }
 
@@ -37,12 +37,12 @@ class StudentController <<controller>> {
 }
 
 hide BonusPoint <<entity>> circle
-hide ViewClassroomForm <<boundary>> circle
+hide UpdateBonusPointForm <<boundary>> circle
 hide StudentController <<controller>> circle
 
 StudentController "1" -left- "1" BonusPoint
 StudentController "1" -right- "1" ClassroomMember
-StudentController "1" -down- "1" ViewClassroomForm
+StudentController "1" -down- "1" UpdateBonusPointForm
 
 
 

@@ -1,0 +1,38 @@
+@startuml deleteTopic
+
+actor ": User"
+boundary ": DeleteCommentForm"
+control ": CommentController"
+entity ": Comment"
+entity ": ClassroomMember"
+
+activate ": User"
+
+": User" -> ": DeleteCommentForm": 1 // request delete comment 
+activate ": DeleteCommentForm"
+": DeleteCommentForm" -> ": CommentController": delete_comment(token, comment_id)
+activate ": CommentController"
+": CommentController" -> ": ClassroomMember": read(classroom_id, user_id)
+activate ": ClassroomMember"
+alt user is not teacher
+    ": CommentController" -> ": Comment": read(comment_id)
+    activate ": Comment"
+    alt user is comment creator
+        ": CommentController" ->> ": Comment": delete(comment_id)
+        ": DeleteCommentForm" -->> ": User": // delete comment successfully
+    else user is not comment creator
+        ": DeleteCommentForm" -->> ": User": // delete comment failed
+    end
+else user is teacher
+    ": CommentController" ->> ": Comment": delete(comment_id)
+    deactivate ": Comment"
+    deactivate ": ClassroomMember"
+    deactivate ": CommentController"
+    ": DeleteCommentForm" -->> ": User": // delete comment successfully
+end
+
+deactivate ": User"
+deactivate ": DeleteCommentForm"
+
+
+@enduml

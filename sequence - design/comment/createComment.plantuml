@@ -1,0 +1,47 @@
+@startuml createComment
+
+actor ": User"
+boundary ": ICommentForm"
+control ": CommentController"
+entity ": ICommentDB"
+entity ": IClassroomMemberDB"
+entity ": ITopicDB"
+
+activate ": User"
+
+": User" -->> ": ICommentForm": // request create comment 
+activate ": ICommentForm"
+": ICommentForm" -> ": ICommentForm": validate(token, topic_id, posted_by, content, resource)
+alt all field is right
+    ": ICommentForm" -> ": CommentController": create_comment(token, topic_id, posted_by, content, resource)
+    activate ": CommentController"
+    ": CommentController" -> ": ITopicDB": view_topic(token, topic_id)
+    activate ": ICommentDB"
+    deactivate ": ICommentDB"
+
+    alt topic is exist, recieve topic information
+        ": CommentController" -> ": IClassroomMemberDB": read(classroom_id, user_id)
+        activate ": IClassroomMemberDB"
+        deactivate ": IClassroomMemberDB"
+        alt user is in class
+            ": CommentController" ->> ": ICommentDB": create(topic_id, posted_by, content, resource)
+            activate ": ICommentDB"
+            deactivate ": ICommentDB"
+            ": ICommentForm" -->> ": User": // create comment successfully
+        else user is not in class
+            deactivate ": CommentController"
+            ": ICommentForm" -->> ": User": // Not have permission to create comment
+        end
+    else topic is not exist
+        ": ICommentForm" -->> ": User": // Topic is not exist
+    end
+else something wrong or missing
+    ": ICommentForm" -->> ": User": // Check information again
+end
+
+
+deactivate ": User"
+deactivate ": ICommentForm"
+
+
+@enduml
