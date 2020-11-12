@@ -23,19 +23,19 @@ class User <<entity>> {
     // read()
     // update()
     // delete()
-    // get_user()
-    // get_classrooms()
-    // get_token()
-    // delete_token()
+    // get user()
+    // get classrooms()
+    // get token()
+    // delete token()
 }
 
 class UpdateMyProfileForm <<boundary>> {
     // validate()
-    // update_profile()
+    // update profile()
 }
 
 class AuthenticationController <<controller>> {
-    // update_profile()
+    // update profile()
 }
 
 hide User <<entity>> circle

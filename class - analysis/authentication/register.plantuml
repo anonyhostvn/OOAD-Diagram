@@ -22,10 +22,10 @@ class User <<entity>> {
     // read()
     // update()
     // delete()
-    // get_user()
-    // get_classrooms()
-    // get_token()
-    // delete_token()
+    // get user()
+    // get classrooms()
+    // get token()
+    // delete token()
 }
 
 class RegisterForm <<boundary>> {
@@ -35,15 +35,15 @@ class RegisterForm <<boundary>> {
 
 class ConfirmRegisterForm <<boundary>> {
     // validate()
-    // confirm_register()
+    // confirm register()
 }
 
 class AuthenticationController <<controller>> {
-    // validate_register()
+    // validate register()
     // register()
-    // send_register_email()
-    // validate_confirm_register()
-    // confirm_register()
+    // send register email()
+    // validate confirm register()
+    // confirm register()
 }
 
 hide User <<entity>> circle
