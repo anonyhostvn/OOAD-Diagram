@@ -53,15 +53,24 @@ class ScoreDB {
     - score: double
     - created_at: datetime
     - updated_at: datetime
-
-    + create(classroom_member_id, date, test_title, score)
-    + read(classroom_member_id)
-    + read(classroom_member_id, score_id)
-    + delete(classroom_member_id, score_id)
+    + get_id(): bigint
+    + get_classroom_member_id(): bigint
+    + set_classroom_member_id(bigint)
+    + get_date(): date
+    + set_date(date)
+    + get_test_title(): string
+    + set_test_title(string)
+    + get_score(): double
+    + set_score(double)
+    + get_created_at(): datetime
+    + get_updated_at(): datetime
 }
 
 class IScoreDB <<interface>> {
     + create(classroom_member_id, date, test_title, score)
+    + read(classroom_member_id)
+    + read(classroom_member_id, score_id)
+    + delete(classroom_member_id, score_id)
 }
 
 hide UpdateScoreForm circle

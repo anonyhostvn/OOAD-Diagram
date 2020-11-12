@@ -54,14 +54,22 @@ class BonusPoint {
     - created_at: datetime
     - updated_at: datetime
 
-    + create(classroom_member_id, date, point)
-    + read(classroom_member_id)
-    + read(classroom_member_id, bonus_point_id)
-    + delete(classroom_member_id, bonus_point_id)
+    + get_id(): bigint
+    + get_classroom_member_id(): bigint
+    + set_classroom_member_id(bigint)
+    + get_date(): date
+    + set_date(date)
+    + get_point(): int
+    + set_point(int)
+    + get_created_at(): datetime
+    + get_updated_at(): datetime
 }
 
 class IBonusPointDB <<interface>> {
     + create(classroom_member_id, date, point)
+    + read(classroom_member_id)
+    + read(classroom_member_id, bonus_point_id)
+    + delete(classroom_member_id, bonus_point_id)
 }
 
 hide UpdateBonusPointForm circle
