@@ -14,19 +14,19 @@ activate ": StudentController"
 ": StudentController" -> ": ClassroomMember": 3 // Checking student and class information is valid
 activate ": ClassroomMember"
 alt student is exist in classroom
-    ": ClassroomMember" -> ": StudentController": 4 // student and classroom is valid
+    ": ClassroomMember" -->> ": StudentController": 4 // student and classroom is valid
     ": StudentController" ->> ": ClassroomEntity": 5 // delete student i from classroom j
     activate ": ClassroomEntity"
-    ": StudentController" -> ": DeleteStudentForm": 6 // delete student to classroom successfully
+    ": StudentController" -->> ": DeleteStudentForm": 6 // delete student to classroom successfully
     deactivate ": ClassroomEntity"
-    ": DeleteStudentForm" -> ": Teacher": 7 // student is deleted to classroom
+    ": DeleteStudentForm" -->> ": Teacher": 7 // student is deleted to classroom
 
 else student is not exist in classroom
-    ": ClassroomMember" -> ": StudentController": 4.1 // provided student or classroom is not valid
+    ": ClassroomMember" -->> ": StudentController": 4.1 // provided student or classroom is not valid
     deactivate ": ClassroomMember"
-    ": StudentController" -> ": DeleteStudentForm": 5.1 // delete student from classroom failed
+    ": StudentController" -->> ": DeleteStudentForm": 4.2 // delete student from classroom failed
     deactivate ": StudentController"
-    ": DeleteStudentForm" -> ": Teacher": 6.1 // student is not deleted from classroom
+    ": DeleteStudentForm" -->> ": Teacher": 4.3 // student is not deleted from classroom
 end
 
 deactivate ": DeleteStudentForm"

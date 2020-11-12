@@ -1,4 +1,4 @@
-@startuml updateClass
+@startuml updateScore
 
 class RollCall <<entity>> {
     id: bigint

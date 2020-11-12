@@ -1,18 +1,23 @@
-@startuml createTopic
+@startuml createComment
 
-class ViewTopicForm {
+class CreateCommentForm {
     - token: string
+    - resource: bigint
+    - posted_by: bigint
+    - content: string
     - topic_id: bigint
 
-    + view_topic(token, topic_id)
+    + create_comment(token, topic_id, posted_by, content, resource)
+    + validate(token, topic_id, posted_by, content, resource)
 }
 
-class ITopicForm <<interface>> {
-    + view_topic(token, topic_id)
+class ICommentForm <<interface>> {
+    + create_comment(token, topic_id, posted_by, content, resource)
+    + validate(token, topic_id, posted_by, content, resource)
 }
 
-class TopicController {
-    + view_topic(token, topic_id)
+class CommentController {
+    + create_comment(token, topic_id, posted_by, content, resource)
 }
 
 class ClassroomMember {
@@ -61,21 +66,47 @@ class ITopicDB <<interface>> {
     + read(topic_id)
 }
 
-hide ViewTopicForm circle
-hide ITopicForm <<interface>> circle
-hide TopicController circle
+
+class Comment {
+    - id: bigint
+    - topic_id: bigint
+    - posted_by: bigint
+    - comment: string
+    - has_resource: bool
+    - resource_id: bigint
+    - created_at: datetime
+    - updated_at: datetime
+
+    + create(topic_id, posted_by, content, resource)
+    + read(topic_id)
+    + read(posted_by)
+    + read(comment_id)
+    + delete(comment_id)
+}
+
+class ICommentDB <<interface>> {
+    + create(topic_id, posted_by, content, resource)
+}
+
+hide CreateCommentForm circle
+hide ICommentForm <<interface>> circle
+hide CommentController circle
 hide IClassroomMemberDB <<interface>> circle
 hide ClassroomMember circle
 hide ITopicDB <<interface>> circle
 hide Topic circle 
+hide ICommentDB <<interface>> circle
+hide Comment circle 
 
 
-ITopicForm .down.> ViewTopicForm
+ICommentForm .down.> CreateCommentForm
 IClassroomMemberDB .down.> ClassroomMember
 ITopicDB .down.> Topic
-ITopicForm "1"-left-"1" TopicController
-TopicController "1"-left-"1" IClassroomMemberDB
-TopicController "1"-left-"1" ITopicDB
+ICommentDB .down.> Comment
+ICommentForm "1"-left-"1" CommentController
+CommentController "1"-left-"1" IClassroomMemberDB
+CommentController "1"-left-"1" ITopicDB
+CommentController "1"-right-"1" ICommentDB
 
 
 @enduml

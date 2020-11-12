@@ -1,5 +1,5 @@
 @startuml createResource
-
+actor ": Teacher"
 activate ": Teacher"
 
 ": Teacher" -->> ": IResourceForm": // request create resource
@@ -17,7 +17,7 @@ alt teacher is in classroom
     ": IResourceForm" -->> ": Teacher": // create resource successfully
 else teacher is not in classroom
     deactivate ": ResourceController"
-    ": IResourceForm" -> ": Teacher": // create resource failed
+    ": IResourceForm" -->> ": Teacher": // create resource failed
 end
 
 deactivate ": Teacher"

@@ -1,6 +1,6 @@
 @startuml addStudent
 
-class ViewStudentForm {
+class UpdateRollCallForm {
     - classroom_member_id: bigint
     - token: string
 
@@ -57,7 +57,7 @@ class IRollCallDB <<interface>> {
     + create(classroom_member_id, date, is_presented)
 }
 
-hide ViewStudentForm circle
+hide UpdateRollCallForm circle
 hide IStudentForm <<interface>> circle
 hide StudentController circle
 hide IClassroomMemberDB <<interface>> circle
@@ -66,7 +66,7 @@ hide IRollCallDB <<interface>> circle
 hide RollCall circle
 
 
-IStudentForm .down.> ViewStudentForm
+IStudentForm .down.> UpdateRollCallForm
 IClassroomMemberDB .down.> ClassroomMember
 IRollCallDB .down.> RollCall
 IStudentForm "1"-left-"1" StudentController

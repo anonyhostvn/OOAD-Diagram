@@ -1,5 +1,7 @@
 @startuml viewClass
 
+actor ": User"
+
 activate ": User"
 ": User" -->> ": IClassroomForm": // request get class info
 activate ": IClassroomForm"

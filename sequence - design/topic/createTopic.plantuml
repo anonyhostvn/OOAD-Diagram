@@ -1,4 +1,6 @@
 @startuml createTopic
+actor ": User"
+
 activate ": User"
 
 ": User" -> ": ITopicForm": 1 // request create topic
@@ -13,14 +15,14 @@ alt file is valid
         ": TopicController" ->> ": ITopicDB": create(classroom_id, posted_by, title, content, resource)
         activate ": ITopicDB"
         deactivate ": ITopicDB"
-        ": ITopicForm" -> ": User": 8 // create topic successfully
+        ": ITopicForm" -> ": User": // create topic successfully
     else can not create topic
         deactivate ": IClassroomMemberDB"
         deactivate ": TopicController"
-        ": ITopicForm" -> ": User": 6.1 // not have permission to create topic
+        ": ITopicForm" -> ": User": // not have permission to create topic
     end
 else file is not valid
-    ": ITopicForm" -> ": User": 6.1 // check upload file
+    ": ITopicForm" -> ": User": // check upload file
 end
 
 

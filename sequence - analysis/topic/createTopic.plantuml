@@ -15,18 +15,18 @@ activate ": TopicController"
 ": TopicController" -> ": ClassroomMember": 3 // checking permission to create topic
 activate ": ClassroomMember"
 alt can create topic
-    ": ClassroomMember" -> ": TopicController": 4 // can create topic
+    ": ClassroomMember" -->> ": TopicController": 4 // can create topic
     ": TopicController" ->> ": TopicEntity": 5 // request create topic
     activate ": TopicEntity"
-    ": TopicController" -> ": CreateTopicForm": 7 // create topic successfully
+    ": TopicController" -->> ": CreateTopicForm": 7 // create topic successfully
     deactivate ": TopicEntity"
-    ": CreateTopicForm" -> ": User": 8 // create topic successfully
+    ": CreateTopicForm" -->> ": User": 8 // create topic successfully
 else can not create topic
-    ": ClassroomMember" -> ": TopicController": 4.1 // can not create topic
+    ": ClassroomMember" -->> ": TopicController": 4.1 // can not create topic
     deactivate ": ClassroomMember"
-    ": TopicController" -> ": CreateTopicForm": 5.1 // create topic failed
+    ": TopicController" -->> ": CreateTopicForm": 4.2 // create topic failed
     deactivate ": TopicController"
-    ": CreateTopicForm" -> ": User": 6.1 // create topic failed
+    ": CreateTopicForm" -->> ": User": 4.3 // create topic failed
 end
 
 deactivate ": User"

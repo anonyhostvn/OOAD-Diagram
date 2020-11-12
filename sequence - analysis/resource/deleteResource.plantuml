@@ -15,18 +15,18 @@ activate ": ResourceController"
 ": ResourceController" -> ": ClassroomMember": 3 // checking permission to delete resource
 activate ": ClassroomMember"
 alt resource is accessible
-    ": ClassroomMember" -> ": ResourceController": 4 // can delete resource
+    ": ClassroomMember" -->> ": ResourceController": 4 // can delete resource
     ": ResourceController" ->> ": ResourceEntity": 5 // request delete resource
     activate ": ResourceEntity"
-    ": ResourceController" -> ": DeleteResourceForm": 6 // delete resource successfully
+    ": ResourceController" -->> ": DeleteResourceForm": 6 // delete resource successfully
     deactivate ": ResourceEntity"
-    ": DeleteResourceForm" -> ": Teacher": 7 // delete resource successfully
+    ": DeleteResourceForm" -->> ": Teacher": 7 // delete resource successfully
 else resource is not accessible
-    ": ClassroomMember" -> ": ResourceController": 4.1 // can not delete resource
+    ": ClassroomMember" -->> ": ResourceController": 4.1 // can not delete resource
     deactivate ": ClassroomMember"
-    ": ResourceController" -> ": DeleteResourceForm": 5.1 // delete resource failed
+    ": ResourceController" -->> ": DeleteResourceForm": 4.2 // delete resource failed
     deactivate ": ResourceController"
-    ": DeleteResourceForm" -> ": Teacher": 6.1 // delete resource failed
+    ": DeleteResourceForm" -->> ": Teacher": 4.3 // delete resource failed
 end
 
 deactivate ": Teacher"

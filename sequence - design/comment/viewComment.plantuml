@@ -1,0 +1,34 @@
+@startuml viewComment
+
+actor ": User"
+
+activate ": User"
+
+": User" -> ": ViewCommentForm": 1 // request view comment 
+activate ": ViewCommentForm"
+": ViewCommentForm" -> ": CommentController": view_comment(token, comment_id)
+activate ": CommentController"
+": CommentController" -> ": Comment": read(comment_id)
+activate ": Comment"
+deactivate ": Comment"
+
+alt comment is exist
+    ": CommentController" -> ": ClassroomMember": read(classroom_id, user_id)
+    activate ": ClassroomMember"
+    deactivate ": CommentController"
+    deactivate ": ClassroomMember"
+    alt user is in classroom
+        ": ViewCommentForm" -->> ": User": // return comments
+    else user is not in classroom
+        ": ViewCommentForm" -->> ": User": // can not view comment
+    end
+else comment is not exist
+        ": ViewCommentForm" -->> ": User": // comment is not exist
+end
+
+
+deactivate ": User"
+deactivate ": ViewCommentForm"
+
+
+@enduml

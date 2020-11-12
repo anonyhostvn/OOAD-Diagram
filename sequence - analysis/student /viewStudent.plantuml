@@ -12,11 +12,11 @@ activate ": ViewStudentForm"
 activate ": UserController"
 ": UserController" -> ": ClassroomMember": 3 // get all student in classroom
 activate ": ClassroomMember"
-": ClassroomMember" -> ": UserController": 4 // list student
+": ClassroomMember" -->> ": UserController": 4 // list student
 deactivate ": ClassroomMember"
-": UserController" -> ": ViewStudentForm": 5 // get student in classroom profile successfully
+": UserController" -->> ": ViewStudentForm": 5 // get student in classroom profile successfully
 deactivate ": UserController"
-": ViewStudentForm" -> ": User": 6 // request get all student in classroom oke
+": ViewStudentForm" -->> ": User": 6 // request get all student in classroom oke
 deactivate ": User"
 
 @enduml

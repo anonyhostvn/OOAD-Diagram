@@ -1,0 +1,51 @@
+@startuml deleteComment
+
+class Comment <<entity>> {
+    id: bigint
+    topic_id: bigint
+    posted_by: bigint
+    comment: string
+    has_resource: bool
+    resource_id: bigint
+    created_at: datetime
+    updated_at: datetime
+
+    // create ()
+    // read ()
+    // delete ()
+    // update ()
+    // Request delete comment ()
+}
+
+class ClassroomMember <<entity>> {
+    id: bigint
+    user_id: bigint
+    classroom_id: bigint
+    created_at: datetime
+
+    // create ()
+    // read ()
+    // delete ()
+    // update ()
+    // checking permission to delete comment()
+}
+
+class DeleteCommentForm <<boundary>> {
+    // request delete  comment()
+}
+
+class CommentController <<controller>> {
+    // request delete comment ()
+}
+
+hide Comment <<entity>> circle
+hide DeleteCommentForm <<boundary>> circle
+hide CommentController <<controller>> circle
+
+CommentController "1" -left- "1" Comment
+CommentController "1" -right- "1" ClassroomMember
+CommentController "1" -down- "1" DeleteCommentForm
+
+
+
+@enduml

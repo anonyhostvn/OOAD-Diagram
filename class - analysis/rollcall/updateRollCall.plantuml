@@ -1,4 +1,4 @@
-@startuml updateClass
+@startuml updateRollCall
 
 class RollCall <<entity>> {
     id: bigint
@@ -28,21 +28,21 @@ class ClassroomMember <<entity>> {
     // checking information is valid()
 }
 
-class ViewClassroomForm <<boundary>> {
-    // request update bonus point()
+class UpdateRollCall <<boundary>> {
+    // request update roll call()
 }
 
 class StudentController <<controller>> {
-    // request update bonus point ()
+    // request update roll call ()
 }
 
 hide RollCall <<entity>> circle
-hide ViewClassroomForm <<boundary>> circle
+hide UpdateRollCall <<boundary>> circle
 hide StudentController <<controller>> circle
 
 StudentController "1" -left- "1" RollCall
 StudentController "1" -right- "1" ClassroomMember
-StudentController "1" -down- "1" ViewClassroomForm
+StudentController "1" -down- "1" UpdateRollCall
 
 
 
