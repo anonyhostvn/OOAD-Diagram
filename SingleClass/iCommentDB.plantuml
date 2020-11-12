@@ -1,0 +1,9 @@
+@startuml iCommentDB
+class ICommentDB <<interface>> {
+    + create(topic_id, posted_by, content, resource)
+    + read(topic_id)
+    + read(posted_by)
+    + read(comment_id)
+    + delete(comment_id)
+}
+@enduml

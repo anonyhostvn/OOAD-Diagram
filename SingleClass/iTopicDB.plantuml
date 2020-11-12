@@ -1,0 +1,9 @@
+@startuml iTopicDB
+class ITopicDB <<interface>> {
+    + create(classroom_id, posted_by, title, content, resource)
+    + read(classroom_id)
+    + read(posted_by)
+    + read(topic_id)
+    + delete(topic_id)
+}
+@enduml

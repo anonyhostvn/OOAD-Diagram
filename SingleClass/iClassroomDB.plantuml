@@ -1,0 +1,10 @@
+@startuml iClassroomDB
+class IClassroomDB <<interface>> {
+    + create(classroom_name, description, teacher_id)
+    + read()
+    + read(classroom_id)
+    + update(classroom_id, class_name, description)
+    + delete(classroom_id)
+    + get_users(classroom)
+}
+@enduml

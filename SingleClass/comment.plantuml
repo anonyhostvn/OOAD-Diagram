@@ -1,0 +1,26 @@
+@startuml comment
+class Comment {
+    - id: bigint
+    - topic_id: bigint
+    - posted_by: bigint
+    - comment: string
+    - has_resource: bool
+    - resource_id: bigint
+    - created_at: datetime
+    - updated_at: datetime
+
+    + get_id(): bigint
+    + get_topic_id(): bigint
+    + set_topic_id(bigint)
+    + get_posted_by(): bigint
+    + set_posted_by(bigint)
+    + get_comment(): string
+    + set_comment(string)
+    + get_has_resource(): bool
+    + set_has_resource(bool)
+    + get_resource_id(): bigint
+    + set_resource_id(bigint)
+    + get_created_at(): datetime
+    + get_updated_at(): datetime
+}
+@enduml

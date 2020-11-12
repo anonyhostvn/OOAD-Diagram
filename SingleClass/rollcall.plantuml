@@ -1,0 +1,20 @@
+@startuml rollcall
+class RollCall {
+    - id: bigint
+    - classroom_member_id: bigint
+    - date: date
+    - is_presented: bool
+    - created_at: datetime
+    - updated_at: datetime
+
+    + get_id(): bigint
+    + get_classroom_member_id(): bigint
+    + set_classroom_member_id(bigint)
+    + get_date(): date
+    + set_date(date)
+    + get_is_presented(): bool
+    + set_is_presented(bool)
+    + get_created_at(): datetime
+    + get_updated_at(): datetime
+}
+@enduml

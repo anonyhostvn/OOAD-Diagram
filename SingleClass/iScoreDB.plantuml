@@ -1,0 +1,8 @@
+@startuml iScoreDB
+class IScoreDB <<interface>> {
+    + create(classroom_member_id, date, test_title, score)
+    + read(classroom_member_id)
+    + read(classroom_member_id, score_id)
+    + delete(classroom_member_id, score_id)
+}
+@enduml

@@ -1,0 +1,11 @@
+@startuml iResourceDB
+class IResourceDB <<interface>> {
+    + save_resource()
+    + get_resource_url()
+    +create(classroom_id, uploaded_by, resource_url)
+    +read(classroom_id)
+    +read(uploaded_by)
+    +read(resource_id)
+    +delete(resource_id)
+}
+@enduml

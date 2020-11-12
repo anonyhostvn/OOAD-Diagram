@@ -1,0 +1,8 @@
+@startuml iRollcallDB
+class IRollCallDB <<interface>> {
+    + create(classroom_member_id, date, is_presented)
+    + read(classroom_member_id)
+    + read(classroom_member_id, rollcall_id)
+    + delete(classroom_member_id, rollcall_id)
+}
+@enduml

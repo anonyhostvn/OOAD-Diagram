@@ -1,0 +1,13 @@
+@startuml iUserDB
+class IUserDB <<interface>> {
+    + create(email, password)
+    + read()
+    + read(user_id)
+    + update(user_id, first_name, last_name, dob, school_id, phone_number, avatar)
+    + delete(user_id)
+    + get_user(token)
+    + get_classrooms(user)
+    + get_token(user_id)
+    + delete_token(token)
+}
+@enduml

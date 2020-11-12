@@ -1,0 +1,50 @@
+@startuml user
+class User {
+    - id: bigint
+    - email: string
+    - password: string
+    - first_name: string
+    - last_name: string
+    - dob: date
+    - school_id: string
+    - phone_number: string
+    - avatar_url: string
+    - token: string
+    - last_logged_in: datetime
+    - is_banned: bool
+    - is_admin: bool
+    - is_verify: bool
+    - created_at: datetime
+    - updated_at: datetime
+
+    + get_id(): bigint
+    + get_email(): string
+    + set_email(string)
+    + get_password(): string
+    + set_password(): string
+    + get_first_name(): string
+    + set_first_name(string)
+    + get_last_name(): string
+    + set_last_name(string)
+    + get_dob(): date
+    + set_dob(date)
+    + get_school_id(): string
+    + set_school_id(string)
+    + get_phone_number(): string
+    + set_phone_number(string)
+    + get_avatar_url(): string
+    + set_avatar_url(string)
+    + get_token(): string
+    + set_token(string)
+    + get_last_logged_in(): datetime
+    + set_last_logged_in(datetime)
+    + get_is_banned(): bool
+    + set_is_banned(bool)
+    + get_is_admin(): bool
+    + set_is_admin(bool)
+    + get_is_verify(): bool
+    + set_is_verify(bool)
+    + get_created_at(): datetime
+    + set_updated_at(): datetime
+}
+@enduml

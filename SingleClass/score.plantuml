@@ -1,0 +1,22 @@
+@startuml score
+class ScoreDB {
+    - id: bigint
+    - classroom_member_id: bigint
+    - date: date
+    - test_title: string
+    - score: double
+    - created_at: datetime
+    - updated_at: datetime
+    + get_id(): bigint
+    + get_classroom_member_id(): bigint
+    + set_classroom_member_id(bigint)
+    + get_date(): date
+    + set_date(date)
+    + get_test_title(): string
+    + set_test_title(string)
+    + get_score(): double
+    + set_score(double)
+    + get_created_at(): datetime
+    + get_updated_at(): datetime
+}
+@enduml
