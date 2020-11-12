@@ -15,19 +15,19 @@ activate ": ResourceController"
 ": ResourceController" -> ": ClassroomMember": 3 // checking permission on resource
 activate ": ClassroomMember"
 alt resource is accessible
-    ": ClassroomMember" -> ": ResourceController": 4 // can access resource
+    ": ClassroomMember" -->> ": ResourceController": 4 // can access resource
     ": ResourceController" -> ": Resource": 5 // Request get resource
     activate ": Resource"
-    ": Resource" -> ": ResourceController": 6 // Return resource
-    ": ResourceController" -> ": ViewResourceForm": 7 // Return resource
+    ": Resource" -->> ": ResourceController": 6 // Return resource
+    ": ResourceController" -->> ": ViewResourceForm": 7 // Return resource
     deactivate ": Resource"
-    ": ViewResourceForm" -> ": User": 8 // Show resource
+    ": ViewResourceForm" -->> ": User": 8 // Show resource
 else resource is not accessible
-    ": ClassroomMember" -> ": ResourceController": 4.1 // can not access resource
+    ": ClassroomMember" -->> ": ResourceController": 4.1 // can not access resource
     deactivate ": ClassroomMember"
-    ": ResourceController" -> ": ViewResourceForm": 5.1 // get resource failed
+    ": ResourceController" -->> ": ViewResourceForm": 4.2 // get resource failed
     deactivate ": ResourceController"
-    ": ViewResourceForm" -> ": User": 6.1 // get resource failed
+    ": ViewResourceForm" -->> ": User": 4.3 // get resource failed
 end
 
 deactivate ": User"

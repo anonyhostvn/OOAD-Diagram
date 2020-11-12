@@ -15,18 +15,18 @@ activate ": StudentController"
 ": StudentController" -> ": ClassroomMember": 3 // checking permission to create resource
 activate ": ClassroomMember"
 alt resource is accessible
-    ": ClassroomMember" -> ": StudentController": 4 // can create resource
+    ": ClassroomMember" -->> ": StudentController": 4 // can create resource
     ": StudentController" ->> ": ResourceEntity": 5 // request create resource
     activate ": ResourceEntity"
-    ": StudentController" -> ": ViewResourceForm": 7 // create resource successfully
+    ": StudentController" -->> ": ViewResourceForm": 7 // create resource successfully
     deactivate ": ResourceEntity"
-    ": ViewResourceForm" -> ": Teacher": 8 // create resource successfully
+    ": ViewResourceForm" -->> ": Teacher": 8 // create resource successfully
 else resource is not accessible
-    ": ClassroomMember" -> ": StudentController": 4.1 // can not create resource
+    ": ClassroomMember" -->> ": StudentController": 4.1 // can not create resource
     deactivate ": ClassroomMember"
-    ": StudentController" -> ": ViewResourceForm": 5.1 // create resource failed
+    ": StudentController" -->> ": ViewResourceForm": 4.2 // create resource failed
     deactivate ": StudentController"
-    ": ViewResourceForm" -> ": Teacher": 6.1 // create resource failed
+    ": ViewResourceForm" -->> ": Teacher": 4.3 // create resource failed
 end
 
 deactivate ": Teacher"

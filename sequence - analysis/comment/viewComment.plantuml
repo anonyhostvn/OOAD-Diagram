@@ -15,18 +15,18 @@ activate ": CommentController"
 ": CommentController" -> ": ClassroomMember": 3 // checking permission to view comment
 activate ": ClassroomMember"
 alt can delete topic
-    ": ClassroomMember" -> ": CommentController": 4 // can view comment
+    ": ClassroomMember" -->> ": CommentController": 4 // can view comment
     ": CommentController" ->> ": Comment": 5 // request view comment
     activate ": Comment"
-    ": CommentController" -> ": ViewCommentForm": 7 // return comments
+    ": CommentController" --> ": ViewCommentForm": 7 // return comments
     deactivate ": Comment"
-    ": ViewCommentForm" -> ": User": 8 // return comments
+    ": ViewCommentForm" -->> ": User": 8 // return comments
 else can not delete topic
-    ": ClassroomMember" -> ": CommentController": 4.1 // not have permission to view comment
+    ": ClassroomMember" -->> ": CommentController": 4.1 // not have permission to view comment
     deactivate ": ClassroomMember"
-    ": CommentController" -> ": ViewCommentForm": 5.1 // can not view comment
+    ": CommentController" -->> ": ViewCommentForm": 4.2 // can not view comment
     deactivate ": CommentController"
-    ": ViewCommentForm" -> ": User": 6.1 // can not view comment
+    ": ViewCommentForm" -->> ": User": 4.3 // can not view comment
 end
 
 deactivate ": User"

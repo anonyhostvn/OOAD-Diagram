@@ -13,17 +13,17 @@ activate ": ClassroomController"
 ": ClassroomController" -> ": ClassroomMember": 3 // request checking \n classroom is exist
 activate ": ClassroomMember"
 alt classroom is valid
-    ": ClassroomMember" -> ": ClassroomController": 4 // classroom is exist
+    ": ClassroomMember" -->> ": ClassroomController": 4 // classroom is exist
     ": ClassroomController" -> ": ClassroomMember": 5 // get classroom information
-    ": ClassroomMember" -> ": ClassroomController": 6 // classroom information
-    ": ClassroomController" -> ": ViewClassroomForm": 7 // get classroom info successfully
-    ": ViewClassroomForm" -> ": User": 8 // Classroom information
+    ": ClassroomMember" -->> ": ClassroomController": 6 // classroom information
+    ": ClassroomController" -->> ": ViewClassroomForm": 7 // get classroom info successfully
+    ": ViewClassroomForm" -->> ": User": 8 // Classroom information
 else classroom is not valid
-    ": ClassroomMember" -> ": ClassroomController": 4.1 // classroom is not exist
+    ": ClassroomMember" -->> ": ClassroomController": 4.1 // classroom is not exist
     deactivate ": ClassroomMember"
-    ": ClassroomController" -> ": ViewClassroomForm": 5.1 // cannot get classroom information
+    ": ClassroomController" -->> ": ViewClassroomForm": 4.2 // cannot get classroom information
     deactivate ": ClassroomController"
-    ": ViewClassroomForm" -> ": User": 6.1 // classroom invalid
+    ": ViewClassroomForm" -->> ": User": 4.3 // classroom invalid
 end
 
 deactivate ": ViewClassroomForm"

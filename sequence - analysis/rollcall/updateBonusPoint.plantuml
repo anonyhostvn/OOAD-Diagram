@@ -15,18 +15,18 @@ activate ": StudentController"
 ": StudentController" -> ": ClassroomMember": 3 // checking information is valid
 activate ": ClassroomMember"
 alt information is valid
-    ": ClassroomMember" -> ": StudentController": 4 // Information is valid
+    ": ClassroomMember" -->> ": StudentController": 4 // Information is valid
     ": StudentController" ->> ": BonusPoint": 5 // Request update bonus point
     activate ": BonusPoint"
-    ": StudentController" -> ": UpdateBonusPointForm": 6 // Update bonus point done
+    ": StudentController" -->> ": UpdateBonusPointForm": 6 // Update bonus point done
     deactivate ": BonusPoint"
-    ": UpdateBonusPointForm" -> ": Teacher": 7 // Update bonus point done
+    ": UpdateBonusPointForm" -->> ": Teacher": 7 // Update bonus point done
 else information is not valid
-    ": ClassroomMember" -> ": StudentController": 4.1 // Information is not valid
+    ": ClassroomMember" -->> ": StudentController": 4.1 // Information is not valid
     deactivate ": ClassroomMember"
-    ": StudentController" -> ": UpdateBonusPointForm": 5.1 // Bonus point update failed
+    ": StudentController" -->> ": UpdateBonusPointForm": 4.2 // Bonus point update failed
     deactivate ": StudentController"
-    ": UpdateBonusPointForm" -> ": Teacher": 6.1 // Bonus point update failed,\n check information again
+    ": UpdateBonusPointForm" -->> ": Teacher": 4.3 // Bonus point update failed,\n check information again
 end
 
 deactivate ": Teacher"

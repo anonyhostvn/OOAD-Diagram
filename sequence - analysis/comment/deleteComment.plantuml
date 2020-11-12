@@ -15,18 +15,18 @@ activate ": CommentController"
 ": CommentController" -> ": ClassroomMember": 3 // checking permission to delete comment
 activate ": ClassroomMember"
 alt can delete topic
-    ": ClassroomMember" -> ": CommentController": 4 // can delete comment
+    ": ClassroomMember" -->> ": CommentController": 4 // can delete comment
     ": CommentController" ->> ": Comment": 5 // request delete comment
     activate ": Comment"
-    ": CommentController" -> ": DeleteCommentForm": 7 // delete comment successfully
+    ": CommentController" -->> ": DeleteCommentForm": 7 // delete comment successfully
     deactivate ": Comment"
-    ": DeleteCommentForm" -> ": User": 8 // delete comment successfully
+    ": DeleteCommentForm" -->> ": User": 8 // delete comment successfully
 else can not delete topic
-    ": ClassroomMember" -> ": CommentController": 4.1 // can not delete comment topic
+    ": ClassroomMember" -->> ": CommentController": 4.1 // can not delete comment topic
     deactivate ": ClassroomMember"
-    ": CommentController" -> ": DeleteCommentForm": 5.1 // delete comment failed
+    ": CommentController" -->> ": DeleteCommentForm": 4.2 // delete comment failed
     deactivate ": CommentController"
-    ": DeleteCommentForm" -> ": User": 6.1 // delete comment failed
+    ": DeleteCommentForm" -->> ": User": 4.3 // delete comment failed
 end
 
 deactivate ": User"

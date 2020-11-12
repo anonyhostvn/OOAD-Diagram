@@ -15,19 +15,19 @@ alt all information is filled
     ": ClassroomController" -> ": ClassroomEntity": 4 // request checking \n classroom is exist
     activate ": ClassroomEntity"
     alt classroom is valid
-        ": ClassroomEntity" -> ": ClassroomController": 5 // classroom is exist
+        ": ClassroomEntity" -->> ": ClassroomController": 5 // classroom is exist
         ": ClassroomController" ->> ": ClassroomEntity": 6 // request delete classroom
-        ": ClassroomController" -> ": DeleteClassroomForm": 7 // delete classroom successfully
-        ": DeleteClassroomForm" -> ": Teacher": 8 // Classroom deleted
+        ": ClassroomController" -->> ": DeleteClassroomForm": 7 // delete classroom successfully
+        ": DeleteClassroomForm" -->> ": Teacher": 8 // Classroom deleted
     else classroom is not valid
-        ": ClassroomEntity" -> ": ClassroomController": 4.1 // classroom is not exist
+        ": ClassroomEntity" -->> ": ClassroomController": 4.1 // classroom is not exist
         deactivate ": ClassroomEntity"
-        ": ClassroomController" -> ": DeleteClassroomForm": 5.1 // delete  classroom failed
+        ": ClassroomController" -->> ": DeleteClassroomForm": 4.2 // delete  classroom failed
         deactivate ": ClassroomController"
-        ": DeleteClassroomForm" -> ": Teacher": 6.1 // classroom is not deleted
+        ": DeleteClassroomForm" -->> ": Teacher": 4.3 // classroom is not deleted
     end
 else some information is missing
-    ": DeleteClassroomForm" -> ": Teacher": 3.1 // check information again
+    ": DeleteClassroomForm" -->> ": Teacher": 3.1 // check information again
 end
 
 deactivate ": DeleteClassroomForm"

@@ -15,19 +15,19 @@ alt all information is valid
     ": ClassroomController" -> ": ClassroomEntity": 4 // request checking \n classroom is exist and classroom information
     activate ": ClassroomEntity"
     alt classroom is valid
-        ": ClassroomEntity" -> ": ClassroomController": 5 // classroom is exist and information is valid
+        ": ClassroomEntity" -->> ": ClassroomController": 5 // classroom is exist and information is valid
         ": ClassroomController" ->> ": ClassroomEntity": 6 // update classroom
-        ": ClassroomController" -> ": UpdateClassroomForm": 7 // update classroom successfully
-        ": UpdateClassroomForm" -> ": Teacher": 8 // Classroom updated
+        ": ClassroomController" -->> ": UpdateClassroomForm": 7 // update classroom successfully
+        ": UpdateClassroomForm" -->> ": Teacher": 8 // Classroom updated
     else classroom is not valid
-        ": ClassroomEntity" -> ": ClassroomController": 5.1 // classroom is not valid
+        ": ClassroomEntity" -->> ": ClassroomController": 5.1 // classroom is not valid
         deactivate ": ClassroomEntity"
-        ": ClassroomController" -> ": UpdateClassroomForm": 6.1 // update  classroom failed
+        ": ClassroomController" -->> ": UpdateClassroomForm": 5.2 // update  classroom failed
         deactivate ": ClassroomController"
-        ": UpdateClassroomForm" -> ": Teacher": 7.1 // classroom is not updated
+        ": UpdateClassroomForm" -->> ": Teacher": 5.3 // classroom is not updated
     end
 else some information is missing or invalid
-    ": UpdateClassroomForm" -> ": Teacher": 3.1 // check information again
+    ": UpdateClassroomForm" -->> ": Teacher": 3.1 // check information again
 end
 
 deactivate ": UpdateClassroomForm"

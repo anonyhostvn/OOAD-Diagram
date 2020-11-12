@@ -16,28 +16,28 @@ activate ": CommentController"
 ": CommentController" -> ": ClassroomMember": 3 // checking permission to create comment
 activate ": ClassroomMember"
 alt can create topic
-    ": ClassroomMember" -> ": CommentController": 4 // can create comment
+    ": ClassroomMember" -->> ": CommentController": 4 // can create comment
     ": CommentController" -> ": Topic": 5 // checking comment is in right topic
     activate ": Topic"
     alt comment is in right topic
-        ": Topic" -> ": CommentController": 6 // comment is in right topic
+        ": Topic" -->> ": CommentController": 6 // comment is in right topic
         ": CommentController" ->> ": CommentEntity": 7 // request create comment
         activate ": CommentEntity"
-        ": CommentController" -> ": CreateCommentForm": 8 // create comment successfully
+        ": CommentController" -->> ": CreateCommentForm": 8 // create comment successfully
         deactivate ": CommentEntity"
-        ": CreateCommentForm" -> ": User": 9 // create comment successfully
+        ": CreateCommentForm" -->> ": User": 9 // create comment successfully
     else comment is not in right topic
-        ": Topic" -> ": CommentController": 6.1 // comment is not in topic
+        ": Topic" -->> ": CommentController": 6.1 // comment is not in topic
         deactivate ": Topic"
-        ": CommentController" -> ": CreateCommentForm": 7.1 // create comment failed
-        ": CreateCommentForm" -> ": User": 8.1 // create comment failed
+        ": CommentController" -->> ": CreateCommentForm": 6.2 // create comment failed
+        ": CreateCommentForm" -->> ": User": 6.3 // create comment failed
     end
 else can not create topic
-    ": ClassroomMember" -> ": CommentController": 4.2 // can not create comment
+    ": ClassroomMember" -->> ": CommentController": 4.1 // can not create comment
     deactivate ": ClassroomMember"
-    ": CommentController" -> ": CreateCommentForm": 5.2 // create comment failed
+    ": CommentController" -->> ": CreateCommentForm": 4.2 // create comment failed
     deactivate ": CommentController"
-    ": CreateCommentForm" -> ": User": 6.2 // create comment failed
+    ": CreateCommentForm" -->> ": User": 4.3 // create comment failed
 end
 
 deactivate ": User"

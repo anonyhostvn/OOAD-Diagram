@@ -15,19 +15,19 @@ alt all information is filled
     ": ClassroomController" -> ": ClassroomEntity": 4 // request checking classroom valid
     activate ": ClassroomEntity"
     alt classroom is valid
-        ": ClassroomEntity" -> ": ClassroomController": 5 // classroom is valid
+        ": ClassroomEntity" -->> ": ClassroomController": 5 // classroom is valid
         ": ClassroomController" ->> ": ClassroomEntity": 6 // create classroom
-        ": ClassroomController" -> ": CreateClassForm": 7 // create classroom successfully
-        ": CreateClassForm" -> ": Teacher": 8 // Classroom created
+        ": ClassroomController" -->> ": CreateClassForm": 7 // create classroom successfully
+        ": CreateClassForm" -->> ": Teacher": 8 // Classroom created
     else classroom is not valid
-        ": ClassroomEntity" -> ": ClassroomController": 5.1 // classroom is not valid
+        ": ClassroomEntity" -->> ": ClassroomController": 5.1 // classroom is not valid
         deactivate ": ClassroomEntity"
-        ": ClassroomController" -> ": CreateClassForm": 6.1 // create classroom failed
+        ": ClassroomController" -->> ": CreateClassForm": 5.2 // create classroom failed
         deactivate ": ClassroomController"
-        ": CreateClassForm" -> ": Teacher": 7.1 // classroom is not created
+        ": CreateClassForm" -->> ": Teacher": 5.3 // classroom is not created
     end
 else some information is missing
-    ": CreateClassForm" -> ": Teacher": 3.1 // check information again
+    ": CreateClassForm" -->> ": Teacher": 3.1 // check information again
 end
 
 deactivate ": CreateClassForm"
