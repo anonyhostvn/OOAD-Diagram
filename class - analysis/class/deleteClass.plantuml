@@ -8,7 +8,7 @@ class Classroom <<entity>> {
     created_at: datetime
     updated_at: datetime
 
-    //create ()
+    // create ()
     // read ()
     // delete ()
     // update ()
@@ -21,7 +21,7 @@ class DeleteClassroomForm <<boundary>> {
 }
 
 class ClassroomController <<controller>> {
-    // request delete classroom()
+    // request delete classroom ()
 }
 
 hide Classroom <<entity>> circle

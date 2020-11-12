@@ -11,11 +11,11 @@ class Topic <<entity>> {
     created_at: datetime
     updated_at: datetime
 
-    // create ( )
-    // read ( )
-    // delete ( )
-    // update ( )
-    // Request delete topic ( )
+    // create ()
+    // read ()
+    // delete ()
+    // update ()
+    // Request delete topic ()
 }
 
 class ClassroomMember <<entity>> {
@@ -24,19 +24,19 @@ class ClassroomMember <<entity>> {
     classroom_id: bigint
     created_at: datetime
 
-    // create ( )
-    // read ( )
-    // delete ( )
-    // update ( )
-    // checking permission to delete topic( )
+    // create ()
+    // read ()
+    // delete ()
+    // update ()
+    // checking permission to delete topic ()
 }
 
 class DeleteTopicForm <<boundary>> {
-    // request delete  topic( )
+    // request delete  topic ()
 }
 
 class TopicController <<controller>> {
-    // request delete topic ( )
+    // request delete topic ()
 }
 
 hide Topic <<entity>> circle

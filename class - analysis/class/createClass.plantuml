@@ -8,22 +8,22 @@ class Classroom <<entity>> {
     created_at: datetime
     updated_at: datetime
 
-    // create ( )
-    // read ( )
-    // delete ( )
-    // update ( )
-    // request checking classroom valid 
+    // create ()
+    // read ()
+    // delete ()
+    // update ()
+    // request checking classroom valid ()
 }
 
 class CreateClassroomForm <<boundary>> {
-    // validate ( )
-    // create class room ( )
+    // validate ()
+    // create class room ()
 }
 
 class ClassroomController <<controller>> {
-    // validate create classroom ( )
-    // create class room ( )
-    // request create classroom( )
+    // validate create classroom ()
+    // create class room ()
+    // request create classroom ()
 }
 
 hide Classroom <<entity>> circle

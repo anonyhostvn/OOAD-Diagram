@@ -9,11 +9,11 @@ class RollCall <<entity>> {
     created_at: datetime
     updated_at: datetime
 
-    // create ( )
-    // read ( )
-    // delete ( )
-    // update ( )
-    // request update score ( )
+    // create ()
+    // read ()
+    // delete ()
+    // update ()
+    // request update score ()
 }
 
 class ClassroomMember <<entity>> {
@@ -22,19 +22,19 @@ class ClassroomMember <<entity>> {
     classroom_id: bigint
     created_at: datetime
 
-    // create ( )
-    // read ( )
-    // delete ( )
-    // update ( )
-    // checking information is valid( )
+    // create ()
+    // read ()
+    // delete ()
+    // update ()
+    // checking information is valid ()
 }
 
 class UpdateScoreForm <<boundary>> {
-    // request update score( )
+    // request update score ()
 }
 
 class StudentController <<controller>> {
-    // request update score ( )
+    // request update score ()
 }
 
 hide RollCall <<entity>> circle

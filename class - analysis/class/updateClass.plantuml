@@ -12,7 +12,7 @@ class Classroom <<entity>> {
     // read ()
     // delete ()
     // update ()
-    // request checking classroom is exist and classroom information()
+    // request checking classroom is exist and classroom information ()
 }
 
 class UpdateClassroomForm <<boundary>> {
@@ -21,7 +21,7 @@ class UpdateClassroomForm <<boundary>> {
 }
 
 class ClassroomController <<controller>> {
-    // request update classroom()
+    // request update classroom ()
 }
 
 hide Classroom <<entity>> circle

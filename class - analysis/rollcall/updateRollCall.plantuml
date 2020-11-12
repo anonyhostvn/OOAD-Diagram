@@ -8,11 +8,11 @@ class RollCall <<entity>> {
     created_at: datetime
     updated_at: datetime
 
-    // create ( )
-    // read ( )
-    // delete ( )
-    // update ( )
-    // request make roll call ( )
+    // create ()
+    // read ()
+    // delete ()
+    // update ()
+    // request make roll call ()
 }
 
 class ClassroomMember <<entity>> {
@@ -21,19 +21,19 @@ class ClassroomMember <<entity>> {
     classroom_id: bigint
     created_at: datetime
 
-    // create ( )
-    // read ( )
-    // delete ( )
-    // update ( )
-    // checking information is valid( )
+    // create ()
+    // read ()
+    // delete ()
+    // update ()
+    // checking information is valid ()
 }
 
 class UpdateRollCallForm <<boundary>> {
-    // request update roll call( )
+    // request update roll call ()
 }
 
 class StudentController <<controller>> {
-    // request update roll call ( )
+    // request update roll call ()
 }
 
 hide RollCall <<entity>> circle

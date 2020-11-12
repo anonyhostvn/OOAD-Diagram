@@ -8,11 +8,11 @@ class Classroom <<entity>> {
     created_at: datetime
     updated_at: datetime
 
-    // create ( )
-    // read ( )
-    // delete ( )
-    // update ( )
-    // add student to classroom( )
+    // create ()
+    // read ()
+    // delete ()
+    // update ()
+    // add student to classroom ()
 }
 
 class ClassroomMember <<entity>> {
@@ -21,20 +21,20 @@ class ClassroomMember <<entity>> {
     classroom_id: bigint
     created_at: datetime
 
-    // create ( )
-    // read ( )
-    // delete ( )
-    // update ( )
-    // checking student valid to enroll class( )
+    // create ()
+    // read ()
+    // delete ()
+    // update ()
+    // checking student valid to enroll class ()
 }
 
 class AddStudentForm <<boundary>> {
-    // validate ( )
-    // add student to class ( )
+    // validate ()
+    // add student to class ()
 }
 
 class StudentController <<controller>> {
-    // request add student to classroom ( )
+    // request add student to classroom ()
 }
 
 hide Classroom <<entity>> circle
