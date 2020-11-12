@@ -39,12 +39,12 @@ class ClassroomController {
 
 hide ClassroomMember circle
 hide IClassroomMemberDB <<interface>> circle
-hide CreateClassroomForm circle
+hide ViewClassroomForm circle
 hide IClassroomForm <<interface>> circle
 hide ClassroomController circle
 
 IClassroomMemberDB -down.> ClassroomMember
-IClassroomForm .down.> CreateClassroomForm
+IClassroomForm .down.> ViewClassroomForm
 ClassroomController "1"-left-"1" IClassroomMemberDB
 IClassroomForm "1"-left-"1" ClassroomController
 

@@ -26,7 +26,7 @@ class IClassroomDB <<interface>> {
     + get_users(classroom)
 }
 
-class CreateClassroomForm {
+class UpdateClassroomForm {
     - classroom_id: string
     - classroom_name: string
     - description: string
@@ -47,12 +47,12 @@ class ClassroomController {
 
 hide Classroom circle
 hide IClassroomDB <<interface>> circle
-hide CreateClassroomForm circle
+hide UpdateClassroomForm circle
 hide IClassroomForm <<interface>> circle
 hide ClassroomController circle
 
 IClassroomDB -down.> Classroom
-IClassroomForm .down.> CreateClassroomForm
+IClassroomForm .down.> UpdateClassroomForm
 ClassroomController "1"-left-"1" IClassroomDB
 IClassroomForm "1"-left-"1" ClassroomController
 
