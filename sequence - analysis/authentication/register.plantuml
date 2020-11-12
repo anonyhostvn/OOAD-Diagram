@@ -22,7 +22,8 @@ alt id is unique
 ": UserEntity" --> ": AuthenticationController" : 1.5 // User does not exsit
 ": AuthenticationController" -> ": UserEntity" : 1.6 // register
 ": UserEntity" -> ": UserEntity" : 1.7 // create
-
+": UserEntity" --> ": AuthenticationController" : 1.8 // register mail
+": AuthenticationController" --> ": User" : 1.9 // register email
 else id exits
 
 ": UserEntity" --> ": AuthenticationController" : 1.5.1 // User exist msg
@@ -30,6 +31,7 @@ deactivate ": UserEntity"
 ": AuthenticationController" --> ": RegisterForm" : 1.6.1 // User exist msg
 deactivate ": AuthenticationController"
 ": RegisterForm" --> ": User" : 1.7.1 // User exist msg
+
 end
 
 else missing info
@@ -38,7 +40,7 @@ else missing info
 
 end
 deactivate ": RegisterForm"
-": User" -> ": ConfirmRegisterForm" : 2.1 // send mail
+": User" -> ": ConfirmRegisterForm" : 2.1 // open register mail get token
 activate ": ConfirmRegisterForm"
 ": ConfirmRegisterForm" -> ": ConfirmRegisterForm" : 2.2 // validate
 
@@ -46,8 +48,9 @@ alt all info is provided
 
 ": ConfirmRegisterForm" -> ": AuthenticationController" : 2.3 // confirm register
 activate ": AuthenticationController"
-": AuthenticationController" --> ": User" : 2.4 // send registerEmail
-": AuthenticationController" -> ": AuthenticationController" : 2.5 // validate confirmRegister
+": AuthenticationController" -> ": AuthenticationController" : 2.4 // validate confirmRegister
+": AuthenticationController" --> ": User" : 2.5 // send registerEmail
+
 
 alt all info is provided
 
