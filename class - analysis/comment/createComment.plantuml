@@ -1,0 +1,71 @@
+@startuml createComment
+
+class Topic <<entity>> {
+    id: bigint
+    classroom_id: bigint
+    posted_by: bigint
+    title: string
+    content: text
+    has_resource: bool
+    resource_id: bigint
+    created_at: datetime
+    updated_at: datetime
+
+    // create ()
+    // read ()
+    // delete ()
+    // update ()
+    // Check comment is in right topic ()
+}
+
+class Comment <<entity>> {
+    id: bigint
+    topic_id: bigint
+    posted_by: bigint
+    comment: string
+    has_resource: bool
+    resource_id: bigint
+    created_at: datetime
+    updated_at: datetime
+
+    // create ()
+    // read ()
+    // delete ()
+    // update ()
+    // Request create comment ()
+}
+
+class ClassroomMember <<entity>> {
+    id: bigint
+    user_id: bigint
+    classroom_id: bigint
+    created_at: datetime
+
+    // create ()
+    // read ()
+    // delete ()
+    // update ()
+    // checking permission to create comment()
+}
+
+class CreateCommentForm <<boundary>> {
+    // request create comment()
+}
+
+class CommentController <<controller>> {
+    // request create comment  ()
+}
+
+hide Comment <<entity>> circle
+hide CreateCommentForm <<boundary>> circle
+hide CommentController <<controller>> circle
+
+CommentController "1" -left- "1" Comment
+CommentController "1" -right- "1" ClassroomMember
+CommentController "1" -down- "1" CreateCommentForm
+CommentController "1" -left- "1" Topic
+
+
+
+
+@enduml

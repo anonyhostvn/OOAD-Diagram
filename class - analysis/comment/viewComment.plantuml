@@ -1,0 +1,51 @@
+@startuml viewTopic
+
+class Comment <<entity>> {
+    id: bigint
+    topic_id: bigint
+    posted_by: bigint
+    comment: string
+    has_resource: bool
+    resource_id: bigint
+    created_at: datetime
+    updated_at: datetime
+
+    // create ()
+    // read ()
+    // delete ()
+    // update ()
+    // Request view comment ()
+}
+
+class ClassroomMember <<entity>> {
+    id: bigint
+    user_id: bigint
+    classroom_id: bigint
+    created_at: datetime
+
+    // create ()
+    // read ()
+    // delete ()
+    // update ()
+    // checking permission to view comment()
+}
+
+class ViewCommentForm <<boundary>> {
+    // request view  comment()
+}
+
+class CommentController <<controller>> {
+    // request view comment ()
+}
+
+hide Comment <<entity>> circle
+hide ViewCommentForm <<boundary>> circle
+hide CommentController <<controller>> circle
+
+CommentController "1" -left- "1" Comment
+CommentController "1" -right- "1" ClassroomMember
+CommentController "1" -down- "1" ViewCommentForm
+
+
+
+@enduml

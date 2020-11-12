@@ -15,9 +15,9 @@ activate ": ICommentForm"
 alt all field is right
     ": ICommentForm" -> ": CommentController": create_comment(token, topic_id, posted_by, content, resource)
     activate ": CommentController"
-    ": CommentController" -> ": ITopicDB": view_topic(token, topic_id)
-    activate ": ICommentDB"
-    deactivate ": ICommentDB"
+    ": CommentController" -> ": ITopicDB": read(topic_id)
+    activate ": ITopicDB"
+    deactivate ": ITopicDB"
 
     alt topic is exist, recieve topic information
         ": CommentController" -> ": IClassroomMemberDB": read(classroom_id, user_id)

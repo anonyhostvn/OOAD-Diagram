@@ -1,18 +1,18 @@
 @startuml createTopic
 
-class ViewTopicForm {
+class ViewCommentForm {
     - token: string
-    - topic_id: bigint
+    - comment_id: bigint
 
-    + view_topic(token, topic_id)
+    + view_comment(token, comment_id)
 }
 
 class ITopicForm <<interface>> {
-    + view_topic(token, topic_id)
+    + view_comment(token, comment_id)
 }
 
 class TopicController {
-    + view_topic(token, topic_id)
+    + view_comment(token, comment_id)
 }
 
 class ClassroomMember {
@@ -39,40 +39,39 @@ class IClassroomMemberDB <<interface>> {
 }
 
 
-class Topic {
+class Comment {
     - id: bigint
-    - classroom_id: bigint
+    - topic_id: bigint
     - posted_by: bigint
-    - title: string
-    - content: text
+    - comment: string
     - has_resource: bool
     - resource_id: bigint
     - created_at: datetime
     - updated_at: datetime
 
-    + create(classroom_id, posted_by, title, content, resource)
-    + read(classroom_id)
-    + read(posted_by)
+    + create(topic_id, posted_by, content, resource)
     + read(topic_id)
-    + delete(topic_id)
+    + read(posted_by)
+    + read(comment_id)
+    + delete(comment_id)
 }
 
 class ITopicDB <<interface>> {
-    + read(topic_id)
+    + read(comment_id)
 }
 
-hide ViewTopicForm circle
+hide ViewCommentForm circle
 hide ITopicForm <<interface>> circle
 hide TopicController circle
 hide IClassroomMemberDB <<interface>> circle
 hide ClassroomMember circle
 hide ITopicDB <<interface>> circle
-hide Topic circle 
+hide Comment circle 
 
 
-ITopicForm .down.> ViewTopicForm
+ITopicForm .down.> ViewCommentForm
 IClassroomMemberDB .down.> ClassroomMember
-ITopicDB .down.> Topic
+ITopicDB .down.> Comment
 ITopicForm "1"-left-"1" TopicController
 TopicController "1"-left-"1" IClassroomMemberDB
 TopicController "1"-left-"1" ITopicDB

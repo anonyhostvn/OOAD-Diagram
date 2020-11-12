@@ -12,18 +12,24 @@ activate ": User"
 activate ": ViewCommentForm"
 ": ViewCommentForm" -> ": CommentController": view_comment(token, comment_id)
 activate ": CommentController"
-": CommentController" -> ": ClassroomMember": read(classroom_id, user_id)
-activate ": ClassroomMember"
-deactivate ": ClassroomMember"
-alt user is in classroom
-    ": CommentController" ->> ": Comment": read(comment_id)
-    activate ": Comment"
-    deactivate ": Comment"
-    ": ViewCommentForm" -->> ": User": // return comments
+": CommentController" -> ": Comment": read(comment_id)
+activate ": Comment"
+deactivate ": Comment"
+
+alt comment is exist
+    ": CommentController" -> ": ClassroomMember": read(classroom_id, user_id)
+    activate ": ClassroomMember"
     deactivate ": CommentController"
-else user is not in classroom
-    ": ViewCommentForm" -->> ": User": // can not view comment
+    deactivate ": ClassroomMember"
+    alt user is in classroom
+        ": ViewCommentForm" -->> ": User": // return comments
+    else user is not in classroom
+        ": ViewCommentForm" -->> ": User": // can not view comment
+    end
+else comment is not exist
+        ": ViewCommentForm" -->> ": User": // comment is not exist
 end
+
 
 deactivate ": User"
 deactivate ": ViewCommentForm"

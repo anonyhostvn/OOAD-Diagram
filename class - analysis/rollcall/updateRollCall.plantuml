@@ -29,11 +29,11 @@ class ClassroomMember <<entity>> {
 }
 
 class UpdateRollCall <<boundary>> {
-    // request update bonus point()
+    // request update roll call()
 }
 
 class StudentController <<controller>> {
-    // request update bonus point ()
+    // request update roll call ()
 }
 
 hide RollCall <<entity>> circle
