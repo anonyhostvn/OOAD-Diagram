@@ -18,9 +18,8 @@ class User <<entity>> {
     created_at: datetime
     updated_at: datetime
 
-    // create()
-    // read()
-    // read()
+    // create ()
+    // read ()
     // update()
     // delete()
     // get user()
@@ -30,13 +29,13 @@ class User <<entity>> {
 }
 
 class LoginForm <<boundary>> {
-    // validate()
-    // login()
+    // validate ()
+    // login ()
 }
 
 class AuthenticationController <<controller>> {
-    // validate login()
-    // login()
+    // validate login ()
+    // login ()
 }
 
 hide User <<entity>> circle

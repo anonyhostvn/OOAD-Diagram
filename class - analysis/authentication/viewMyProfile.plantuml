@@ -18,23 +18,23 @@ class User <<entity>> {
     created_at: datetime
     updated_at: datetime
 
-    // create()
-    // read()
-    // update()
-    // delete()
-    // get user()
-    // get classrooms()
-    // get token()
-    // delete token()
+    // create ()
+    // read ()
+    // update ()
+    // delete ()
+    // get user ()
+    // get classrooms ()
+    // get token ()
+    // delete token ()
 }
 
 class ViewMyProfileForm <<boundary>> {
-    // validate()
-    // update profile()
+    // validate ()
+    // update profile ()
 }
 
 class AuthenticationController <<controller>> {
-    // view profile()
+    // view profile ()
 }
 
 hide User <<entity>> circle

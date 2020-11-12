@@ -18,32 +18,32 @@ class User <<entity>> {
     created_at: datetime
     updated_at: datetime
 
-    // create()
-    // read()
-    // update()
-    // delete()
-    // get user()
-    // get classrooms()
-    // get token()
-    // delete token()
+    // create ()
+    // read ()
+    // update ()
+    // delete ()
+    // get user ()
+    // get classrooms ()
+    // get token ()
+    // delete token ()
 }
 
 class RegisterForm <<boundary>> {
-    // validate()
-    // register()
+    // validate ()
+    // register ()
 }
 
 class ConfirmRegisterForm <<boundary>> {
-    // validate()
-    // confirm register()
+    // validate ()
+    // confirm register ()
 }
 
 class AuthenticationController <<controller>> {
-    // validate register()
-    // register()
-    // send register email()
-    // validate confirm register()
-    // confirm register()
+    // validate register ()
+    // register ()
+    // send register email ()
+    // validate confirm register ()
+    // confirm register ()
 }
 
 hide User <<entity>> circle
