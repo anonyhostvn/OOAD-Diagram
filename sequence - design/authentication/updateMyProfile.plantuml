@@ -2,7 +2,7 @@
 actor ": User"
 
 activate ": User"
-": User" -> ": IAuthenticationForm" : 1 // enter information
+": User" -> ": IAuthenticationForm" :  // enter information
 activate ": IAuthenticationForm"
 ": IAuthenticationForm" -> ": IAuthenticationForm" : validate(token, first_name, last_name, dob, school_id, phone_number, avatar)
 

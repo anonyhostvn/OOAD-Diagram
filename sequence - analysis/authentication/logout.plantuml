@@ -25,15 +25,16 @@ deactivate ": UserEntity"
 else invalid info
 
 ": AuthenticationController" --> ": LogoutForm" : 5.1 // invalid inf msg
-deactivate ": AuthenticationController"
+
 ": LogoutForm" --> ": User" : 5.2 // invalid inf msg
 
 end
 
 else missing info
 
-": LogoutForm" --> ": User" : 4.1 // missing inf msg
+": AuthenticationController" --> ": User" : 4.1 // missing inf msg
 deactivate ": LogoutForm"
+deactivate ": AuthenticationController"
 deactivate ": User"
 end
 @enduml

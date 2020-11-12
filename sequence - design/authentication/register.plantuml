@@ -2,7 +2,7 @@
 actor ": User"
 
 activate ": User"
-": User" -> ": IAuthenticationForm" : 1 // enter information
+": User" -> ": IAuthenticationForm" : // enter information
 activate ": IAuthenticationForm"
 ": IAuthenticationForm" -> ": IAuthenticationForm" : validate(email, password1, password2)
 
@@ -17,7 +17,9 @@ alt id is unique
 
 ": IUserDB" --> ": AuthenticationController" : // User does not exsit
 ": AuthenticationController" -> ": IUserDB" : register(email, password1, password2)
-": IUserDB" -> ": IUserDB" : 1.7 // create
+": IUserDB" -> ": IUserDB" :  // create
+": IUserDB" --> ": AuthenticationController" : // register mail
+": AuthenticationController" --> ": User" : // register mail
 
 else id exits
 
@@ -34,7 +36,7 @@ else missing info
 
 end
 deactivate ": IAuthenticationForm"
-": User" -> ": ConfirmRegisterForm" : 2 // send mail
+": User" -> ": ConfirmRegisterForm" : // open register mail get token
 activate ": ConfirmRegisterForm"
 ": ConfirmRegisterForm" -> ": ConfirmRegisterForm" : validate(register_token)
 
