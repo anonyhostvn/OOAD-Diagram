@@ -1,0 +1,9 @@
+@startuml iClassroomForm
+class IClassroomForm <<interface>> {
+    + validate(token, classroom_name, description)
+    + create_classroom(token, classroom_name, description)
+    + delete_classroom(token, classroom_id)
+    + update_classroom(token, classroom_id, classroom_name, description)
+    + view_classroom(token)
+}
+@enduml

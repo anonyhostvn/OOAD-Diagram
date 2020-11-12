@@ -1,0 +1,21 @@
+@startuml iAuthenticationForm
+class IAuthenticationForm <<interface>> {
+    + validate(email)
+    + forgot_password(email)
+    + validate(forgot_password_token, new_password1, new_password2)
+    + confirm_forgot_password(forgot_password_token, new_password1)
+    + validate(email, password)
+    + login(emal, password)
+    + validate(token)
+    + logout(token)
+    + validate(email, password1, password2)
+    + register(email, password1)
+    + confirm_register(register_token)
+    + validate(token, old_password, new_password1, new_password2)
+    + reset_password(token, old_password, new_password1)
+    + validate(token, first_name, last_name, dob, school_id, phone_number, avatar)
+    + update_profile(token, first_name, last_name, dob, school_id, phone_number, avatar)
+    + validate(token)
+    + view_profile(token)
+}
+@enduml

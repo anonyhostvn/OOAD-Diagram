@@ -1,0 +1,7 @@
+@startuml iResourceForm
+class IResourceForm <<interface>> {
+    + create_resource(token, classroom_id, resource)
+    + delete_resource(token, resource_id)
+    + view_resource(token, resource_id)
+}
+@enduml

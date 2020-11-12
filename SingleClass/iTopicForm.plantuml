@@ -1,0 +1,9 @@
+@startuml iTopicForm
+class ITopicForm <<interface>> {
+    + view_comment(token, comment_id)
+    + create_topic(token, classroom_id, posted_by, title, content, resource)
+    + validate(token, classroom_id, posted_by, title, content, resource)
+    + delete_topic(token, topic_id)
+    + view_topic(token, topic_id)
+}
+@enduml

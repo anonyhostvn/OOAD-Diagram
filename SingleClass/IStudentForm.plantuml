@@ -1,0 +1,11 @@
+@startuml iStudentForm
+class IStudentForm <<interface>> {
+    + update_bonus_point(token, classroom_id, bonus_point)
+    + update_roll_call(token, classroom_member_id)
+    + update_score(token, classroom_member_id, test_title, score)
+    + validate(token, class_room_id, user_id)
+    + delete_student_from_classroom(token, classroom_id)
+    + view_student(token, classroom_id)
+    + show_all_student(students)
+}
+@enduml
