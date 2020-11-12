@@ -23,6 +23,16 @@ class ClassroomMember {
     - classroom_id: bigint
     - created_at: datetime
 
+    + get_id(): bigint
+    + get_user_id(): bigint
+    + set_user_id(bigint)
+    + get_classroom_id(): bigint
+    + set_classroom_id(bigint)
+    + get_created_at(): datetime
+    + get_updated_at(): datetime
+}
+
+class IClassroomMemberDB <<interface>> {
     + create(classroom_id, user_id): void
     + read(classroom_id)
     + read(user_id)
@@ -34,10 +44,6 @@ class ClassroomMember {
     + delete(classroom_id, user_id)
     + get_user(classroom_member)
     + get_classroom(classroom_member)
-}
-
-class IClassroomMemberDB <<interface>> {
-    + get_user(classroom_id)
 }
 
 hide ViewStudentForm circle
