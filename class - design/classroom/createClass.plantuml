@@ -10,11 +10,13 @@ class Classroom {
 
     + get_id(): bigint
     + get_classroom_name(): string
-    + set_classroom_name(): string
+    + set_classroom_name(string)
     + get_description(): string
-    + set_description(): string
-    + get_teacher_id(): bigint
-    + set_teacher_id(): bigint
+    + set_description(string)
+    + get_teacher_id(): string
+    + set_teacher_id(string)
+    + get_created_at(): datetime
+    + get_updated_at(): datetime
 }
 
 class IClassroomDB <<interface>> {
