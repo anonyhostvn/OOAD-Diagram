@@ -1,67 +1,67 @@
 @startuml
-actor ":User"
+actor ": User"
 
-activate ":User"
-":User" -> ":IAuthenticationForm" : 1 // enter information
-activate ":IAuthenticationForm"
-":IAuthenticationForm" -> ":IAuthenticationForm" : validate(email, password1, password2)
+activate ": User"
+": User" -> ": IAuthenticationForm" : 1 // enter information
+activate ": IAuthenticationForm"
+": IAuthenticationForm" -> ": IAuthenticationForm" : validate(email, password1, password2)
 
 alt all info is provided
 
-":IAuthenticationForm" -> ":AuthenticationController" : register(email, password1)
-activate ":AuthenticationController"
-":AuthenticationController" -> ":IUserDB" : validate_register(email, password1, password2)
-activate ":IUserDB"
+": IAuthenticationForm" -> ": AuthenticationController" : register(email, password1)
+activate ": AuthenticationController"
+": AuthenticationController" -> ": IUserDB" : validate_register(email, password1, password2)
+activate ": IUserDB"
 
 alt id is unique
 
-":IUserDB" --> ":AuthenticationController" : // User does not exsit
-":AuthenticationController" -> ":IUserDB" : register(email, password1, password2)
-":IUserDB" -> ":IUserDB" : 1.7 // create
+": IUserDB" --> ": AuthenticationController" : // User does not exsit
+": AuthenticationController" -> ": IUserDB" : register(email, password1, password2)
+": IUserDB" -> ": IUserDB" : 1.7 // create
 
 else id exits
 
-":IUserDB" --> ":AuthenticationController" : // User exist msg
-deactivate ":IUserDB"
-":AuthenticationController" --> ":IAuthenticationForm" : // User exist msg
-deactivate ":AuthenticationController"
-":IAuthenticationForm" --> ":User" : // User exist msg
+": IUserDB" --> ": AuthenticationController" : // User exist msg
+deactivate ": IUserDB"
+": AuthenticationController" --> ": IAuthenticationForm" : // User exist msg
+deactivate ": AuthenticationController"
+": IAuthenticationForm" --> ": User" : // User exist msg
 end
 
 else missing info
 
-":IAuthenticationForm" --> ":User" : // missing inf msg
+": IAuthenticationForm" --> ": User" : // missing inf msg
 
 end
-deactivate ":IAuthenticationForm"
-":User" -> ":ConfirmRegisterForm" : 2 // send mail
-activate ":ConfirmRegisterForm"
-":ConfirmRegisterForm" -> ":ConfirmRegisterForm" : validate(register_token)
+deactivate ": IAuthenticationForm"
+": User" -> ": ConfirmRegisterForm" : 2 // send mail
+activate ": ConfirmRegisterForm"
+": ConfirmRegisterForm" -> ": ConfirmRegisterForm" : validate(register_token)
 
 alt all info is provided
 
-":ConfirmRegisterForm" -> ":AuthenticationController" : confirm_register(register_token)
-activate ":AuthenticationController"
-":AuthenticationController" -> ":User" : send_register_email(email, register_token)
-":AuthenticationController" -> ":AuthenticationController" : validate_confirm_register(register_token)
+": ConfirmRegisterForm" -> ": AuthenticationController" : confirm_register(register_token)
+activate ": AuthenticationController"
+": AuthenticationController" -> ": User" : send_register_email(email, register_token)
+": AuthenticationController" -> ": AuthenticationController" : validate_confirm_register(register_token)
 
 alt all info is provided
 
-":AuthenticationController" -> ":IUserDB" : confirm_register(register_token)
-activate ":IUserDB"
-deactivate ":IUserDB"
+": AuthenticationController" -> ": IUserDB" : confirm_register(register_token)
+activate ": IUserDB"
+deactivate ": IUserDB"
 else missing info
 
-":AuthenticationController" --> ":ConfirmRegisterForm" : // missing inf msg
-":ConfirmRegisterForm" --> ":User" : // missing inf msg
+": AuthenticationController" --> ": ConfirmRegisterForm" : // missing inf msg
+": ConfirmRegisterForm" --> ": User" : // missing inf msg
 
 end
-deactivate ":ConfirmRegisterForm"
+deactivate ": ConfirmRegisterForm"
 
 else missing info
 
-":AuthenticationController" --> ":User" : // missing info msg
-deactivate ":AuthenticationController"
+": AuthenticationController" --> ": User" : // missing info msg
+deactivate ": AuthenticationController"
 end
-deactivate ":User"
+deactivate ": User"
 @enduml

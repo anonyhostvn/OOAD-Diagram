@@ -3,7 +3,7 @@
 activate ": Teacher"
 ": Teacher" -->> ": IStudentForm": // Add student to classroom
 activate ": IStudentForm"
-": IStudentForm" -> ": IStudentForm": validate(token, classroom_id, user_id) 
+": IStudentForm" -> ": IStudentForm": validate(token, classroom_id, user_id)
 alt all information is filled and valid
     ": IStudentForm" -> ": StudentController": add_student(token, classroom_id, user_id)
     activate ": StudentController"
@@ -23,10 +23,10 @@ alt all information is filled and valid
         end
 
     else student is not valid for enroll classroom
-        ": IStudentForm" -->> ": Teacher":// student is not valid to  added to classroom
+        ": IStudentForm" -->> ": Teacher": // student is not valid to  added to classroom
     end
 else some information is missing or invalid
-   ": IStudentForm" -->> ": Teacher": // Check information again 
+   ": IStudentForm" -->> ": Teacher": // Check information again
 end
 
 deactivate ": IStudentForm"

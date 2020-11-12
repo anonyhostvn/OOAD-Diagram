@@ -1,25 +1,25 @@
 @startuml
-actor ":User"
+actor ": User"
 
-activate ":User"
-":User" -> ":IAuthenticationForm" : 1 // enter information
-activate ":IAuthenticationForm"
-":IAuthenticationForm" -> ":IAuthenticationForm" : validate(token)
+activate ": User"
+": User" -> ": IAuthenticationForm" : 1 // enter information
+activate ": IAuthenticationForm"
+": IAuthenticationForm" -> ": IAuthenticationForm" : validate(token)
 
 alt all info is provided
 
-":IAuthenticationForm" -> ":AuthenticationController" : view_profile(token)
-activate ":AuthenticationController"
-":AuthenticationController" -> ":IUserDB" : view_profile(token)
-":IUserDB" -> ":IUserDB" : get_user(token)
+": IAuthenticationForm" -> ": AuthenticationController" : view_profile(token)
+activate ": AuthenticationController"
+": AuthenticationController" -> ": IUserDB" : view_profile(token)
+": IUserDB" -> ": IUserDB" : get_user(token)
 
-":IUserDB" --> ":AuthenticationController" : // info view msg
-":AuthenticationController"  --> ":IAuthenticationForm" : // info view msg
-":IAuthenticationForm" --> ":User" : // info view msg
+": IUserDB" --> ": AuthenticationController" : // info view msg
+": AuthenticationController"  --> ": IAuthenticationForm" : // info view msg
+": IAuthenticationForm" --> ": User" : // info view msg
 else missing info
 
-":IAuthenticationForm" --> ":User" : // missing inf msg
-deactivate ":IAuthenticationForm"
-deactivate ":User"
+": IAuthenticationForm" --> ": User" : // missing inf msg
+deactivate ": IAuthenticationForm"
+deactivate ": User"
 end
 @enduml

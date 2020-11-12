@@ -1,38 +1,38 @@
 @startuml
-actor ":User"
+actor ": User"
 
-activate ":User"
-":User" -> ":IAuthenticationForm" : 1 // enter information
-activate ":IAuthenticationForm"
-":IAuthenticationForm" -> ":IAuthenticationForm" : validate(email, password)
+activate ": User"
+": User" -> ": IAuthenticationForm" : 1 // enter information
+activate ": IAuthenticationForm"
+": IAuthenticationForm" -> ": IAuthenticationForm" : validate(email, password)
 
 alt all info is provided
 
-":IAuthenticationForm" -> ":AuthenticationController" : login(email, password)
-activate ":AuthenticationController"
-":AuthenticationController" -> ":IUserDB" : validate_login(email, password)
+": IAuthenticationForm" -> ": AuthenticationController" : login(email, password)
+activate ": AuthenticationController"
+": AuthenticationController" -> ": IUserDB" : validate_login(email, password)
 
 alt user exist
-activate ":IUserDB"
-":IUserDB" --> ":AuthenticationController" : // user exist msg
-":AuthenticationController" -> ":IUserDB" : login(emal, password)
+activate ": IUserDB"
+": IUserDB" --> ": AuthenticationController" : // user exist msg
+": AuthenticationController" -> ": IUserDB" : login(emal, password)
 
-":IUserDB" -> ":IUserDB" : get_token(user_id)
-":IUserDB" --> ":AuthenticationController" : // token
-deactivate ":IUserDB"
-":AuthenticationController" --> ":User" : // token
+": IUserDB" -> ": IUserDB" : get_token(user_id)
+": IUserDB" --> ": AuthenticationController" : // token
+deactivate ": IUserDB"
+": AuthenticationController" --> ": User" : // token
 
 else user not exist
-":AuthenticationController" --> ":IAuthenticationForm" : // invalid inf msg
-deactivate ":AuthenticationController"
-":IAuthenticationForm" --> ":User" : // invalid inf msg
+": AuthenticationController" --> ": IAuthenticationForm" : // invalid inf msg
+deactivate ": AuthenticationController"
+": IAuthenticationForm" --> ": User" : // invalid inf msg
 
 end
 
 else missing info
 
-":IAuthenticationForm" --> ":User" : // missing inf msg
-deactivate ":IAuthenticationForm"
-deactivate ":User"
+": IAuthenticationForm" --> ": User" : // missing inf msg
+deactivate ": IAuthenticationForm"
+deactivate ": User"
 end
 @enduml

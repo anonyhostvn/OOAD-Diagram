@@ -8,7 +8,7 @@ entity ": ClassroomMember"
 
 activate ": Teacher"
 
-": Teacher" -> ": ViewResourceForm": 1 // request create resource 
+": Teacher" -> ": ViewResourceForm": 1 // request create resource
 activate ": ViewResourceForm"
 ": ViewResourceForm" -> ": StudentController": 2 // request create resource
 activate ": StudentController"

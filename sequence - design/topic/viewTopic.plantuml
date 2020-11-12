@@ -1,7 +1,7 @@
 @startuml createTopic
 activate ": User"
 
-": User" -->> ": ITopicForm": // request view topic 
+": User" -->> ": ITopicForm": // request view topic
 activate ": ITopicForm"
 ": ITopicForm" -> ": TopicController": view_topic(token, classroom_id)
 activate ": TopicController"
@@ -19,7 +19,7 @@ alt can view topic
         ": ITopicForm" -->> ": User": // topic is not exist
     end
 else can not view topic
-    ": ITopicForm" -->> ": User": // not have permission for view topic 
+    ": ITopicForm" -->> ": User": // not have permission for view topic
 end
 
 deactivate ": User"

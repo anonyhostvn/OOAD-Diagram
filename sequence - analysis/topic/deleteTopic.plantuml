@@ -8,7 +8,7 @@ entity ": ClassroomMember"
 
 activate ": User"
 
-": User" -> ": DeleteTopicForm": 1 // request delete topic 
+": User" -> ": DeleteTopicForm": 1 // request delete topic
 activate ": DeleteTopicForm"
 ": DeleteTopicForm" -> ": TopicController": 2 // request delete topic
 activate ": TopicController"

@@ -1,41 +1,41 @@
 @startuml
-actor ":User"
-boundary ":LoginForm"
-control ":AuthenticationController"
-entity ":UserEntity"
-activate ":User"
-":User" -> ":LoginForm" : 1 // enter information
-activate ":LoginForm"
-":LoginForm" -> ":LoginForm" : 2 // validate
+actor ": User"
+boundary ": LoginForm"
+control ": AuthenticationController"
+entity ": UserEntity"
+activate ": User"
+": User" -> ": LoginForm" : 1 // enter information
+activate ": LoginForm"
+": LoginForm" -> ": LoginForm" : 2 // validate
 alt all info is provided
 
-":LoginForm" -> ":AuthenticationController" : 3 // login
-activate ":AuthenticationController"
-":AuthenticationController" -> ":UserEntity" : 4 // validate
+": LoginForm" -> ": AuthenticationController" : 3 // login
+activate ": AuthenticationController"
+": AuthenticationController" -> ": UserEntity" : 4 // validate
 
 alt user exist
 
-":UserEntity" --> ":AuthenticationController" : 5 // user exist msg
-activate ":UserEntity"
-":AuthenticationController" -> ":UserEntity" : 6 // login
+": UserEntity" --> ": AuthenticationController" : 5 // user exist msg
+activate ": UserEntity"
+": AuthenticationController" -> ": UserEntity" : 6 // login
 
-":UserEntity" -> ":UserEntity" : 7 // get token
-":UserEntity" --> ":AuthenticationController" : 8 // token
-deactivate ":UserEntity"
-":AuthenticationController" --> ":User" : 9 // token
+": UserEntity" -> ": UserEntity" : 7 // get token
+": UserEntity" --> ": AuthenticationController" : 8 // token
+deactivate ": UserEntity"
+": AuthenticationController" --> ": User" : 9 // token
 
 else user not exist
 
-":AuthenticationController" --> ":LoginForm" : 5.1 // invalid inf msg
-deactivate ":AuthenticationController"
-":LoginForm" --> ":User" : 6.1 // invalid inf msg
+": AuthenticationController" --> ": LoginForm" : 5.1 // invalid inf msg
+deactivate ": AuthenticationController"
+": LoginForm" --> ": User" : 6.1 // invalid inf msg
 
 end
 
 else missing info
 
-":LoginForm" --> ":User" : 4.1 // missing inf msg
-deactivate ":LoginForm"
-deactivate ":User"
+": LoginForm" --> ": User" : 4.1 // missing inf msg
+deactivate ": LoginForm"
+deactivate ": User"
 end
 @enduml

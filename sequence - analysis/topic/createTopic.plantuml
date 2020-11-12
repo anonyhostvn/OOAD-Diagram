@@ -8,7 +8,7 @@ entity ": ClassroomMember"
 
 activate ": User"
 
-": User" -> ": CreateTopicForm": 1 // request create topic 
+": User" -> ": CreateTopicForm": 1 // request create topic
 activate ": CreateTopicForm"
 ": CreateTopicForm" -> ": TopicController": 2 // request create topic
 activate ": TopicController"
