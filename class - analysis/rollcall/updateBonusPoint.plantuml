@@ -8,11 +8,11 @@ class BonusPoint <<entity>> {
     created_at: datetime
     updated_at: datetime
 
-    // create ()
-    // read ()
-    // delete ()
-    // update ()
-    // Request update bonus point ()
+    // create ( )
+    // read ( )
+    // delete ( )
+    // update ( )
+    // Request update bonus point ( )
 }
 
 class ClassroomMember <<entity>> {
@@ -21,19 +21,19 @@ class ClassroomMember <<entity>> {
     classroom_id: bigint
     created_at: datetime
 
-    // create ()
-    // read ()
-    // delete ()
-    // update ()
-    // checking information is valid()
+    // create ( )
+    // read ( )
+    // delete ( )
+    // update ( )
+    // checking information is valid( )
 }
 
 class UpdateBonusPointForm <<boundary>> {
-    // request update bonus point()
+    // request update bonus point( )
 }
 
 class StudentController <<controller>> {
-    // request update bonus point ()
+    // request update bonus point ( )
 }
 
 hide BonusPoint <<entity>> circle

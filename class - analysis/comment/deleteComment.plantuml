@@ -10,11 +10,11 @@ class Comment <<entity>> {
     created_at: datetime
     updated_at: datetime
 
-    // create ()
-    // read ()
-    // delete ()
-    // update ()
-    // Request delete comment ()
+    // create ( )
+    // read ( )
+    // delete ( )
+    // update ( )
+    // Request delete comment ( )
 }
 
 class ClassroomMember <<entity>> {
@@ -23,19 +23,19 @@ class ClassroomMember <<entity>> {
     classroom_id: bigint
     created_at: datetime
 
-    // create ()
-    // read ()
-    // delete ()
-    // update ()
-    // checking permission to delete comment()
+    // create ( )
+    // read ( )
+    // delete ( )
+    // update ( )
+    // checking permission to delete comment ( )
 }
 
 class DeleteCommentForm <<boundary>> {
-    // request delete  comment()
+    // request delete  comment( )
 }
 
 class CommentController <<controller>> {
-    // request delete comment ()
+    // request delete comment ( )
 }
 
 hide Comment <<entity>> circle

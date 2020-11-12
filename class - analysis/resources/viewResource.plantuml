@@ -7,11 +7,11 @@ class Resource <<entity>> {
     resource: string
     created_at: datetime
 
-    // create ()
-    // read ()
-    // delete ()
-    // update ()
-    // Request view resource ()
+    // create ( )
+    // read ( )
+    // delete ( )
+    // update ( )
+    // request view resource ( )
 }
 
 class ClassroomMember <<entity>> {
@@ -20,19 +20,19 @@ class ClassroomMember <<entity>> {
     classroom_id: bigint
     created_at: datetime
 
-    // create ()
-    // read ()
-    // delete ()
-    // update ()
-    // checking permission to view resource()
+    // create ( )
+    // read ( )
+    // delete ( )
+    // update ( )
+    // checking permission to view resource ( )
 }
 
 class ViewResourceForm <<boundary>> {
-    // request view  resource()
+    // request view resource ( )
 }
 
 class ResourceController <<controller>> {
-    // request view resource ()
+    // request view resource ( )
 }
 
 hide Resource <<entity>> circle

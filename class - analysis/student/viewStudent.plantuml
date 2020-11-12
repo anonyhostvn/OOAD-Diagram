@@ -13,7 +13,7 @@ class ClassroomMember <<entity>> {
     // get all student in classroom ()
 }
 
-class ViewClassroomForm <<boundary>> {
+class ViewStudentForm <<boundary>> {
     // request get all student in classroom oke ()
 }
 
@@ -21,12 +21,12 @@ class StudentController <<controller>> {
     // get all student ()
 }
 
-hide ViewClassroomForm <<boundary>> circle
+hide ViewStudentForm <<boundary>> circle
 hide StudentController <<controller>> circle
 hide ClassroomMember <<entity>> circle
 
 StudentController "1" -right- "1" ClassroomMember
-StudentController "1" -down- "1" ViewClassroomForm
+StudentController "1" -down- "1" ViewStudentForm
 
 
 

@@ -11,11 +11,11 @@ class Topic <<entity>> {
     created_at: datetime
     updated_at: datetime
 
-    // create ()
-    // read ()
-    // delete ()
-    // update ()
-    // Check comment is in right topic ()
+    // create ( )
+    // read ( )
+    // delete ( )
+    // update ( )
+    // Check comment is in right topic ( )
 }
 
 class Comment <<entity>> {
@@ -28,11 +28,11 @@ class Comment <<entity>> {
     created_at: datetime
     updated_at: datetime
 
-    // create ()
-    // read ()
-    // delete ()
-    // update ()
-    // Request create comment ()
+    // create ( )
+    // read ( )
+    // delete ( )
+    // update ( )
+    // Request create comment ( )
 }
 
 class ClassroomMember <<entity>> {
@@ -41,19 +41,19 @@ class ClassroomMember <<entity>> {
     classroom_id: bigint
     created_at: datetime
 
-    // create ()
-    // read ()
-    // delete ()
-    // update ()
-    // checking permission to create comment()
+    // create ( )
+    // read ( )
+    // delete ( )
+    // update ( )
+    // checking permission to create comment( )
 }
 
 class CreateCommentForm <<boundary>> {
-    // request create comment()
+    // request create comment( )
 }
 
 class CommentController <<controller>> {
-    // request create comment  ()
+    // request create comment  ( )
 }
 
 hide Comment <<entity>> circle
