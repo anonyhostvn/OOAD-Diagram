@@ -52,6 +52,16 @@ class Resource {
     -resource: string
     -created_at: datetime
 
+    + get_id(): bigint
+    + get_user_id(): bigint
+    + set_user_id(bigint)
+    + get_classroom_id(): bigint
+    + set_classroom_id(bigint)
+    + get_created_at(): datetime
+    + get_updated_at(): datetime
+}
+
+class IResourceDB <<interface>> {
     + save_resource()
     + get_resource_url()
     + create(classroom_id, uploaded_by, resource_url)
@@ -59,10 +69,7 @@ class Resource {
     + read(uploaded_by)
     + read(resource_id)
     + delete(resource_id)
-}
 
-class IResourceDB <<interface>> {
-    + read(resource_id)
 }
 
 hide ViewResourceForm circle

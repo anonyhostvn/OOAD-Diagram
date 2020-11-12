@@ -56,15 +56,29 @@ class Topic {
     - created_at: datetime
     - updated_at: datetime
 
+    + get_id(): bigint
+    + get_classroom_id(): bigint
+    + set_classroom_id(bigint)
+    + get_posted_by(): bigint
+    + set_posted_by(bigint)
+    + get_title(): string
+    + set_title(string)
+    + get_content(): string
+    + set_content(string)
+    + get_has_resource(): bool
+    + set_has_resource(bool)
+    + get_resource_id(): bigint
+    + set_resource(bigint)
+    + get_created_at(): datetime
+    + get_updated_at(): datetime
+}
+
+class ITopicDB <<interface>> {
     + create(classroom_id, posted_by, title, content, resource)
     + read(classroom_id)
     + read(posted_by)
     + read(topic_id)
     + delete(topic_id)
-}
-
-class ITopicDB <<interface>> {
-    + read(topic_id)
 }
 
 hide ViewTopicForm circle
