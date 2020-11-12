@@ -1,10 +1,6 @@
 @startuml viewComment
 
 actor ": User"
-boundary ": ViewCommentForm"
-control ": CommentController"
-entity ": Comment"
-entity ": ClassroomMember"
 
 activate ": User"
 

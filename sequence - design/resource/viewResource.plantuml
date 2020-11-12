@@ -1,4 +1,5 @@
 @startuml viewResource
+actor ": User"
 
 activate ": User"
 
@@ -15,9 +16,9 @@ alt user is in classroom
     deactivate ": IResourceDB"
     deactivate ": ResourceController"
     alt resource is exist
-        ": IResourceForm" -->> ": User": // Show resource
+        ": IResourceForm" -->> ": User": // show resource
     else resource is not exist
-        ": IResourceForm" -->> ": User": // Resource is not exist
+        ": IResourceForm" -->> ": User": // resource is not exist
     end
     
 else user is not in classroom

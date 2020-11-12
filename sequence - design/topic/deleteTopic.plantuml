@@ -1,4 +1,6 @@
 @startuml deleteTopic
+
+actor ": User"
 activate ": User"
 
 ": User" -->> ": ITopicForm": 1 // request delete topic
@@ -14,13 +16,13 @@ alt can delete topic (is teacher of that class or user who create topic)
     alt topic is exist
         ": TopicController" ->> ": ITopicDB": delete(topic_id)
         deactivate ": ITopicDB"
-        ": ITopicForm" -->> ": User": 8 // delete topic successfully
+        ": ITopicForm" -->> ": User": // delete topic successfully
     else topic is not exist
         ": ITopicForm" -->> ": User": // topic is not exist
     end
     
 else can not delete topic
-    ": TopicController" -> ": ITopicForm": 5.1 // delete topic failed
+    ": TopicController" -> ": ITopicForm": // delete topic failed
     deactivate ": TopicController"
     ": ITopicForm" -->> ": User": // not have permission for delete topic
 end

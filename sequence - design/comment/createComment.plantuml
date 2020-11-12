@@ -1,11 +1,6 @@
 @startuml createComment
 
 actor ": User"
-boundary ": ICommentForm"
-control ": CommentController"
-entity ": ICommentDB"
-entity ": IClassroomMemberDB"
-entity ": ITopicDB"
 
 activate ": User"
 

@@ -1,5 +1,5 @@
 @startuml createResource
-
+actor ": Teacher"
 activate ": Teacher"
 
 ": Teacher" -->> ": IResourceForm": // request create resource
