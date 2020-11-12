@@ -9,7 +9,7 @@ entity ": ClassroomMember"
 activate ": Teacher"
 ": Teacher" -> ": AddStudentForm": 1 // Add student to classroom
 activate ": AddStudentForm"
-": AddStudentForm" -> ": AddStudentForm": 2 // validate 
+": AddStudentForm" -> ": AddStudentForm": 2 // validate
 alt all information is filled and valid
     ": AddStudentForm" -> ": StudentController": 3 // Request add student to classroom
     activate ": StudentController"
@@ -18,7 +18,7 @@ alt all information is filled and valid
     alt student is valid for enroll classroom
         ": ClassroomMember" -> ": StudentController": 5 // student is valid to enroll class
         ": StudentController" ->> ": ClassroomEntity": 6 // add student to classroom
-        activate ": ClassroomEntity" 
+        activate ": ClassroomEntity"
         ": StudentController" -> ": AddStudentForm": 7 // add student to classroom successfully
         deactivate ": ClassroomEntity"
         ": AddStudentForm" -> ": Teacher": 8 // student is added to classroom
@@ -31,7 +31,7 @@ alt all information is filled and valid
         ": AddStudentForm" -> ": Teacher": 7.1 // student is not added to classroom
     end
 else some information is missing or invalid
-   ": AddStudentForm" -> ": Teacher": 3.1 // Check information again 
+   ": AddStudentForm" -> ": Teacher": 3.1 // Check information again
 end
 
 deactivate ": AddStudentForm"

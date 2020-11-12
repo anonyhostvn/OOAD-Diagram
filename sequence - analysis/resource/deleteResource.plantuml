@@ -8,7 +8,7 @@ entity ": ClassroomMember"
 
 activate ": Teacher"
 
-": Teacher" -> ": DeleteResourceForm": 1 // request delete resource 
+": Teacher" -> ": DeleteResourceForm": 1 // request delete resource
 activate ": DeleteResourceForm"
 ": DeleteResourceForm" -> ": ResourceController": 2 // request delete resource
 activate ": ResourceController"

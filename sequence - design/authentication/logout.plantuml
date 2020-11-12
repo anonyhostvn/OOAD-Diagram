@@ -1,37 +1,37 @@
 @startuml
-actor ":User"
+actor ": User"
 
-activate ":User"
-":User" -> ":IAuthenticationForm" : 1 // enter information
-activate ":IAuthenticationForm"
-":IAuthenticationForm" -> ":IAuthenticationForm" : validate(token)
+activate ": User"
+": User" -> ": IAuthenticationForm" : 1 // enter information
+activate ": IAuthenticationForm"
+": IAuthenticationForm" -> ": IAuthenticationForm" : validate(token)
 alt all info is provided
 
-":IAuthenticationForm" -> ":AuthenticationController" : logout(token)
-activate ":AuthenticationController"
-":AuthenticationController" -> ":AuthenticationController" : validate_logout(token)
+": IAuthenticationForm" -> ": AuthenticationController" : logout(token)
+activate ": AuthenticationController"
+": AuthenticationController" -> ": AuthenticationController" : validate_logout(token)
 
 alt correct info
 
-":AuthenticationController" -> ":IUserDB" : logout(token)
-activate ":IUserDB"
-":IUserDB" -> ":IUserDB" : delete_token(token)
-":IUserDB" --> ":AuthenticationController" :  // logout accept msg
-deactivate ":IUserDB"
-":AuthenticationController" --> ":User" :  // logout accept msg
+": AuthenticationController" -> ": IUserDB" : logout(token)
+activate ": IUserDB"
+": IUserDB" -> ": IUserDB" : delete_token(token)
+": IUserDB" --> ": AuthenticationController" :  // logout accept msg
+deactivate ": IUserDB"
+": AuthenticationController" --> ": User" :  // logout accept msg
 
 else invalid info
 
-":AuthenticationController" --> ":IAuthenticationForm" : // invalid inf msg
-deactivate ":AuthenticationController"
-":IAuthenticationForm" --> ":User" : // invalid inf msg
+": AuthenticationController" --> ": IAuthenticationForm" : // invalid inf msg
+deactivate ": AuthenticationController"
+": IAuthenticationForm" --> ": User" : // invalid inf msg
 
 end
 
 else missing info
 
-":IAuthenticationForm" --> ":User" : // missing inf msg
-deactivate ":IAuthenticationForm"
-deactivate ":User"
+": IAuthenticationForm" --> ": User" : // missing inf msg
+deactivate ": IAuthenticationForm"
+deactivate ": User"
 end
 @enduml

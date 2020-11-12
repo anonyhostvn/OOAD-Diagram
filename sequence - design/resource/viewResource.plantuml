@@ -2,7 +2,7 @@
 
 activate ": User"
 
-": User" -> ": IResourceForm": // request view resource 
+": User" -> ": IResourceForm": // request view resource
 activate ": IResourceForm"
 ": IResourceForm" -> ": ResourceController": view_resource(token, resource_id)
 activate ": ResourceController"

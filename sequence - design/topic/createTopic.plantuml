@@ -1,7 +1,7 @@
 @startuml createTopic
 activate ": User"
 
-": User" -> ": ITopicForm": 1 // request create topic 
+": User" -> ": ITopicForm": 1 // request create topic
 activate ": ITopicForm"
 ": ITopicForm" -> ": ITopicForm": validate(token, classroom_id, posted_by, title, content, resource)
 alt file is valid

@@ -8,7 +8,7 @@ entity ": ClassroomMember"
 
 activate ": User"
 
-": User" -> ": ViewResourceForm": 1 // request view resource 
+": User" -> ": ViewResourceForm": 1 // request view resource
 activate ": ViewResourceForm"
 ": ViewResourceForm" -> ": ResourceController": 2 // request view resource
 activate ": ResourceController"

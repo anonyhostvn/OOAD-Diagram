@@ -2,7 +2,7 @@
 
 activate ": Teacher"
 
-": Teacher" -->> ": IResourceForm": // request delete resource 
+": Teacher" -->> ": IResourceForm": // request delete resource
 activate ": IResourceForm"
 ": IResourceForm" -> ": ResourceController": delete_resource(token, resource_id)
 activate ": ResourceController"
@@ -13,7 +13,7 @@ alt teacher is in classroom
     activate ": IResourceDB"
     alt resource is exist
         ": ResourceController" ->> ": IResourceDB": delete(resource_id)
-        deactivate ": ResourceController" 
+        deactivate ": ResourceController"
         deactivate ": IResourceDB"
         ": IResourceForm" -->> ": Teacher": // delete resource successfully
     else resource is not exist

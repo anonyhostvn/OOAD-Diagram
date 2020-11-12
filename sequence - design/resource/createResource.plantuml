@@ -2,7 +2,7 @@
 
 activate ": Teacher"
 
-": Teacher" -->> ": IResourceForm": // request create resource 
+": Teacher" -->> ": IResourceForm": // request create resource
 activate ": IResourceForm"
 ": IResourceForm" -> ": ResourceController": create_resource(token, classroom_id, uploaded_by, resource)
 

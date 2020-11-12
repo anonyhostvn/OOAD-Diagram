@@ -1,7 +1,7 @@
 @startuml deleteTopic
 activate ": User"
 
-": User" -->> ": ITopicForm": 1 // request delete topic 
+": User" -->> ": ITopicForm": 1 // request delete topic
 activate ": ITopicForm"
 ": ITopicForm" -> ": TopicController": delete_topic(token, topic_id)
 activate ": TopicController"
