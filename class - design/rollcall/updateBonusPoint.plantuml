@@ -1,6 +1,6 @@
 @startuml addStudent
 
-class ViewStudentForm {
+class UpdateBonusPointForm {
     - classroom_id: bigint
     - token: string
     - bonus_point: bigint
@@ -58,7 +58,7 @@ class IBonusPointDB <<interface>> {
     + create(classroom_member_id, date, point)
 }
 
-hide ViewStudentForm circle
+hide UpdateBonusPointForm circle
 hide IStudentForm <<interface>> circle
 hide StudentController circle
 hide IClassroomMemberDB <<interface>> circle
@@ -67,7 +67,7 @@ hide IBonusPointDB <<interface>> circle
 hide BonusPoint circle 
 
 
-IStudentForm .down.> ViewStudentForm
+IStudentForm .down.> UpdateBonusPointForm
 IClassroomMemberDB .down.> ClassroomMember
 IBonusPointDB .down.> BonusPoint
 IStudentForm "1"-left-"1" StudentController
