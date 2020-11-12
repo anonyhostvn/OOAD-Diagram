@@ -1,5 +1,7 @@
 @startuml deleteClass
 
+actor ": Teacher"
+
 activate ": Teacher"
 ": Teacher" -->> ": IClassroomForm": // request delete classroom
 activate ": IClassroomForm"

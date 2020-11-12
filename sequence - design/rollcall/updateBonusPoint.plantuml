@@ -1,6 +1,6 @@
 @startuml updateBonusPoint
 
-
+actor ": Teacher"
 activate ": Teacher"
 
 ": Teacher" -->> ": IStudentForm": 1 // request update bonus point

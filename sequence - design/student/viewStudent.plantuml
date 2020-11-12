@@ -1,4 +1,5 @@
 @startuml viewStudent
+actor ": User"
 activate ": User"
 ": User" -->> ": IStudentForm": // request view student information
 activate ": IStudentForm"

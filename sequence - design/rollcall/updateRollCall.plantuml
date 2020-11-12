@@ -1,5 +1,6 @@
 @startuml updateRollCall
 
+actor ": Teacher"
 activate ": Teacher"
 
 ": Teacher" -->> ": IStudentForm": // request update roll call
@@ -16,7 +17,7 @@ alt student is exist in classroom
 else student is not exist in classroom
     deactivate ": IClassroomMemberDB"
     deactivate ": StudentController"
-    ": IStudentForm" -->> ": Teacher": 7.1 // Roll call failed,\n check information again
+    ": IStudentForm" -->> ": Teacher": // Roll call failed,\n check information again
 end
 
 deactivate ": IStudentForm"

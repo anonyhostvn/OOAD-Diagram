@@ -1,5 +1,5 @@
 @startuml updateClass
-
+actor ": Teacher"
 activate ": Teacher"
 ": Teacher" -->> ": IClassroomForm": // fill & request update classroom
 activate ": IClassroomForm"
@@ -23,7 +23,7 @@ alt all information is valid
         ": IClassroomForm" -->> ": Teacher": classroom is not updated
     end
 else some information is missing or invalid
-    ": IClassroomForm" -->> ": Teacher": 3.1 // check information again
+    ": IClassroomForm" -->> ": Teacher": // check information again
 end
 
 deactivate ": IClassroomForm"
