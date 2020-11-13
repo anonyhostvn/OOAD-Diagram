@@ -1,4 +1,4 @@
-@startuml addStudent
+@startuml updateBonusPoint
 
 class UpdateBonusPointForm {
     - classroom_id: bigint
@@ -86,7 +86,7 @@ IClassroomMemberDB .down.> ClassroomMember
 IBonusPointDB .down.> BonusPoint
 IStudentForm "1"-left-"1" StudentController
 StudentController "1"-left-"1" IClassroomMemberDB
-StudentController "1"-left-"1" IBonusPointDB
+StudentController "1"-down-"1" IBonusPointDB 
 
 
 @enduml

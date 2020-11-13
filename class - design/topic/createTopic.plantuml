@@ -8,17 +8,17 @@ class CreateTopicForm {
     - title: string
     - content: string
 
-    + create_topic(token, classroom_id, posted_by, title, content, resource)
-    + validate(token, classroom_id, posted_by, title, content, resource)
+    + create_topic(token, classroom_id,\n posted_by, title, content, resource)
+    + validate(token, classroom_id, posted_by,\n title, content, resource)
 }
 
 class ITopicForm <<interface>> {
-    + create_topic(token, classroom_id, posted_by, title, content, resource)
-    + validate(token, classroom_id, posted_by, title, content, resource)
+    + create_topic(token, classroom_id,\n posted_by, title, content, resource)
+    + validate(token, classroom_id, posted_by,\n title, content, resource)
 }
 
 class TopicController {
-    + create_topic(token, classroom_id, posted_by, title, content, resource) 
+    + create_topic(token, classroom_id, posted_by, title,\n content, resource) 
 }
 
 class ClassroomMember {
@@ -42,9 +42,9 @@ class IClassroomMemberDB <<interface>> {
     + read(user_id)
     + read(classroom_member_id)
     + read(classroom_id, user_id)
-    + update_rollcall(classroom_member_id, created_at, is_presented)
-    + update_bonus_point(classroom_member_id, created_at, point)
-    + update_score(classroom_member_id, created_at, test_title, score)
+    + update_rollcall(classroom_member_id,\n created_at, is_presented)
+    + update_bonus_point(classroom_member_id,\n created_at, point)
+    + update_score(classroom_member_id, created_at,\n test_title, score)
     + delete(classroom_id, user_id)
     + get_user(classroom_member)
     + get_classroom(classroom_member)
@@ -101,7 +101,7 @@ IClassroomMemberDB .down.> ClassroomMember
 ITopicDB .down.> Topic
 ITopicForm "1"-left-"1" TopicController
 TopicController "1"-left-"1" IClassroomMemberDB
-TopicController "1"-left-"1" ITopicDB
+TopicController "1"-down-"1" ITopicDB
 
 
 @enduml

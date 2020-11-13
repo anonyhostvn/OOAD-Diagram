@@ -3,11 +3,11 @@ actor ": Teacher"
 activate ": Teacher"
 ": Teacher" -->> ": IClassroomForm": // fill & request update classroom
 activate ": IClassroomForm"
-": IClassroomForm" -> ": IClassroomForm": validate(token, classroom_id, classroom_name, description)
+": IClassroomForm" -> ": IClassroomForm": validate(token, classroom_id,\n classroom_name, description)
 alt all information is valid
-    ": IClassroomForm" -> ": ClassroomController": update_classroom(token, classroom_id, classroom_name, description)
+    ": IClassroomForm" -> ": ClassroomController": update_classroom(token, classroom_id,\n classroom_name, description)
     activate ": ClassroomController"
-    ": ClassroomController" -> ": ClassroomController": validate_update_classroom(token, classroom_id, classroom_name, description)
+    ": ClassroomController" -> ": ClassroomController": validate_update_classroom(token, classroom_id,\n classroom_name, description)
     activate ": IClassroomDB"
     alt classroom is valid
         ": ClassroomController" -> ": IClassroomDB": get(classroom_id)

@@ -37,9 +37,9 @@ class IClassroomMemberDB <<interface>> {
     + read(user_id)
     + read(classroom_member_id)
     + read(classroom_id, user_id)
-    + update_rollcall(classroom_member_id, created_at, is_presented)
-    + update_bonus_point(classroom_member_id, created_at, point)
-    + update_score(classroom_member_id, created_at, test_title, score)
+    + update_rollcall(classroom_member_id,\n created_at, is_presented)
+    + update_bonus_point(classroom_member_id,\n created_at, point)
+    + update_score(classroom_member_id, created_at,\n test_title, score)
     + delete(classroom_id, user_id)
     + get_user(classroom_member)
     + get_classroom(classroom_member)
@@ -88,7 +88,7 @@ IClassroomMemberDB .down.> ClassroomMember
 IResourceDB .down.> Resource
 IResourceForm "1"-left-"1" ResourceController
 ResourceController "1"-left-"1" IClassroomMemberDB
-ResourceController "1"-left-"1" IResourceDB
+ResourceController "1"-down-"1" IResourceDB
 
 
 @enduml

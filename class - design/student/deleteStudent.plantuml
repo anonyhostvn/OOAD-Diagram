@@ -1,4 +1,4 @@
-@startuml addStudent
+@startuml deleteStudent
 
 class DeleteStudentForm {
     - classroom_id: bigint

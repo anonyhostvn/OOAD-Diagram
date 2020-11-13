@@ -1,4 +1,4 @@
-@startuml addStudent
+@startuml viewStudent
 
 class ViewStudentForm {
     - classroom_id: bigint

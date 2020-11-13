@@ -88,7 +88,7 @@ IClassroomDB -down.> Classroom
 IStudentForm .down.> AddStudentForm
 IClassroomMemberDB .down.> ClassroomMember
 StudentController "1"-left-"1" IClassroomDB
-IStudentForm "1"-left-"1" StudentController
+IStudentForm "1"-up-"1" StudentController
 StudentController "1"-left-"1" IClassroomMemberDB
 
 

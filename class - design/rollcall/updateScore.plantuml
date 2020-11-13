@@ -1,4 +1,4 @@
-@startuml viewStudent
+@startuml updateScore
 
 class UpdateScoreForm {
     - classroom_member_id: bigint
@@ -87,7 +87,7 @@ IClassroomMemberDB .down.> ClassroomMember
 IScoreDB .down.> ScoreDB
 IStudentForm "1"-left-"1" StudentController
 StudentController "1"-left-"1" IClassroomMemberDB
-StudentController "1"-left-"1" IScoreDB
+StudentController "1"-down-"1" IScoreDB
 
 
 @enduml
