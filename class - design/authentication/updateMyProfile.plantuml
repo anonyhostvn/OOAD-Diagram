@@ -93,6 +93,6 @@ hide AuthenticationController circle
 IUserDB -down.> User
 IAuthenticationForm .down.> UpdateMyProfileForm
 AuthenticationController "1"-left-"1" IUserDB
-IAuthenticationForm "1"-left-"1" AuthenticationController
+IAuthenticationForm "1"-up-"1" AuthenticationController
 
 @enduml

@@ -4,14 +4,14 @@ actor ": User"
 activate ": User"
 ": User" -> ": IAuthenticationForm" :  // enter information
 activate ": IAuthenticationForm"
-": IAuthenticationForm" -> ": IAuthenticationForm" : validate(token, first_name, last_name, dob, school_id, phone_number, avatar)
+": IAuthenticationForm" -> ": IAuthenticationForm" : validate(token,\n first_name, \nlast_name, \ndob, school_id, \nphone_number, avatar)
 
 alt all info is provided
 
-": IAuthenticationForm" -> ": AuthenticationController" : update_profile(token, first_name, last_name, dob, school_id, phone_number, avatar)
+": IAuthenticationForm" -> ": AuthenticationController" : update_profile(token, \nfirst_name, \nlast_name, dob, school_id, \nphone_number, avatar)
 activate ": AuthenticationController"
 ": AuthenticationController" -> ": IUserDB" : view_profile(token)
-": IUserDB" -> ": IUserDB" : update_profile(token, first_name, last_name, dob, school_id, phone_number, avatar)
+": IUserDB" -> ": IUserDB" : update_profile(token,\n first_name, \nlast_name,\n dob, school_id, \nphone_number, avatar)
 
 
 ": IUserDB" --> ": AuthenticationController" : // info view msg
