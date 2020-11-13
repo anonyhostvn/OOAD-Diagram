@@ -36,13 +36,13 @@ else missing info
 
 end
 deactivate ": IAuthenticationForm"
-": User" -> ": ConfirmRegisterForm" : // open register mail get token
-activate ": ConfirmRegisterForm"
-": ConfirmRegisterForm" -> ": ConfirmRegisterForm" : validate \n(register_token)
+": User" -> ": IAuthenticationForm" : // open register mail get token
+activate ": IAuthenticationForm"
+": IAuthenticationForm" -> ": IAuthenticationForm" : validate \n(register_token)
 
 alt all info is provided
 
-": ConfirmRegisterForm" -> ": AuthenticationController" : confirm_register \n(register_token)
+": IAuthenticationForm" -> ": AuthenticationController" : confirm_register \n(register_token)
 activate ": AuthenticationController"
 ": AuthenticationController" -> ": User" : send_register_email\n(email, register_token)
 ": AuthenticationController" -> ": AuthenticationController" : validate_confirm_ \n register\n(register_token)
@@ -54,12 +54,11 @@ activate ": IUserDB"
 deactivate ": IUserDB"
 else missing info
 
-": AuthenticationController" --> ": ConfirmRegisterForm" : // missing inf msg
-": ConfirmRegisterForm" --> ": User" : // missing inf msg
+": AuthenticationController" --> ": IAuthenticationForm" : // missing inf msg
+": IAuthenticationForm" --> ": User" : // missing inf msg
 
 end
-deactivate ": ConfirmRegisterForm"
-
+deactivate ": IAuthenticationForm"
 else missing info
 
 ": AuthenticationController" --> ": User" : // missing info msg
